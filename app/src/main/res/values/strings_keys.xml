@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="db_zip_key">1q2w3e4risyl]y[</string>
+    <!--<string name="poll_key">1q2w3e4risyl]y[1</string>-->
+
+    <string name="aes_key">AAAAAAAAAAAAAAAA</string>
+
+    <!--api-->
+    <string name="header_api">apiKey</string>
+    <string name="header_package">packageName</string>
+    <string name="header_signature">signature</string>
+    <string name="header_timestamp">timestamp</string>
+    <string name="header_package_digest">packageDigest</string>
+    <string name="header_token">tokenSession</string>
+    <string name="header_deviceId">deviceId</string>
+    <string name="header_cache">Cache-Control</string>
+    <string name="header_language">Accept-Language</string>
+    <string name="header_member_object_id">memberObjectId</string>
+    <string name="header_error">error</string>
+    <string name="header_result_code">resultCode</string>
+    <string name="header_imei">imei</string>
+    <string name="header_imei2">imei2</string>
+    <string name="header_model">deviceModelName</string>
+    <string name="header_version">versionCode</string>
+    <string name="header_mac_address">macAddress</string>
+    <string name="header_operator">simMobileOperator</string>
+    <string name="header_operator_code">simMobileOperatorCode</string>
+
+    <string name="value_cache">max-age=0</string>
+    <string name="value_language">th-TH</string>
+    <string name="value_state">wifi</string>
+
+
+    <string name="share_pass">mvisionwhatphone</string>
+
+    <!--google analytics-->
+    <string name="tracker_id">UA-71971845-2</string>
+
+    <!--facebook-->
+    <string name="facebook_app_id">1518854235096909</string>
+
+    <string name="url_dooads">https://www.dooads.com/</string>
+    <string name="url_contact">https://www.dooads.com/contactus.php</string>
+    <string name="url_how_to">https://www.dooads.com/dooadshowto/</string>
+    <string name="url_ref">"https://www.dooads.com/friend-get-friend.php?referrer=%1$s</string>
+    <string name="url_level">https://www.dooads.com/webview/userlevel.php</string>
+    <string name="url_youtube">https://www.dooads.com/webview/subscribe.php</string>
+</resources>

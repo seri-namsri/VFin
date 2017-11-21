@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/margin"
+    android:layout_marginLeft="@dimen/margin"
+    android:layout_marginRight="@dimen/margin"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            app:name = "Kanit"
+            android:id="@+id/textViewAddressNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.example.enter_01.vfin.customview.ButtonWithFont
+            app:name = "Kanit"
+            android:text="แก้ไข"
+            android:layout_alignParentRight="true"
+            android:layout_width="80dp"
+            android:layout_height="40dp" />
+    </RelativeLayout>
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        app:name = "Kanit"
+        android:id="@+id/textViewAddressDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"/>
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBgApp"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:theme="@style/ToolbarColoredBackArrow"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_big_size"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            android:id="@+id/textViewDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewTitle"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit" />
+
+        <com.example.enter_01.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonMyItem"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/margin_3"
+            android:layout_below="@+id/textViewDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:background="@drawable/button_radius_yello"
+            android:text="สินค้าของฉัน"
+            android:textColor="@color/colorOrangeText"
+            app:name="Kanit"
+            app:type="bold" />
+    </RelativeLayout>
+
+</LinearLayout>

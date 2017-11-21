@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.enter_01.vfin.component.main.MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.example.enter_01.vfin.customview.ButtonWithFont
+                app:name ="Kanit"
+                app:type = "bold"
+                android:id="@+id/buttonCoin"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:drawableStart="@drawable/ic_coin"
+                android:drawableEnd="@drawable/bt_add_more"
+                android:layout_margin="8dp"
+                android:text="959,715.99"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_radius_alpha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_coin"
+                android:drawableRight="@drawable/bt_add_more" />
+
+            <com.example.enter_01.vfin.customview.ButtonWithFont
+                app:name ="Kanit"
+                app:type = "bold"
+                android:id="@+id/buttonEnergy"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:drawableStart="@drawable/ic_power"
+                android:drawableEnd="@drawable/bt_add_more"
+                android:layout_margin="8dp"
+                android:text="99/99"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_radius_alpha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_coin"
+                android:drawableRight="@drawable/bt_add_more" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tabLayout" />
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="@android:color/white" />
+
+</RelativeLayout>

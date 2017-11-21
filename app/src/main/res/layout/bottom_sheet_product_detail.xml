@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/design_bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="8dp"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="80dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+
+
+    <com.example.enter_01.vfin.customview.ButtonWithFont
+        app:name = "Kanit"
+        app:type = "bold"
+        android:layout_margin="@dimen/margin"
+        android:id="@+id/buttonCoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_radius_green"
+        android:drawableLeft="@drawable/ic_coin"
+        android:drawablePadding="-20dp"
+        android:padding="@dimen/margin"
+        android:text="1"
+        android:textColor="@android:color/white" />
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonCoin"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:padding="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.example.enter_01.vfin.customview.TextViewWithFont
+                app:name = "Kanit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ยอดเงินของคุณ"/>
+            <com.example.enter_01.vfin.customview.ButtonWithFont
+                app:name = "Kanit"
+                app:type = "bold"
+                android:layout_marginTop="@dimen/margin"
+                android:drawableLeft="@drawable/ic_coin"
+                android:padding="8dp"
+                android:text="9900099"
+                android:textColor="@android:color/white"
+                android:drawableRight="@drawable/bt_add_more"
+                android:background="@drawable/button_radius_blue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:padding="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <com.example.enter_01.vfin.customview.TextViewWithFont
+                app:name = "Kanit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="จำนวณครั้งที่ซื้อได้"/>
+            <com.example.enter_01.vfin.customview.ButtonWithFont
+                app:name = "Kanit"
+                app:type = "bold"
+                android:textColor="@android:color/white"
+                android:drawableLeft="@drawable/ic_power"
+                android:padding="@dimen/margin"
+                android:text="99/99"
+                android:drawableRight="@drawable/bt_add_more"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_radius_blue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+         />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

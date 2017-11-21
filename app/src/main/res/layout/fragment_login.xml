@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_v_fin" />
+
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:text="เข้าสู่ระบบ"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_big_size"
+        app:name="Kanit"
+        app:type="bold" />
+
+
+    <com.example.enter_01.vfin.customview.EditTextWithFont
+        android:id="@+id/editTextTel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:drawableLeft="@drawable/ic_login_phone"
+        android:gravity="center"
+        android:hint="เบอร์โทร"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textColorHint="#8F9097"
+        android:theme="@style/MyEditTextTheme"
+        app:name="Kanit"
+        app:type="bold" />
+
+    <com.example.enter_01.vfin.customview.EditTextWithFont
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:drawableLeft="@drawable/ic_login_password"
+        android:gravity="center"
+        android:hint="รหัสผ่าน"
+        android:inputType="textPassword"
+        android:textColor="@android:color/white"
+        android:textColorHint="#8F9097"
+        android:theme="@style/MyEditTextTheme"
+        app:name="Kanit"
+        app:type="bold" />
+
+    <com.example.enter_01.vfin.customview.ButtonWithFont
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@drawable/button_radius_yello"
+        android:text="เข้าสู่ระบบ"
+        android:textColor="#E8800F"
+        app:name="Kanit"
+        app:type="bold" />
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="หรือ"
+        android:textColor="@android:color/white"
+        app:name="Kanit"
+        app:type="bold" />
+
+    <com.example.enter_01.vfin.customview.ButtonWithFont
+        android:id="@+id/buttonLoginWithFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        app:name="Kanit"
+        app:type="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:layout_weight="1"
+            android:text="ลืมรหัสผ่าน"
+            android:textColor="@android:color/white"
+            app:name="Kanit"
+            app:type="bold" />
+
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="สมัครสมาชิก"
+            android:textColor="@android:color/white"
+            app:name="Kanit"
+            app:type="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

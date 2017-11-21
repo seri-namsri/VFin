@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:padding="@dimen/margin"
+    android:minWidth="1000dp"
+    android:minHeight="200dp"
+    android:layout_height="match_parent">
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin_2"
+        android:layout_height="wrap_content"
+        app:name = "Kanit"
+        app:type = "bold"
+        android:textColor="@android:color/black"
+        android:text="ยืนยันการซื้อ"
+        android:textSize="@dimen/text_big_size"/>
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_marginTop="@dimen/margin_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:name = "Kanit"
+        android:text="คุณต้องการซื้อ"
+        android:textSize="@dimen/text_normal_size"/>
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:id="@+id/textViewName"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_height="wrap_content"
+        app:name = "Kanit"
+        app:type = "bold"
+        android:textColor="@android:color/black"
+        android:text="ยืนยันการซื้อ"
+        android:textSize="@dimen/text_big_size"/>
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_height="wrap_content"
+        app:name = "Kanit"
+        android:text="ในราคา"
+        android:textSize="@dimen/text_big_size"/>
+
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_height="wrap_content"
+        app:name = "Kanit"
+        app:type = "bold"
+        android:id="@+id/textViewPrice"
+        android:textColor="#FF4D53"
+        android:text="ยืนยันการซื้อ"
+        android:textSize="@dimen/text_big_size"/>
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        app:name = "Kanit"
+        android:text="vin point"
+        android:textSize="@dimen/text_big_size"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_3"
+        android:layout_marginLeft="@dimen/margin_3"
+        android:layout_marginRight="@dimen/margin_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.enter_01.vfin.customview.ButtonWithFont
+            app:name = "Kanit"
+            android:layout_marginBottom="@dimen/margin_3"
+            android:id="@+id/buttonCancel"
+            app:type = "bold"
+            android:text="ยกเลิก"
+            android:layout_width="0dp"
+            android:textColor="#807F80"
+            android:background="@drawable/button_background_black_corner"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin" />
+
+        <com.example.enter_01.vfin.customview.ButtonWithFont
+            app:name = "Kanit"
+            android:text="ยืนยัน"
+            android:layout_marginBottom="@dimen/margin_3"
+            android:layout_marginLeft="@dimen/margin"
+            android:background="@drawable/button_radius_yello"
+            android:textColor="@color/colorOrangeText"
+            android:id="@+id/buttonOk"
+            app:type = "bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</LinearLayout>

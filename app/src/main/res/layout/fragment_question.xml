@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/colorBgApp"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="คุณเคยใช้แป้งตราง฿ประเภทไหนบ้าง" />
+
+    <CheckBox
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cooling Black" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clearly White" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="into the deep" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ice Age" />
+
+    <Button
+        android:layout_marginTop="16dp"
+        android:id="@+id/buttonNext"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_radius"
+        android:text="ข้อต่อไป"
+        android:textColor="@android:color/white" />
+</LinearLayout>

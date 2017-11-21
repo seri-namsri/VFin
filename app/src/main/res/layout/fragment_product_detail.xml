@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBgApp"
+    android:orientation="vertical">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="300dp">
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#80000000"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewOwner"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_toRightOf="@+id/imageViewOwner"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            app:name="Kanit"
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/imageViewOwner"
+                            android:text="เจ้าของสินค้า"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_normal_size" />
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            app:name="Kanit"
+                            android:id="@+id/textViewNameOwner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textView"
+                            android:layout_toRightOf="@+id/imageViewOwner"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_small_size" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@android:color/transparent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                        app:name="Kanit"
+                        android:id="@+id/textViewTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:drawableLeft="@drawable/ic_detail"
+                        android:drawablePadding="@dimen/margin"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin"
+                        android:text="รายละเอียดสินค้า"
+                        android:textColor="@android:color/white" />
+
+                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                        app:name="Kanit"
+                        android:id="@+id/textViewDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin" />
+
+                    <com.example.enter_01.vfin.customview.ButtonWithFont
+                        app:name = "Kanit"
+                        app:type = "bold"
+                        android:id="@+id/buttonProductDetail"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/margin"
+                        android:background="@drawable/button_radius_yello"
+                        android:text="ข้อมูลสินค้า"
+                        android:textColor="@color/colorOrangeText" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@android:color/transparent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                        app:name="Kanit"
+                        android:id="@+id/textViewTitleHis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:drawableLeft="@drawable/ic_history"
+                        android:drawablePadding="@dimen/margin"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin"
+                        android:text="ประวัติการซื้อสินค้า"
+                        android:textColor="@android:color/white" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="ชื่อผู้ซื้อขายล่าสุด"
+                            app:name="Kanit" />
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            app:name="Kanit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="ราคา" />
+
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            app:name="Kanit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="เวลา" />
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_margin="@dimen/margin"
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewNameProduct"
+                android:orientation="horizontal">
+
+                <com.example.enter_01.vfin.customview.TextViewWithFont
+                    android:id="@+id/priceMarket"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_big_size"
+                    app:name="Kanit"
+                    android:text="ราคาตลาด"
+                    />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                        app:name = "Kanit"
+                        android:textSize="@dimen/text_small_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="เหลือเวลาอีก"/>
+
+                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                        android:id="@+id/textViewTimeProduct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/ic_clock"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="@dimen/text_big2_size"
+                        app:name="Kanit"
+                        app:type="bold" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/bottom_sheet_product_detail" />
+    </android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

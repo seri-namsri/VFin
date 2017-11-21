@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            app:name = "Kanit"
+            android:textSize="@dimen/text_small_size"
+            android:layout_marginLeft="@dimen/margin"
+            android:id="@+id/textViewUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            app:name = "Kanit"
+            android:textSize="@dimen/text_small_size"
+            android:gravity="center"
+            android:id="@+id/textViewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            app:name = "Kanit"
+            android:textSize="@dimen/text_small_size"
+            android:gravity="center"
+            android:id="@+id/textViewDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    
+</LinearLayout>

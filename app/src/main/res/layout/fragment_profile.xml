@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBgApp"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/margin"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_marginTop="60dp"
+                    android:background="@color/colorPrimary"
+                    android:foregroundGravity="center"
+                    app:cardElevation="2dp"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_2"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            android:id="@+id/textViewName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:name="Kanit" />
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            android:id="@+id/textViewEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:name="Kanit" />
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            android:id="@+id/textViewProfilePercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:name="Kanit" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/imageViewProfile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/button_radius"
+                    app:layout_constraintBottom_toTopOf="@+id/card_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/card_view"
+                    app:layout_constraintVertical_bias="0.44" />
+
+                <com.example.enter_01.vfin.customview.ButtonWithFont
+                    android:id="@+id/buttonViewProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/button_radius_yello"
+                    android:drawableLeft="@drawable/ic_profile_yellow_16"
+                    android:paddingLeft="@dimen/margin"
+                    android:paddingRight="@dimen/margin"
+                    android:text="ข้อมูลส่วนตัว"
+                    android:textColor="@color/colorOrangeText"
+                    app:layout_constraintBottom_toBottomOf="@+id/card_view"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_view"
+                    app:name="Kanit"
+                    app:type="bold" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayoutLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_2">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginRight="@dimen/margin"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="เลเวลของคุณคือ 4"
+                            android:textSize="@dimen/text_big_size"
+                            app:name="Kanit"
+                            app:type="bold" />
+
+                        <com.example.enter_01.vfin.customview.TextViewWithFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/margin_3"
+                            android:text="อีก 2,502 คะแนน จะเลื่อนขั้นเป็น เลเวล 5"
+                            android:textSize="@dimen/text_small_size"
+                            app:name="Kanit"
+                            app:type="italic" />
+
+                        <com.example.enter_01.vfin.customview.PercenView
+                            android:id="@+id/perCentView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin"
+                            android:layout_marginRight="@dimen/margin" />
+
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+                <FrameLayout
+                    android:id="@+id/imageView1"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/card_view1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/card_view1" />
+
+                <com.example.enter_01.vfin.customview.ButtonWithFont
+                    android:id="@+id/buttonLevelDetail"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:background="@drawable/button_radius_yello"
+                    android:drawableLeft="@drawable/ic_medal_level_16"
+                    android:paddingLeft="@dimen/margin"
+                    android:paddingRight="@dimen/margin"
+                    android:text="รายละเอียดเลเวล"
+                    android:textColor="@color/colorOrangeText"
+                    app:layout_constraintBottom_toBottomOf="@+id/card_view1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_view1"
+                    app:name="Kanit"
+                    app:type="bold" />
+
+
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/img_medal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_2"
+                android:paddingBottom="@dimen/margin" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

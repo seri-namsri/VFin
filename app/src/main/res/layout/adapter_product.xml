@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/imageViewProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#50000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+            <com.example.enter_01.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:textColor="@android:color/white"
+                app:name="Kanit" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:id="@+id/textViewNameProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_normal_size"
+        app:name="Kanit"
+        app:type="bold" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewNameProduct"
+        android:orientation="horizontal">
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            android:id="@+id/priceMarket"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            android:text="ราคาตลาด"
+  />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <com.example.enter_01.vfin.customview.TextViewWithFont
+                app:name = "Kanit"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="เหลือเวลาอีก"/>
+
+            <com.example.enter_01.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewTimeProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:drawableLeft="@drawable/ic_clock"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/text_normal_size"
+                app:name="Kanit"
+                app:type="bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/bt_fav" />
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:id="@+id/textViewType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/text_small_size"
+        android:visibility="gone"
+        app:name="Kanit" />
+
+
+    <com.example.enter_01.vfin.customview.ButtonWithFont
+        android:id="@+id/buttonPrice"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/textViewType"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/button_radius"
+        android:drawableLeft="@drawable/ic_coin"
+        android:drawablePadding="-20sp"
+        android:drawableStart="@drawable/ic_coin"
+        android:gravity="center"
+        android:paddingLeft="4dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_small_size"
+        app:name="Kanit" />
+</RelativeLayout>

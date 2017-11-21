@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <VideoView
+
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:id="@+id/videoViewAds"/>
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            app:name = "Kanit"
+            android:textColor="@color/colorGreenText"
+            android:gravity="center"
+            android:text="358,000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            app:name = "Kanit"
+            android:gravity="center"
+            android:text="03.00"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            app:name = "Kanit"
+            android:gravity="center"
+            android:text="0.05 v"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_margin="8dp"
+        android:text="รายละเอียด"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_margin="8dp"
+        android:text="      กรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุกรุณาระบุ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

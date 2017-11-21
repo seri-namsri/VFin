@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="170dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin"
+    android:layout_marginLeft="@dimen/margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageViewProduct"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_margin="@dimen/margin"
+            android:scaleType="centerCrop" />
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <com.example.enter_01.vfin.customview.TextViewWithFont
+            android:id="@+id/textViewCoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:drawableLeft="@drawable/ic_coin_16"
+            android:textColor="@color/colorOrangeText"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <com.example.enter_01.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonDetail"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/button_radius_yello"
+            android:text="ดูรายละเอียด"
+            android:textColor="@color/colorOrangeText"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            app:type="bold" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

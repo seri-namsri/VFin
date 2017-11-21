@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.enter_01.vfin">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name=".ApplicationVFin"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".component.splashscreen.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".component.profiledetail.ProfileDetailActivity"/>
+
+        <activity android:name=".component.leveldetail.LevelDetailActivity"/>
+
+        <activity android:name=".component.messagedetail.MessageDetailActivity"/>
+
+        <activity android:name=".component.productdetail.ProductDetailActivity"/>
+
+        <activity android:name=".component.work.WorkActivity"/>
+
+        <activity android:name=".component.downloadapp.DownloadAppActivity"/>
+
+        <activity android:name=".component.viewads.ViewAdsActivity"/>
+
+        <activity android:name=".component.survey.SurveyActivity"/>
+
+        <activity android:name=".component.question.QuestionActivity"/>
+
+        <activity android:name=".component.viewadsdetail.ViewAdsDetailActivity"/>
+
+        <activity android:name=".component.authen.login.LoginActivity"/>
+
+        <activity android:name=".component.main.MainActivity"/>
+
+        <activity android:name=".component.rewarddetail.RewardDetailActivity"/>
+
+        <activity android:name=".component.financehistory.FinanceHistoryActivity"/>
+
+
+        <service
+            android:name=".firebase.fcm.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".firebase.fcm.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>
