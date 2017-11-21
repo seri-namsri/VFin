@@ -27,7 +27,7 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
     @Override
     public void getLogin(String tel,String password) {
 
-    /*    LoginMange.getInstance().loginWithApi(tel, password, new Query.CallBackData() {
+        LoginMange.getInstance().loginWithApi(tel, password, new Query.CallBackData() {
             @Override
             public <T> void onSuccess(T t) {
                 Log.e("onSuccess",new Gson().toJson((LoginResponseModel)t));
@@ -42,10 +42,10 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
             public void onFail(String error) {
 
             }
-        });*/
+        });
 
 
-      LoginMange.getInstance().getLogin(new Query.CallBackData() {
+    /*  LoginMange.getInstance().getLogin(new Query.CallBackData() {
           @Override
           public <T> void onSuccess(T t) {
 
@@ -64,7 +64,7 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
           public void onFail(String error) {
 
           }
-      },tel,password);
+      },tel,password);*/
     }
 
 
