@@ -16,6 +16,7 @@ public interface LoginContract {
 
     interface Presenter {
         void getLogin(String tel,String password);
+        void getLoginFaceBook(String faceBookId);
 
     }
 }

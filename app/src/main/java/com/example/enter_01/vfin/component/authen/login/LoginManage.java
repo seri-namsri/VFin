@@ -1,18 +1,21 @@
 package com.example.enter_01.vfin.component.authen.login;
 
+import com.example.enter_01.vfin.api.modelrequest.ErrorModel;
+import com.example.enter_01.vfin.api.modelrequest.LoginFaceBookRequestModel;
 import com.example.enter_01.vfin.api.modelrequest.LoginRequestModel;
 import com.example.enter_01.vfin.api.response.LoginResponseModel;
-import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductModel;
 import com.example.enter_01.vfin.component.profile.model.Member;
 import com.example.enter_01.vfin.firebase.Firestore.Query;
 import com.example.enter_01.vfin.firebase.Firestore.Update;
-import com.example.enter_01.vfin.utility.Log;
 import com.example.enter_01.vfin.utility.RetrofitUtility;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -21,14 +24,14 @@ import rx.schedulers.Schedulers;
  * Created by enter_01 on 11/13/2017 AD.
  */
 
-public class LoginMange {
+public class LoginManage {
 
     private static FirebaseFirestore db;
-    private static LoginMange instance = null;
+    private static LoginManage instance = null;
 
-    public static LoginMange getInstance() {
+    public static LoginManage getInstance() {
         if (instance == null)
-            instance = new LoginMange();
+            instance = new LoginManage();
         return instance;
     }
 
@@ -84,13 +87,12 @@ public class LoginMange {
     }
 
 
-
-    public void loginWithApi(String userName, String password, final Query.CallBackData callBackData){
+    public void loginWithApi(String userName, String password, final Query.CallBackData callBackData) {
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(com.example.enter_01.vfin.api.request
-                .Member.class).loginVfin(new LoginRequestModel(userName,password)).subscribeOn(Schedulers
-                .io())
+                        .Member.class).loginVfin(new LoginRequestModel(userName, password))
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<LoginResponseModel>() {
                     @Override
@@ -100,8 +102,52 @@ public class LoginMange {
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
+                        if (e instanceof HttpException) {
+                            ResponseBody body = ((HttpException) e).response().errorBody();
+                            try {
+                                ErrorModel errorModel = new Gson().fromJson(body
+                                        .string(), ErrorModel.class);
+                                callBackData.onFail(errorModel.message);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onNext(LoginResponseModel s) {
+                        callBackData.onSuccess(s);
+
+                    }
+
+                });
+
+    }
+
+    public void loginWithFaceBook(String facebookID, final Query.CallBackData
+            callBackData) {
+        LoginFaceBookRequestModel a = new LoginFaceBookRequestModel(facebookID);
+        RetrofitUtility.getInstance()
+                .getRetrofit()
+                .create(com.example.enter_01.vfin.api.request
+                        .Member.class).loginFaceBookVfin(new LoginFaceBookRequestModel(facebookID))
+                .subscribeOn(Schedulers
+                        .io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<LoginResponseModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        HttpException exception = (HttpException) e;
                         e.getMessage();
                         e.printStackTrace();
+
                         //    view.hideLoading();
                     }
 

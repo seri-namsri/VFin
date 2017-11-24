@@ -17,71 +17,65 @@ import java.util.ArrayList;
 
 public class LoginPresenter extends Presenter<LoginContract.View> implements LoginContract.Presenter {
 
-    private LoginContract.View view ;
+    private LoginContract.View view;
 
-    public LoginPresenter(LoginContract.View view){
-        this.view = view ;
+    public LoginPresenter(LoginContract.View view) {
+        this.view = view;
     }
 
 
     @Override
-    public void getLogin(String tel,String password) {
-
-        LoginMange.getInstance().loginWithApi(tel, password, new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-                Log.e("onSuccess",new Gson().toJson((LoginResponseModel)t));
-            }
-
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-
-            }
-
-            @Override
-            public void onFail(String error) {
-
-            }
-        });
-
-
-    /*  LoginMange.getInstance().getLogin(new Query.CallBackData() {
-          @Override
-          public <T> void onSuccess(T t) {
-
-          }
-
-          @Override
-          public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-              Member member = (Member) tArrayList.get(0);
-              Utility.savePreferences(Contextor.getInstance().getContext(),"member_id",
-                      member.getMember_id());
-              addDeviceToken(member);
-              view.setUpViewLogin();
-          }
-
-          @Override
-          public void onFail(String error) {
-
-          }
-      },tel,password);*/
+    public void getLogin(String tel, String password) {
+        if (tel != null && password != null)
+        {
+            LoginManage.getInstance().loginWithApi(tel, password, callBackData);
+        }
     }
 
 
-    public void addDeviceToken( Member member){
+    private Query.CallBackData callBackData = new Query.CallBackData() {
+        @Override
+        public <T> void onSuccess(T t) {
+            Log.e("onSuccess", new Gson().toJson((LoginResponseModel) t));
+            Utility.savePreferences(Contextor.getInstance().getContext(), "member_id",
+                    "571c26fc-dfa0-4b1c-8ef9-925ba53b2f43");
+            view.setUpViewLogin();
+        }
+
+        @Override
+        public <T> void onSuccessAll(ArrayList<T> tArrayList) {
+
+        }
+
+        @Override
+        public void onFail(String error) {
+          //  Utility.savePreferences(Contextor.getInstance().getContext(), "member_id",
+          //          "571c26fc-dfa0-4b1c-8ef9-925ba53b2f43");
+          //  view.setUpViewLogin();
+            view.showMessageFail(error);
+        }
+    };
+
+    @Override
+    public void getLoginFaceBook(String faceBookId) {
+        LoginManage.getInstance().loginWithFaceBook(faceBookId, callBackData);
+    }
+
+
+    public void addDeviceToken(Member member) {
         ArrayList<String> arrayDeviceToken = member.getDevice_token();
-        String deviceToken  = Utility.loadSavedPreferences(Contextor.getInstance().getContext(),
+        String deviceToken = Utility.loadSavedPreferences(Contextor.getInstance().getContext(),
                 "tokenFCM");
 
-        if (arrayDeviceToken!= null && arrayDeviceToken.indexOf(deviceToken)<0){
+        if (arrayDeviceToken != null && arrayDeviceToken.indexOf(deviceToken) < 0) {
             arrayDeviceToken.add(deviceToken);
 
-        }else if (arrayDeviceToken == null){
+        } else if (arrayDeviceToken == null) {
             arrayDeviceToken = new ArrayList<>();
             arrayDeviceToken.add(deviceToken);
         }
 
-        LoginMange.getInstance().addDeviceToken(new Query.CallBackData() {
+        LoginManage.getInstance().addDeviceToken(new Query.CallBackData() {
             @Override
             public <T> void onSuccess(T t) {
 
@@ -94,9 +88,10 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
 
             @Override
             public void onFail(String error) {
+                view.showMessageFail(error);
 
             }
-        },member.getMember_id(),arrayDeviceToken);
+        }, member.getMember_id(), arrayDeviceToken);
 
     }
 }

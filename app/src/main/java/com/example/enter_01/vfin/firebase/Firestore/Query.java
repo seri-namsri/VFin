@@ -154,7 +154,13 @@ public class Query {
         void onFail(String error);
     }
 
-
+    public interface CallBackDataRealTime{
+        <T>  void onSuccess(T t);
+        <T>  void onSuccessRemove(int position);
+        <T>  void onSuccessItemChange(int position);
+        <T>  void onSuccessAll(ArrayList<T> tArrayList);
+        void onFail(String error);
+    }
 
 
 }

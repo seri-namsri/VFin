@@ -1,16 +1,33 @@
 package com.example.enter_01.vfin.component.buysell.allproduct;
 
+import com.example.enter_01.vfin.api.modelrequest.ErrorModel;
 import com.example.enter_01.vfin.api.modelrequest.RequestFcm;
+import com.example.enter_01.vfin.api.modelrequest.TradeBuy;
 import com.example.enter_01.vfin.api.request.Apipublic;
 import com.example.enter_01.vfin.api.response.ModelFcm;
+import com.example.enter_01.vfin.api.response.TradeBuyResponseModel;
 import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductModel;
+import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
 import com.example.enter_01.vfin.component.profile.model.Member;
 import com.example.enter_01.vfin.firebase.Firestore.Query;
+import com.example.enter_01.vfin.firebase.realtime.FirebaseRealtimeManage;
+import com.example.enter_01.vfin.utility.Log;
+import com.example.enter_01.vfin.utility.PreferencesMange;
 import com.example.enter_01.vfin.utility.RetrofitUtility;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -22,7 +39,6 @@ import rx.schedulers.Schedulers;
 public class AllProductManage {
 
     private static AllProductManage instance = null;
-    private static FirebaseFirestore db;
 
     public static AllProductManage getInstance() {
         if (instance == null)
@@ -30,110 +46,147 @@ public class AllProductManage {
         return instance;
     }
 
-    public void getAllProduct(final Query.CallBackData callBackData) {
-        db = FirebaseFirestore.getInstance();
-        Query.getInstance().readDataCollection(db.collection("product"), new
-                ProductModel(), new Query.CallBackData() {
+
+    public void getAllProductFormRealtime(final Query.CallBackDataRealTime callBackData) {
+
+        final long[] count = {0};
+        final ArrayList<ProductRealTimeModel> productRealTimeModels = new ArrayList<>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference("product");
+        final ArrayList<String>arrayList = new ArrayList<>();
+
+        final ChildEventListener childEventListener = new ChildEventListener() {
             @Override
-            public <T> void onSuccess(T t) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                ProductRealTimeModel productRealTimeModel = dataSnapshot.getValue
+                        (ProductRealTimeModel.class);
+                productRealTimeModels.add(productRealTimeModel);
+                arrayList.add(productRealTimeModel.getId()+"");
+                if (count[0] <= productRealTimeModels.size()) {
+                    productRealTimeModel.setIntegerArrayListId(arrayList);
+                    callBackData.onSuccessAll(productRealTimeModels);
+                    //    productRealTimeModels.clear();
+                }
+            }
 
-                callBackData.onSuccess(t);
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+                int position = arrayList.indexOf(dataSnapshot.getKey());
+                if (position >= 0) {
+                    ProductRealTimeModel productRealTimeModel = dataSnapshot.getValue
+                            (ProductRealTimeModel.class);
+                    productRealTimeModels.set(position,productRealTimeModel);
+                    callBackData.onSuccessItemChange(position);
+                }
+            }
 
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+               int position  =  arrayList.indexOf(dataSnapshot.getKey());
+                if (position >= 0){
+                    arrayList.remove(position);
+                    productRealTimeModels.remove(position);
+                    callBackData.onSuccessRemove(position);
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
 
             }
 
             @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-                callBackData.onSuccessAll(tArrayList);
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                count[0] = dataSnapshot.getChildrenCount();
+
+                myRef.addChildEventListener(childEventListener);
+
             }
 
             @Override
-            public void onFail(String error) {
-                callBackData.onFail(error);
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
+
+
     }
 
 
-    public void getMemberOfProduct(final Query.CallBackData callBackData,String memberId) {
-        db = FirebaseFirestore.getInstance();
-        Query.getInstance().readDataDocumentNorealTime(db.document("member/"+memberId), new
-                Member(), new Query.CallBackData() {
+    public void getProductIdFormRealtime(FirebaseDatabase database, String id, final Query
+            .CallBackData
+            callBackData) {
+
+
+        DatabaseReference myRef = database.getReference("product/" + id);
+        final String[] key = {""};
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public <T> void onSuccess(T t) {
-
-                callBackData.onSuccess(t);
-
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                callBackData.onSuccess(dataSnapshot.getValue(ProductRealTimeModel.class));
+                return;
             }
 
             @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-                callBackData.onSuccessAll(tArrayList);
-            }
-
-            @Override
-            public void onFail(String error) {
-                callBackData.onFail(error);
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("getAllProductFormRealtime", "Failed to read value.", error.toException());
             }
         });
-    }
-
-    public void getProduct(final Query.CallBackData callBackData,String productId) {
-        db = FirebaseFirestore.getInstance();
-        Query.getInstance().readDataDocument(db.document("product/"+productId), new
-                ProductModel(), new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-
-                callBackData.onSuccess(t);
 
 
-            }
-
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-                callBackData.onSuccessAll(tArrayList);
-            }
-
-            @Override
-            public void onFail(String error) {
-                callBackData.onFail(error);
-            }
-        });
     }
 
 
-    public void setNotiFcm(ArrayList<String>deviceToken,String productName,String imageProduct  ,
-                           int price){
-        String priority = "high";
-        String title =  productName+" ถูกซื้อต่อไปแล้ว";
-        String body = "ด้วยราคา "+price + " บาท";
-        String icon = "icon_noti";
-        String color = "#0064FF";
-        RetrofitUtility.getInstance().getRetrofit("https://fcm.googleapis.com").
-                create(Apipublic.class).sendFcm(new RequestFcm(deviceToken, priority, title, body,
-                icon, color,imageProduct))
-                .subscribeOn(Schedulers.io())
+    public void tradeBuyProduct(final Query.CallBackData callBackData, ProductRealTimeModel productRealTimeModel) {
+        RetrofitUtility.getInstance()
+                .getRetrofit()
+                .create(com.example.enter_01.vfin.api.request
+                        .Product.class).tradebuy(new TradeBuy(PreferencesMange.getInstance().getMemberID(),
+                productRealTimeModel
+                        .getNextPrice(),
+                productRealTimeModel.getId()))
+                .subscribeOn(Schedulers
+                        .io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ModelFcm>() {
+                .subscribe(new Subscriber<TradeBuyResponseModel>() {
                     @Override
                     public void onCompleted() {
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
+                        if (e instanceof HttpException) {
+                            ResponseBody body = ((HttpException) e).response().errorBody();
+
+                            try {
+                                ErrorModel errorModel = new Gson().fromJson(body
+                                        .string(), ErrorModel.class);
+                                callBackData.onFail(errorModel.message);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
 
                     }
 
                     @Override
-                    public void onNext(final ModelFcm s) {
+                    public void onNext(TradeBuyResponseModel s) {
+                        callBackData.onSuccess(s);
 
                     }
-                });
-    }
 
+                });
+
+    }
 
 
 }

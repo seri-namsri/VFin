@@ -38,7 +38,8 @@
     <string name="tracker_id">UA-71971845-2</string>
 
     <!--facebook-->
-    <string name="facebook_app_id">1518854235096909</string>
+    <string name="facebook_app_id">175012909747963</string>
+    <string name="fb_login_protocol_scheme">fb175012909747963</string>
 
     <string name="url_dooads">https://www.dooads.com/</string>
     <string name="url_contact">https://www.dooads.com/contactus.php</string>

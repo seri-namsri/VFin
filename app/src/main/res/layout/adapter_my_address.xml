@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin">
+
+    <com.example.enter_01.vfin.customview.TextViewWithFont
+        android:layout_centerVertical="true"
+        android:id="@+id/textViewAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/buttonEdit" />
+
+    <com.example.enter_01.vfin.customview.ButtonWithFont
+        android:id="@+id/buttonEdit"
+        android:layout_width="50dp"
+        android:textSize="@dimen/text_small_size"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_background_red_corner"
+        android:text="แก้ไข"
+        android:textColor="@android:color/holo_red_dark"
+        app:name="Kanit"
+        app:type="bold" />
+
+</RelativeLayout>

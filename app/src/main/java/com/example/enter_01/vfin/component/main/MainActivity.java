@@ -1,9 +1,13 @@
 package com.example.enter_01.vfin.component.main;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +22,10 @@ import com.example.enter_01.vfin.component.message.MessageFragment;
 import com.example.enter_01.vfin.component.profile.ProfileFragment;
 import com.example.enter_01.vfin.component.profile.model.Member;
 import com.example.enter_01.vfin.component.reward.RewardFragment;
+import com.example.enter_01.vfin.utility.Log;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
 
@@ -64,6 +72,7 @@ public class MainActivity extends BaseActivity implements MainContract.View{
     protected void startView() {
         initTab();
         presenter.showView();
+
     }
 
 
@@ -148,7 +157,9 @@ public class MainActivity extends BaseActivity implements MainContract.View{
 
     @Override
     public void setUpView(Member member) {
-        buttonEnergy.setText(member.getEnergy()+"/99");
-        buttonCoin.setText(member.getCoin()+"");
+        try {
+            buttonEnergy.setText(member.getEnergy()+"/99");
+            buttonCoin.setText(member.getCoin()+"");
+        }catch (Exception e){}
     }
 }

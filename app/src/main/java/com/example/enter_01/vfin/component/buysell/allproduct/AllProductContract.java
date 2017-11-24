@@ -3,6 +3,7 @@ package com.example.enter_01.vfin.component.buysell.allproduct;
 
 import com.example.enter_01.vfin.base.BaseView;
 import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductModel;
+import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
 
 import java.util.ArrayList;
 
@@ -14,14 +15,16 @@ public interface AllProductContract {
 
     interface View extends BaseView {
 
-        void setUpViewAllProduct(ArrayList<ProductModel>allProduct);
+        void setUpViewAllProduct(ArrayList<ProductRealTimeModel>allProduct);
+        void removeItem(int position);
+        void changeItem(int position);
 
     }
 
     interface Presenter {
         void getProductAll();
 
-        void buyProduct(ProductModel productModel,int price,String memberIdOwner);
+        void buyProduct(ProductRealTimeModel productModel);
 
     }
 }

@@ -13,6 +13,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+      //  multiDexEnabled true
         externalNativeBuild {
             cmake {
                 cppFlags ""
@@ -63,6 +65,8 @@ dependencies {
     //firestore
     compile 'com.google.firebase:firebase-firestore:11.6.0'
     compile 'com.google.firebase:firebase-messaging:11.6.0'
+    compile 'com.google.firebase:firebase-database:11.6.0'
+
     //gson
     compile 'com.google.code.gson:gson:2.8.2'
     //parceler
@@ -91,6 +95,10 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
 
+    /*facebook*/
+    compile 'com.facebook.android:facebook-android-sdk:4.22.0'
+
+    //compile 'com.android.support:multidex:1.0.1'
 }
 
 

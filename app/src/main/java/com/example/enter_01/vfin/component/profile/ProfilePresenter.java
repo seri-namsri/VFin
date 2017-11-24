@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.enter_01.vfin.R;
 import com.example.enter_01.vfin.base.presenter.Presenter;
 import com.example.enter_01.vfin.component.financehistory.FinanceHistoryActivity;
+import com.example.enter_01.vfin.component.myproduct.MyProductActivity;
 import com.example.enter_01.vfin.component.profile.model.Member;
 import com.example.enter_01.vfin.component.profile.model.ProfileMore;
 import com.example.enter_01.vfin.firebase.Firestore.Query;
@@ -34,7 +35,7 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
                 .CallBackData() {
             @Override
             public <T> void onSuccess(T t) {
-                view.setUpViewProfile((Member) t);
+//                view.setUpViewProfile((Member) t);
             }
 
             @Override
@@ -63,7 +64,7 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
                 break;
 
             case 2:
-                // className = FinanceHistoryActivity.class;
+                 className = MyProductActivity.class;
                 break;
 
             case 3:

@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import com.example.enter_01.vfin.base.presenter.Presenter;
 import com.example.enter_01.vfin.component.buysell.allproduct.pojo.MemberBuy;
 import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductModel;
+import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
 import com.example.enter_01.vfin.component.productdetail.ProductDetailManage;
 import com.example.enter_01.vfin.component.profile.ProfileManager;
 import com.example.enter_01.vfin.component.profile.model.Member;
@@ -30,89 +31,44 @@ public class AllProductPresenter extends Presenter<AllProductContract.View> impl
     @Override
     public void getProductAll() {
         view.showLoading();
-        AllProductManage.getInstance().getAllProduct(new Query.CallBackData() {
+        AllProductManage.getInstance().getAllProductFormRealtime(new Query.CallBackDataRealTime() {
             @Override
             public <T> void onSuccess(T t) {
 
+            }
+
+            @Override
+            public <T> void onSuccessRemove(int position) {
+                view.removeItem(position);
+            }
+
+            @Override
+            public <T> void onSuccessItemChange(int position) {
+                 view.changeItem(position);
             }
 
             @Override
             public <T> void onSuccessAll(ArrayList<T> tArrayList) {
                 view.hideLoading();
-                ArrayList<ProductModel> arrayList = (ArrayList<ProductModel>) tArrayList;
-
+                ArrayList<ProductRealTimeModel> arrayList = (ArrayList<ProductRealTimeModel>) tArrayList;
                 view.setUpViewAllProduct(arrayList);
             }
 
             @Override
             public void onFail(String error) {
-
+                view.hideLoading();
+                view.showMessageFail(error);
             }
         });
+
     }
 
     @Override
-    public void buyProduct(final ProductModel productModel, final int price, String memberIdOwner) {
-        Long tsLong = System.currentTimeMillis() / 1000;
-        MemberBuy memberBuy = new MemberBuy();
-        memberBuy.member_id = PreferencesMange.getInstance().getMemberID();
-        memberBuy.date_buy = tsLong;
-        memberBuy.price = price;
-        try {
-            productModel.member_buy.add(memberBuy);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            productModel.member_buy = new ArrayList<>();
-            productModel.member_buy.add(memberBuy);
-        }
-        final String finalMemberIdOwner = memberIdOwner;
-        ProductDetailManage.getInstance().upDateProduct(new Query.CallBackData() {
+    public void buyProduct(final ProductRealTimeModel productModel) {
+
+        AllProductManage.getInstance().tradeBuyProduct(new Query.CallBackData() {
             @Override
             public <T> void onSuccess(T t) {
-
-
-            }
-
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-                getMemberUpdate(price);
-                getMemberIdOwner(finalMemberIdOwner, price,productModel.getName(),productModel
-                        .getImage_product().get(0));
-            }
-
-            @Override
-            public void onFail(String error) {
-
-            }
-        }, productModel);
-
-    }
-
-
-    private void getMemberUpdate(final int price) {
-        ProfileManager.getInstance().getMemberNorealTime(PreferencesMange.getInstance().getMemberID(), new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-                Member member = (Member) t;
-
-                ProductDetailManage.getInstance().upDateEnergyCoinMemberMe(new Query.CallBackData() {
-                    @Override
-                    public <T> void onSuccess(T t) {
-
-                    }
-
-                    @Override
-                    public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-
-                    }
-
-                    @Override
-                    public void onFail(String error) {
-
-                    }
-                },PreferencesMange.getInstance().getMemberID(), member.getEnergy() - 1
-                        , member.getCoin() - price);
-
 
             }
 
@@ -123,48 +79,11 @@ public class AllProductPresenter extends Presenter<AllProductContract.View> impl
 
             @Override
             public void onFail(String error) {
-
+                view.showMessageFail(error);
             }
-        });
+        },productModel);
 
     }
 
-    private void getMemberIdOwner(final String memberIDOwner, final int price, final String
-            productName,final  String imageProduct) {
 
-        ProfileManager.getInstance().getMemberNorealTime(memberIDOwner, new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-                Member member = (Member) t;
-                AllProductManage.getInstance().setNotiFcm(member.getDevice_token(),productName,
-                        imageProduct,price);
-                ProductDetailManage.getInstance().upDateReturnCoinMemberOwner(new Query.CallBackData() {
-                    @Override
-                    public <T> void onSuccess(T t) {
-
-                    }
-
-                    @Override
-                    public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-
-                    }
-
-                    @Override
-                    public void onFail(String error) {
-
-                    }
-                }, memberIDOwner, member.getCoin() + price);
-            }
-
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-
-            }
-
-            @Override
-            public void onFail(String error) {
-
-            }
-        });
-    }
 }

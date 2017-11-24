@@ -12,11 +12,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.enter_01.vfin.R;
 import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductModel;
+import com.example.enter_01.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
 import com.example.enter_01.vfin.component.profile.model.Member;
 import com.example.enter_01.vfin.firebase.Firestore.Query;
 import com.example.enter_01.vfin.utility.Contextor;
 import com.example.enter_01.vfin.utility.Log;
 import com.example.enter_01.vfin.utility.PreferencesMange;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -36,14 +43,27 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private ArrayList<ProductModel> productModel;
-    private int stop = 0;
+    private ArrayList<ProductRealTimeModel> productModel;
     private CallBackClick callBackClick;
 
-    public ProductAdapter(ArrayList<ProductModel> productModel, CallBackClick callBackClick) {
+    public ProductAdapter(ArrayList<ProductRealTimeModel> productModel, CallBackClick callBackClick) {
         this.productModel = productModel;
         this.callBackClick = callBackClick;
 
+    }
+
+
+    public void addData(ArrayList<ProductRealTimeModel> productModel){
+        this.productModel= productModel;
+        notifyDataSetChanged();
+    }
+
+    public void dataChange(int position){
+        notifyItemChanged(position);
+    }
+
+    public void removeData(int position){
+        notifyItemRemoved(position);
     }
 
     @Override
@@ -55,12 +75,50 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.textViewNameProduct.setText(productModel.get(position).getName());
-        holder.textViewTimeProduct.setText(productModel.get(position).getTime() + " ..");
-        holder.priceMarket.setText("ราคาตลาด\n"+productModel.get(position).getPrice_market());
 
-        Glide.with(Contextor.getInstance().getContext()).load(productModel.get(position)
-                .getImage_product().get(0))
+        setDataOrtherItem(productModel.get(position), holder);
+
+      /*  AllProductManage allProductManage = new AllProductManage();
+        allProductManage.getProductIdFormRealtime(holder.database,productModel.get
+               (position).getId() + "", new Query .CallBackData() {
+                    @Override
+                    public <T> void onSuccess(T t) {
+                        ProductRealTimeModel productRealTimeModel = (ProductRealTimeModel) t;
+                        if (productRealTimeModel != null)
+                            setDataOrtherItem(productRealTimeModel, holder);
+                   /*     else{
+                            try {
+                                Log.d("AllProductManage",position +"   .");
+                                productModel.remove(position);
+                                notifyDataSetChanged();
+
+                            }catch (Exception e){}
+                        }*/
+                 /*   }
+
+                    @Override
+                    public <T> void onSuccessAll(ArrayList<T> tArrayList) {
+
+                    }
+
+                    @Override
+                    public void onFail(String error) {
+
+                    }
+                });*/
+
+    }
+
+
+
+
+    private void setDataOrtherItem(final ProductRealTimeModel productModel, final ViewHolder holder) {
+        holder.textViewNameProduct.setText(productModel.getName());
+        holder.textViewTimeProduct.setText(productModel.getExpiredTime() + " ..");
+        holder.priceMarket.setText("ราคาตลาด\n" + productModel.getNextPrice());
+
+        Glide.with(Contextor.getInstance().getContext()).load(productModel
+                .getImgUrl())
                 .into
                         (holder.imageViewProduct);
 
@@ -69,14 +127,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             holder.countDownTimer.cancel();
         }
 
-        holder.buttonPrice.setText( "รอคนซื้อ "+ productModel.get(position).getPrice() +
+        holder.buttonPrice.setText("รอคนซื้อ " + productModel.getNextPrice() +
                 " Vin point");
-        holder.buttonPrice.setTag(R.string.key_price,productModel.get(position).getPrice()+"");
-        holder.buttonPrice.setTag(R.string.key_memberID,"");
+        holder.buttonPrice.setTag(R.string.key_price, productModel.getNextPrice() + "");
+        holder.buttonPrice.setTag(R.string.key_memberID, "");
 
-        long tsLong = System.currentTimeMillis() / 1000;
+        long tsLong = System.currentTimeMillis();
 
-        final long time1 = productModel.get(position).getTime() - tsLong;
+        final long time1 = productModel.getExpiredTime() - tsLong;
 
         final int millis = (int) time1;
         holder.df.setTimeZone(holder.tz);
@@ -92,14 +150,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             }
 
             public void onFinish() {
-                Log.e("done!");
+                holder.textViewTimeProduct.setText("หมดเวลา");
+                holder.buttonPrice.setText("หมดเวลา");
+                holder.buttonPrice.setEnabled(false);
+                holder.buttonPrice.setBackgroundResource(R.drawable.button_radius);
             }
         }.start();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callBackClick.clickItemProduct(productModel.get(position));
+                callBackClick.clickItemProduct(productModel);
             }
         });
 
@@ -107,114 +168,31 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View view) {
 
-
-                callBackClick.clickItemProductBuy(productModel.get(position), Long.parseLong(holder
-                        .buttonPrice
-                        .getTag(R.string.key_price)
-                        .toString())
-                        ,holder.buttonPrice.getTag(R.string.key_memberID).toString());
+                callBackClick.clickItemProductBuy(productModel, Long.parseLong(holder
+                                .buttonPrice
+                                .getTag(R.string.key_price)
+                                .toString())
+                        , holder.buttonPrice.getTag(R.string.key_memberID).toString());
             }
         });
-        final int[] price = {productModel.get(position).getPrice()};
-        AllProductManage.getInstance().getProduct(new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-              //  int price = 0;
-                 int finalPrice = 0;
-                try {
+        if (PreferencesMange.getInstance().getMemberID().equals(productModel.ownerCode)){
+            holder.buttonPrice.setText("รอคนซื้อ "+ productModel.getNextPrice() +
+                    " Vin point");
+            holder.buttonPrice.setTag(R.string.key_price,productModel.getNextPrice()+"");
+            holder.buttonPrice.setTag(R.string.key_memberID,productModel.getOwnerCode()+"");
+            holder.buttonPrice.setEnabled(false);
+            holder.buttonPrice.setBackgroundResource(R.drawable.button_radius);
+        } else {
+            holder.buttonPrice.setText("ซื้อเลย "+ productModel.getNextPrice()+
+                    " Vin point");
+            holder.buttonPrice.setTag(R.string.key_price,productModel.getNextPrice()+"");
+            holder.buttonPrice.setTag(R.string.key_memberID,productModel.getOwnerCode()+"");
 
-                    ProductModel productModel1 = (ProductModel) t;
-                    if (productModel1.getMember_buy().get(productModel1.getMember_buy().size() - 1)
-                            .getPrice() > 0)
-                    {
-                         price[0] = productModel1.getMember_buy().get(productModel1
-                                .getMember_buy().size() - 1).getPrice();
-                        double totel = (1 / 100.0f) * price[0];
-                        price[0] = (int) (price[0] +Math.ceil(totel));
-                        holder.buttonPrice.setText(price[0] + "");
-                        holder.buttonPrice.setTag(R.string.key_price, price[0] +"");
-                        holder.buttonPrice.setTag(R.string.key_memberID,productModel1.getMember_buy().get(productModel1
-                                .getMember_buy().size() - 1).getMember_id());
-                    }
-                    finalPrice = price[0];
-                    final int finalPrice1 = finalPrice;
-                    AllProductManage.getInstance().getMemberOfProduct(new Query.CallBackData() {
-                        @Override
-                        public <T> void onSuccess(T t) {
-                            Member member = (Member) t;
-                            try {
+            //  holder.textViewType.setText("ซื้อต่อทันที");
+            holder.buttonPrice.setEnabled(true);
+            holder.buttonPrice.setBackgroundResource(R.drawable.button_radius_green);
+        }
 
-                                CropCircleTransformation multi = new CropCircleTransformation();
-                                Glide.with(Contextor.getInstance().getContext()).load(member.getImage_profile()).apply(bitmapTransform(multi)).into(holder.imageProfile);
-
-                                if (member.getMember_id().equals(PreferencesMange.getInstance().getMemberID())) {
-                                    holder.buttonPrice.setText("รอคนซื้อ "+ finalPrice1 +
-                                            " Vin point");
-                                    holder.buttonPrice.setTag(R.string.key_price,finalPrice1+"");
-                                    holder.buttonPrice.setTag(R.string.key_memberID,member.getMember_id()+"");
-                                    holder.buttonPrice.setEnabled(false);
-                                    holder.buttonPrice.setBackgroundResource(R.drawable.button_radius);
-                                } else {
-                                    holder.buttonPrice.setText("ซื้อเลย "+ finalPrice1+
-                                            " Vin point");
-                                    holder.buttonPrice.setTag(R.string.key_price,finalPrice1+"");
-                                    holder.buttonPrice.setTag(R.string.key_memberID,member.getMember_id()+"");
-
-                                    //  holder.textViewType.setText("ซื้อต่อทันที");
-                                    holder.buttonPrice.setEnabled(true);
-                                    holder.buttonPrice.setBackgroundResource(R.drawable.button_radius_green);
-                                }
-
-
-                                holder.textViewUserName.setText(member.getName());
-                            } catch (Exception e) {
-                                holder.buttonPrice.setText("ซื้อเลย "+ finalPrice1+
-                                        " Vin point");
-                                holder.buttonPrice.setTag(R.string.key_price,finalPrice1+"");
-                                holder.buttonPrice.setTag(R.string.key_memberID,member.getMember_id());
-
-                                //   holder.textViewType.setText("ซื้อต่อทันที");
-                                holder.buttonPrice.setEnabled(true);
-                                holder.buttonPrice.setBackgroundResource(R.drawable.button_radius_green);
-                            }
-
-                        }
-
-                        @Override
-                        public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-
-                        }
-
-                        @Override
-                        public void onFail(String error) {
-
-                        }
-                    }, productModel1.getMember_buy()
-                            .get(productModel1.getMember_buy().size() - 1).member_id);
-
-                }catch (Exception e){
-                    holder.buttonPrice.setText("ซื้อเลย "+ price[0] +
-                            " Vin point");
-                    holder.buttonPrice.setTag(price[0]+"");
-                  //  holder.textViewType.setText("ซื้อต่อทันที");
-                    holder.buttonPrice.setEnabled(true);
-                    holder.buttonPrice.setBackgroundResource(R.drawable.button_radius_green);
-                }
-
-
-                //    Log.d("onSuccessonSuccessonSuccess",new Gson().toJson(member));
-            }
-
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-
-            }
-
-            @Override
-            public void onFail(String error) {
-
-            }
-        }, productModel.get(position).product_id);
     }
 
     @Override
@@ -236,12 +214,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         @BindView(R.id.imageProfile)
         ImageView imageProfile;
         @BindView(R.id.textViewUserName)
-        TextView textViewUserName;   @BindView(R.id.priceMarket)
+        TextView textViewUserName;
+        @BindView(R.id.priceMarket)
         TextView priceMarket;
         CountDownTimer countDownTimer;
         final TimeZone tz = TimeZone.getTimeZone("UTC");
         final SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         public ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -250,8 +229,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public interface CallBackClick {
-        void clickItemProduct(ProductModel productModel);
+        void clickItemProduct(ProductRealTimeModel productModel);
 
-        void clickItemProductBuy(ProductModel productModel, long price,String memberIdOwner);
+        void clickItemProductBuy(ProductRealTimeModel productModel, long price, String memberIdOwner);
     }
 }

@@ -52,6 +52,10 @@ public class ProductDetailManage {
                 });
     }
 
+    public void buyProductWithAPi(final Query.CallBackData callBackData, ProductModel productModel){
+
+    }
+
     public void upDateReturnCoinMemberOwner(final Query.CallBackData callBackData, String memberId
             ,int coin) {
         db = FirebaseFirestore.getInstance();

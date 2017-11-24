@@ -79,4 +79,22 @@ public class EditTextWithFont extends android.support.v7.widget.AppCompatEditTex
         Kanit_regular = Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Regular.otf");
         // roboto = Typeface.createFromAsset(context.getAssets(), "fonts/RobotoSlab-Regular.otf");
     }
+
+    public String getTextDataNotNull(String msg) {
+
+        if (getText().toString().isEmpty()) {
+            if (msg == null){
+                setError("กรุณากรอกข้อมูลให้ครบ");
+            }else {
+                setError(msg);
+            }
+
+            return null;
+        }
+
+        return getText().toString();
+    }
+
+
+
 }

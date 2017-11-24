@@ -149,8 +149,8 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
             @Override
             public <T> void onSuccess(T t) {
                 Member member = (Member) t;
-                AllProductManage.getInstance().setNotiFcm(member.getDevice_token(),productName,
-                        imageProduct,price);
+             //   AllProductManage.getInstance().setNotiFcm(member.getDevice_token(),productName,
+               //         imageProduct,price);
                 ProductDetailManage.getInstance().upDateReturnCoinMemberOwner(new Query.CallBackData() {
                     @Override
                     public <T> void onSuccess(T t) {
