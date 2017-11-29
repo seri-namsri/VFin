@@ -48,7 +48,7 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                    <com.mvision.vfin.customview.TextViewWithFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_3"
@@ -57,7 +57,7 @@
                         app:name="Kanit"
                         app:type="bold" />
 
-                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                    <com.mvision.vfin.customview.TextViewWithFont
                         android:id="@+id/textViewTel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                 android:padding="@dimen/margin">
 
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
@@ -88,7 +88,7 @@
                     app:name="Kanit"
                     app:type="bold" />
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                 android:padding="@dimen/margin">
 
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
@@ -119,7 +119,7 @@
                     app:name="Kanit"
                     app:type="bold" />
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:id="@+id/textViewIdentiFication"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                 android:padding="@dimen/margin">
 
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
@@ -151,7 +151,7 @@
                     app:type="bold" />
 
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:id="@+id/textViewEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
                 android:padding="@dimen/margin">
 
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
@@ -184,7 +184,7 @@
                     app:type="bold" />
 
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:id="@+id/textViewBirdDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
                 android:padding="@dimen/margin">
 
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
@@ -216,7 +216,7 @@
                     app:type="bold" />
 
 
-                <com.example.enter_01.vfin.customview.TextViewWithFont
+                <com.mvision.vfin.customview.TextViewWithFont
                     android:id="@+id/textViewPassWord"
                     android:text="*******"
                     android:layout_width="wrap_content"
@@ -226,7 +226,7 @@
                     app:name="Kanit" />
 
             </LinearLayout>
-            <com.example.enter_01.vfin.customview.TextViewWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
                 android:id="@+id/textViewGender"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
@@ -258,7 +258,7 @@
 
             </android.support.v7.widget.CardView>
 
-            <com.example.enter_01.vfin.customview.ButtonWithFont
+            <com.mvision.vfin.customview.ButtonWithFont
                 android:id="@+id/buttonAddDress"
                 android:layout_width="150dp"
                 android:layout_height="30dp"

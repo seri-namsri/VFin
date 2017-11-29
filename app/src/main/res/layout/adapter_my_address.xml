@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/margin">
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         android:layout_centerVertical="true"
         android:id="@+id/textViewAddress"
         android:layout_width="wrap_content"
@@ -13,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/buttonEdit" />
 
-    <com.example.enter_01.vfin.customview.ButtonWithFont
+    <com.mvision.vfin.customview.ButtonWithFont
         android:id="@+id/buttonEdit"
         android:layout_width="50dp"
         android:textSize="@dimen/text_small_size"

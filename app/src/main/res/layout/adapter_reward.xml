@@ -19,7 +19,7 @@
             android:layout_margin="@dimen/margin"
             android:scaleType="centerCrop" />
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             app:name="Kanit"
             app:type="bold" />
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             android:id="@+id/textViewCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             app:name="Kanit"
             app:type="bold" />
 
-        <com.example.enter_01.vfin.customview.ButtonWithFont
+        <com.mvision.vfin.customview.ButtonWithFont
             android:id="@+id/buttonDetail"
             android:layout_width="match_parent"
             android:layout_height="30dp"

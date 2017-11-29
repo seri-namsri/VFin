@@ -13,7 +13,7 @@
         android:src="@drawable/logo_v_fin" />
 
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
@@ -24,10 +24,11 @@
         app:type="bold" />
 
 
-    <com.example.enter_01.vfin.customview.EditTextWithFont
+    <com.mvision.vfin.customview.EditTextWithFont
         android:id="@+id/editTextTel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLength="255"
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginRight="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
@@ -40,9 +41,10 @@
         app:name="Kanit"
         app:type="bold" />
 
-    <com.example.enter_01.vfin.customview.EditTextWithFont
+    <com.mvision.vfin.customview.EditTextWithFont
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
+        android:maxLength="255"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginRight="@dimen/margin"
@@ -57,7 +59,7 @@
         app:name="Kanit"
         app:type="bold" />
 
-    <com.example.enter_01.vfin.customview.ButtonWithFont
+    <com.mvision.vfin.customview.ButtonWithFont
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +72,7 @@
         app:name="Kanit"
         app:type="bold" />
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
@@ -79,8 +81,11 @@
         app:name="Kanit"
         app:type="bold" />
 
-    <com.example.enter_01.vfin.customview.ButtonWithFont
+    <com.mvision.vfin.customview.ButtonWithFont
+        android:background="@drawable/button_background_blue_facebook"
         android:id="@+id/buttonLoginWithFacebook"
+        android:textColor="@android:color/white"
+        android:text="FACEBOOK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin"
@@ -94,7 +99,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin"
@@ -105,7 +110,7 @@
             app:type="bold" />
 
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin"

@@ -30,7 +30,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
 
-            <com.example.enter_01.vfin.customview.TextViewWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
                 android:id="@+id/textViewUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
     </RelativeLayout>
 
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         android:id="@+id/textViewNameProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         android:layout_below="@+id/textViewNameProduct"
         android:orientation="horizontal">
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             android:id="@+id/priceMarket"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -80,14 +80,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content">
 
-            <com.example.enter_01.vfin.customview.TextViewWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
                 app:name = "Kanit"
                 android:textSize="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="เหลือเวลาอีก"/>
 
-            <com.example.enter_01.vfin.customview.TextViewWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
                 android:id="@+id/textViewTimeProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
         android:layout_margin="@dimen/margin"
         android:background="@drawable/bt_fav" />
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         android:id="@+id/textViewType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,11 +120,18 @@
         app:name="Kanit" />
 
 
-    <com.example.enter_01.vfin.customview.ButtonWithFont
+    <RelativeLayout
+
+        android:layout_below="@+id/textViewType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    <com.mvision.vfin.customview.ButtonWithFont
         android:id="@+id/buttonPrice"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_below="@+id/textViewType"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin"
@@ -136,5 +143,15 @@
         android:paddingLeft="4dp"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_small_size"
-        app:name="Kanit" />
+        app:name="Kanit"/>
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progress"
+            android:elevation="2dp"
+            android:layout_centerInParent="true"
+            android:layout_width="15dp"
+            android:layout_height="15dp" />
+
+    </RelativeLayout>
 </RelativeLayout>

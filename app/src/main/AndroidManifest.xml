@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.enter_01.vfin">
+    package="com.mvision.vfin">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
-        android:name=".ApplicationVFin"
+        android:name="com.mvision.vfin.ApplicationVFin"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".component.splashscreen.SplashScreenActivity">
+        <activity android:name="com.mvision.vfin.component.splashscreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,47 +20,49 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".component.profiledetail.ProfileDetailActivity"/>
+        <activity android:name="com.mvision.vfin.component.profiledetail.ProfileDetailActivity"/>
 
-        <activity android:name=".component.leveldetail.LevelDetailActivity"/>
+        <activity android:name="com.mvision.vfin.component.leveldetail.LevelDetailActivity"/>
 
-        <activity android:name=".component.messagedetail.MessageDetailActivity"/>
+        <activity android:name="com.mvision.vfin.component.messagedetail.MessageDetailActivity"/>
 
-        <activity android:name=".component.productdetail.ProductDetailActivity"/>
+        <activity android:name="com.mvision.vfin.component.productdetail.ProductDetailActivity"/>
 
-        <activity android:name=".component.work.WorkActivity"/>
+        <activity android:name="com.mvision.vfin.component.work.WorkActivity"/>
 
-        <activity android:name=".component.downloadapp.DownloadAppActivity"/>
+        <activity android:name="com.mvision.vfin.component.downloadapp.DownloadAppActivity"/>
 
-        <activity android:name=".component.viewads.ViewAdsActivity"/>
+        <activity android:name="com.mvision.vfin.component.viewads.ViewAdsActivity"/>
 
-        <activity android:name=".component.survey.SurveyActivity"/>
+        <activity android:name="com.mvision.vfin.component.survey.SurveyActivity"/>
 
-        <activity android:name=".component.question.QuestionActivity"/>
+        <activity android:name="com.mvision.vfin.component.question.QuestionActivity"/>
 
-        <activity android:name=".component.viewadsdetail.ViewAdsDetailActivity"/>
+        <activity android:name="com.mvision.vfin.component.viewadsdetail.ViewAdsDetailActivity"/>
 
-        <activity android:name=".component.authen.login.LoginActivity"/>
+        <activity android:name="com.mvision.vfin.component.authen.login.LoginActivity"/>
 
-        <activity android:name=".component.main.MainActivity"/>
+        <activity android:name="com.mvision.vfin.component.main.MainActivity"/>
 
-        <activity android:name=".component.rewarddetail.RewardDetailActivity"/>
+        <activity android:name="com.mvision.vfin.component.rewarddetail.RewardDetailActivity"/>
 
-        <activity android:name=".component.financehistory.FinanceHistoryActivity"/>
+        <activity android:name="com.mvision.vfin.component.financehistory.FinanceHistoryActivity"/>
 
-        <activity android:name=".component.myaddress.MyAddressActivity"/>
+        <activity android:name="com.mvision.vfin.component.myaddress.MyAddressActivity"/>
 
-        <activity android:name=".component.myproduct.MyProductActivity"/>
+        <activity android:name="com.mvision.vfin.component.myproduct.MyProductActivity"/>
+
+        <activity android:name=".component.editprofile.EditProfileActivity"/>
 
 
         <service
-            android:name=".firebase.fcm.MyFirebaseMessagingService">
+            android:name="com.mvision.vfin.firebase.fcm.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
         <service
-            android:name=".firebase.fcm.MyFirebaseInstanceIDService">
+            android:name="com.mvision.vfin.firebase.fcm.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

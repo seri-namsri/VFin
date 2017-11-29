@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                    <com.mvision.vfin.customview.TextViewWithFont
                         android:id="@+id/textViewTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -73,14 +73,14 @@
                         android:textColor="@android:color/white"
                         app:name="Kanit" />
 
-                    <com.example.enter_01.vfin.customview.TextViewWithFont
+                    <com.mvision.vfin.customview.TextViewWithFont
                         android:id="@+id/textViewDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin"
                         app:name="Kanit" />
 
-                    <com.example.enter_01.vfin.customview.ButtonWithFont
+                    <com.mvision.vfin.customview.ButtonWithFont
                         android:id="@+id/buttonProductDetail"
                         android:layout_width="150dp"
                         android:layout_height="30dp"
@@ -119,13 +119,13 @@
             android:orientation="vertical"
             android:padding="@dimen/margin">
 
-            <com.example.enter_01.vfin.customview.TextViewWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ยอดเงินของคุณ"
                 app:name="Kanit" />
 
-            <com.example.enter_01.vfin.customview.ButtonWithFont
+            <com.mvision.vfin.customview.ButtonWithFont
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/margin"
@@ -147,13 +147,13 @@
             android:orientation="vertical"
             android:padding="@dimen/margin">
 
-            <com.example.enter_01.vfin.customview.TextViewWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="กดซื้อทันที"
                 app:name="Kanit" />
 
-            <com.example.enter_01.vfin.customview.ButtonWithFont
+            <com.mvision.vfin.customview.ButtonWithFont
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"

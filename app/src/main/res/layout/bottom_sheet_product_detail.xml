@@ -12,7 +12,7 @@
 
 
 
-    <com.example.enter_01.vfin.customview.ButtonWithFont
+    <com.mvision.vfin.customview.ButtonWithFont
         app:name = "Kanit"
         app:type = "bold"
         android:layout_margin="@dimen/margin"
@@ -44,12 +44,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <com.example.enter_01.vfin.customview.TextViewWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
                 app:name = "Kanit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ยอดเงินของคุณ"/>
-            <com.example.enter_01.vfin.customview.ButtonWithFont
+            <com.mvision.vfin.customview.ButtonWithFont
                 app:name = "Kanit"
                 app:type = "bold"
                 android:layout_marginTop="@dimen/margin"
@@ -71,12 +71,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-            <com.example.enter_01.vfin.customview.TextViewWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
                 app:name = "Kanit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="จำนวณครั้งที่ซื้อได้"/>
-            <com.example.enter_01.vfin.customview.ButtonWithFont
+            <com.mvision.vfin.customview.ButtonWithFont
                 app:name = "Kanit"
                 app:type = "bold"
                 android:textColor="@android:color/white"

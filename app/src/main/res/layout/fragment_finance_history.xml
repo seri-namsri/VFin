@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             app:name = "Kanit"/>
 
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             android:textSize="@dimen/text_big_size"
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:drawablePadding="@dimen/margin"
             app:name = "Kanit"/>
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

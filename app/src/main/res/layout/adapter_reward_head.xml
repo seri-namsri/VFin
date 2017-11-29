@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         app:name = "Kanit"
         app:type = "bold"
         android:textSize="@dimen/text_big_size"

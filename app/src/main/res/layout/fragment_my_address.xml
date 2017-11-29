@@ -18,7 +18,7 @@
         android:layout_above="@+id/buttonOK"/>
 
 
-    <com.example.enter_01.vfin.customview.ButtonWithFont
+    <com.mvision.vfin.customview.ButtonWithFont
         android:id="@+id/buttonOK"
         app:name = "Kanit"
         app:type = "bold"

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.enter_01.vfin.component.main.MainActivity">
+    tools:context="com.mvision.vfin.component.main.MainActivity">
 
 
     <LinearLayout
         android:id="@+id/toolbar"
-        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
 
         <LinearLayout
 
@@ -19,52 +19,54 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.example.enter_01.vfin.customview.ButtonWithFont
-                app:name ="Kanit"
-                app:type = "bold"
+            <com.mvision.vfin.customview.ButtonWithFont
                 android:id="@+id/buttonCoin"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:layout_weight="1"
+                android:background="@drawable/button_radius_alpha"
+                android:drawableEnd="@drawable/bt_add_more"
+                android:drawableLeft="@drawable/ic_coin"
+                android:drawableRight="@drawable/bt_add_more"
                 android:drawableStart="@drawable/ic_coin"
-                android:drawableEnd="@drawable/bt_add_more"
-                android:layout_margin="8dp"
-                android:text="959,715.99"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin"
+                android:text="0"
                 android:textColor="@android:color/white"
-                android:background="@drawable/button_radius_alpha"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_coin"
-                android:drawableRight="@drawable/bt_add_more" />
+                app:name="Kanit"
+                app:type="bold" />
 
-            <com.example.enter_01.vfin.customview.ButtonWithFont
-                app:name ="Kanit"
-                app:type = "bold"
+            <com.mvision.vfin.customview.ButtonWithFont
                 android:id="@+id/buttonEnergy"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:drawableStart="@drawable/ic_power"
-                android:drawableEnd="@drawable/bt_add_more"
-                android:layout_margin="8dp"
-                android:text="99/99"
-                android:textColor="@android:color/white"
-                android:background="@drawable/button_radius_alpha"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
                 android:layout_weight="1"
+                android:background="@drawable/button_radius_alpha"
+                android:drawableEnd="@drawable/bt_add_more"
                 android:drawableLeft="@drawable/ic_coin"
-                android:drawableRight="@drawable/bt_add_more" />
+                android:drawableRight="@drawable/bt_add_more"
+                android:drawableStart="@drawable/ic_power"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin"
+                android:text="0"
+                android:textColor="@android:color/white"
+                app:name="Kanit"
+                app:type="bold" />
         </LinearLayout>
 
 
     </LinearLayout>
 
     <FrameLayout
-        android:layout_below="@+id/toolbar"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tabLayout" />
+        android:layout_above="@+id/tabLayout"
+        android:layout_below="@+id/toolbar" />
 
 
     <android.support.design.widget.TabLayout

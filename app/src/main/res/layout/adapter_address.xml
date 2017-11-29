@@ -13,20 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             app:name = "Kanit"
             android:id="@+id/textViewAddressNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <com.example.enter_01.vfin.customview.ButtonWithFont
+        <com.mvision.vfin.customview.ButtonWithFont
             app:name = "Kanit"
             android:text="แก้ไข"
             android:layout_alignParentRight="true"
             android:layout_width="80dp"
             android:layout_height="40dp" />
     </RelativeLayout>
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         app:name = "Kanit"
         android:id="@+id/textViewAddressDetail"
         android:layout_width="wrap_content"

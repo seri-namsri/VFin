@@ -12,7 +12,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp" />
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         app:name = "Kanit"
         app:type = "bold"
         android:layout_marginTop="@dimen/margin"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/imageViewSurvey" />
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         app:name = "Kanit"
         android:textColor="@color/colorGreenText"
         android:drawableLeft="@drawable/ic_coin_24"
@@ -34,7 +34,7 @@
         android:layout_below="@+id/textViewName"
         android:layout_toRightOf="@+id/imageViewSurvey" />
 
-    <com.example.enter_01.vfin.customview.TextViewWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         app:name = "Kanit"
         android:drawableLeft="@drawable/ic_clock_24"
         android:layout_marginTop="@dimen/margin"

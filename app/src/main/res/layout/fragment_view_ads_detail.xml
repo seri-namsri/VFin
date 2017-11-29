@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             app:name = "Kanit"
             android:textColor="@color/colorGreenText"
             android:gravity="center"
@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             app:name = "Kanit"
             android:gravity="center"
             android:text="03.00"
@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
-        <com.example.enter_01.vfin.customview.TextViewWithFont
+        <com.mvision.vfin.customview.TextViewWithFont
             app:name = "Kanit"
             android:gravity="center"
             android:text="0.05 v"
