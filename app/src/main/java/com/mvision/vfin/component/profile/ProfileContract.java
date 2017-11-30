@@ -1,5 +1,6 @@
 package com.mvision.vfin.component.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.mvision.vfin.base.BaseView;
@@ -39,7 +40,7 @@ public interface ProfileContract {
 
         void clickLevelDetail();
 
-
+        void changeData(Intent intent);
 
     }
 

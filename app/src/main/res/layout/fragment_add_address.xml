@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBgApp"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:theme="@style/ToolbarColoredBackArrow" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="เลือกจังหวัด*"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewSubDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="เลือกอำเภอ / เขต*"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewProvince"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="เลือกแขวง / ตำบล*"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.EditTextWithFont
+                android:id="@+id/editTextPostalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="รหัสไปรษณี"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.EditTextWithFont
+                android:id="@+id/editTextStreet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="ถนน"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+
+            <com.mvision.vfin.customview.EditTextWithFont
+                android:id="@+id/editTextSoi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="ซอย / ตรอก"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.EditTextWithFont
+                android:id="@+id/editTextNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="บ้านเลขที่ / เลขที่ห้อง"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.EditTextWithFont
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="ชื่อผู้รับ"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.EditTextWithFont
+                android:id="@+id/editTextNameAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_background_black_corner"
+                android:hint="บ้านเลขที่ / เลขที่ห้อง"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.ButtonWithFont
+                android:id="@+id/buttonOk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@drawable/button_radius_yello"
+                android:text="ตกลง"
+                android:textColor="@color/colorOrangeText"
+                app:name="Kanit"
+                app:type="bold" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

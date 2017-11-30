@@ -38,7 +38,7 @@ public class EditProfileActivity extends BaseActivity {
     @Override
     protected void startView() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, EditProfileFragment.newInstance());
+        transaction.replace(R.id.container, EditProfileFragment.newInstance(getIntent().getExtras()));
         transaction.commit();
     }
 }

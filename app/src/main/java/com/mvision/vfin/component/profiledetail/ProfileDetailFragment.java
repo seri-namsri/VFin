@@ -1,5 +1,7 @@
 package com.mvision.vfin.component.profiledetail;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,17 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-
 import com.bumptech.glide.Glide;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
+import com.mvision.vfin.component.editprofile.EditProfileActivity;
 import com.mvision.vfin.component.profile.model.MemberResponseModel;
 import com.mvision.vfin.customview.TextViewWithFont;
 import com.mvision.vfin.utility.Log;
-import com.google.gson.Gson;
+import com.mvision.vfin.utility.Utility;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -60,12 +64,12 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
 
     @Override
     public void showMessageFail(String msg) {
+        Utility.ShowMsg(getActivity(),msg);
 
     }
 
     @Override
     public void showLoading() {
-
     }
 
     @Override
@@ -92,23 +96,58 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
 
     @Override
     public void setUpViewProfile(MemberResponseModel member) {
-        setUptoolBar();
-        textViewEmail.setText(member.result.email+"");
-        textViewName.setText(member.result.firstName);
-        textViewTel.setText(member.result.mobilePhoneNo);
-        textViewBirdDay.setText(member.result.dateOfBirth);
-        textViewIdentiFication.setText(member.result.personalId);
-        textViewGender.setText(member.result.sex);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            imageViewProfile.setElevation(10);
-        }
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        CropCircleTransformation multi = new CropCircleTransformation();
-        Glide.with(this).load(member.result.avatarLink).apply(bitmapTransform(multi)).into(imageViewProfile);
+        try {
+            setUptoolBar();
+            textViewEmail.setText(member.result.email + "");
+            textViewName.setText(member.result.firstName);
+            textViewTel.setText(member.result.mobilePhoneNo);
+            textViewBirdDay.setText(member.result.dateOfBirth);
+            textViewIdentiFication.setText(member.result.personalId);
+            textViewGender.setText(member.result.sex);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                imageViewProfile.setElevation(10);
+            }
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(linearLayoutManager);
+            CropCircleTransformation multi = new CropCircleTransformation();
+            Glide.with(this).load(member.result.avatarLink).apply(bitmapTransform(multi)).into(imageViewProfile);
 
-       /// AdapterAddress adapterAddress = new AdapterAddress(member.getAddress());
-      //  recyclerView.setAdapter(adapterAddress);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /// AdapterAddress adapterAddress = new AdapterAddress(member.getAddress());
+        //  recyclerView.setAdapter(adapterAddress);
+    }
+
+    @Override
+    public void startEditProfile(Bundle bundle, int requestCode) {
+        startActivityResultFromFragment(EditProfileActivity.class, bundle, requestCode);
+    }
+
+    @Override
+    public void finishFragment(MemberResponseModel member) {
+        Intent returnIntent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("memberResponseModel", Parcels.wrap(member));
+        returnIntent.putExtras(bundle);
+        getActivity().setResult(Activity.RESULT_OK, returnIntent);
+        getActivity().finish();
+
+    }
+
+    @Override
+    public void showGallery() {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, 7);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("MyAddressResponseModel","ssss!!!!!");
+        presenter.changeData(requestCode, data);
     }
 
 
@@ -119,25 +158,35 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         applyFontForToolbarTitle(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ข้อมูลส่วนตัว");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.getfinishFragment();
+            }
+        });
+        getViewLayout().setFocusableInTouchMode(true);
+        getViewLayout().requestFocus();
+        getViewLayout().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        presenter.getfinishFragment();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
     }
 
 
-    @OnClick({R.id.linearLayoutName, R.id.linearLayoutEmail, R.id.linearLayoutIdentiFication, R.id
-            .linearLayoutBirdDay, R.id.linearLayoutPassword})
+    @OnClick({R.id.linearLayoutName, R.id.linearLayoutEmail, R.id
+            .linearLayoutBirdDay, R.id.linearLayoutPassword,R.id.imageViewProfile})
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.linearLayoutName:
+        presenter.clickEditProfile(view.getId());
 
-                break;
-            case R.id.linearLayoutEmail:
-                break;
-            case R.id.linearLayoutIdentiFication:
-                break;
-            case R.id.linearLayoutBirdDay:
-                break;
-            case R.id.linearLayoutPassword:
-                break;
-        }
     }
 
 

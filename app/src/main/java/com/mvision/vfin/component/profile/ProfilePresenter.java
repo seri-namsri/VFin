@@ -1,5 +1,6 @@
 package com.mvision.vfin.component.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.mvision.vfin.R;
@@ -41,6 +42,8 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
             @Override
             public <T> void onSuccess(T t) {
                 memberResponseModel  =  (MemberResponseModel) t;
+
+                Log.e("ProfileDetailPresenter",new Gson().toJson(memberResponseModel));
                 view.setUpViewProfile(memberResponseModel);
             }
 
@@ -110,6 +113,13 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
     @Override
     public void clickLevelDetail() {
        view.startLevelDetail();
+    }
+
+    @Override
+    public void changeData(Intent intent) {
+        MemberResponseModel memberResponseModel = Parcels.unwrap(intent.getExtras().getParcelable
+                ("memberResponseModel"));
+        view.setUpViewProfile(memberResponseModel);
     }
 
     private ArrayList<ProfileMore> setDateMore() {

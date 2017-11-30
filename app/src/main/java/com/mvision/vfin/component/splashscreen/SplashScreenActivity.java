@@ -1,9 +1,17 @@
 package com.mvision.vfin.component.splashscreen;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Base64;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseActivity;
+import com.mvision.vfin.utility.Log;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by enter_01 on 11/13/2017 AD.
@@ -41,9 +49,9 @@ public class SplashScreenActivity extends BaseActivity {
         transaction.replace(R.id.container, SplashScreenFragment.newInstance());
         transaction.commit();
 
-      /*  PackageInfo info;
+   /*     PackageInfo info;
         try {
-            info = getPackageManager().getPackageInfo("com.example.enter_01.vfin", PackageManager.GET_SIGNATURES);
+            info = getPackageManager().getPackageInfo("com.mvision.dooads", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md;
                 md = MessageDigest.getInstance("SHA");

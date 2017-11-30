@@ -129,7 +129,7 @@ public class LoginManage {
 
     public void loginWithFaceBook(String facebookID, final Query.CallBackData callBackData) {
         LoginFaceBookRequestModel a = new LoginFaceBookRequestModel(facebookID);
-        Log.e("LoginFaceBookRequestModel",new Gson().toJson(a));
+        Log.e("loginWithFaceBook",new Gson().toJson(a));
         RetrofitUtility.getInstance().getRetrofit().create(com.mvision.vfin.api.request.Member.class)
                 .loginFaceBookVfin(new LoginFaceBookRequestModel(facebookID))
                 .subscribeOn(Schedulers.io())

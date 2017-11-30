@@ -13,7 +13,8 @@ public class MemberResponseModel extends BaseRespone{
     public Result result ;
     @Parcel
     public static  class Result {
-        public String avatarLink,firstName,lastName,email,sex,personalId,dateOfBirth,mobilePhoneNo;
+        public String avatarLink,firstName,lastName,email,sex,personalId,dateOfBirth,
+                mobilePhoneNo,avatarFilePath;
         public MemberLevelLimit memberLevelLimit;
         public int memberLevel;
     }

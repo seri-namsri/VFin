@@ -11,7 +11,7 @@ import com.mvision.vfin.utility.Utility;
  */
 
 public class LoginFaceBookRequestModel {
-    private String facebookId, deviceId, platform, imei, imei2, macAddress, versionCode, deviceModelNam;
+    private String facebookId, deviceId, platform, imei, imei2, macAddress, versionCode, deviceModelName;
 
     public LoginFaceBookRequestModel(String facebookId) {
         this.facebookId = facebookId;
@@ -21,6 +21,6 @@ public class LoginFaceBookRequestModel {
         this.imei2 = Utility.getIMEI2(Contextor.getInstance().getContext())+"";
         this.macAddress = Utility.getMACAddress("wlan0");
         this.versionCode = String.valueOf(BuildConfig.VERSION_CODE);
-        this.deviceModelNam = Utility.getDeviceName();
+        this.deviceModelName = Utility.getDeviceName();
     }
 }

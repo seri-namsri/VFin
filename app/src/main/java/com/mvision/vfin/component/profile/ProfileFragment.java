@@ -1,5 +1,7 @@
 package com.mvision.vfin.component.profile;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import com.mvision.vfin.component.profile.model.MemberResponseModel;
 import com.mvision.vfin.component.profile.model.ProfileMore;
 import com.mvision.vfin.component.profiledetail.ProfileDetailActivity;
 import com.mvision.vfin.customview.PercenView;
+import com.mvision.vfin.utility.Log;
 
 import java.util.ArrayList;
 
@@ -105,7 +108,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
             perCentView.setC("0.4");
             textViewName.setText(member.result.firstName);
             textViewEmail.setText(member.result.email);
-            textViewProfilePercent.setText(member.result.memberLevel+"");
+            textViewProfilePercent.setText(member.result.memberLevel + "");
             imageViewProfile.bringToFront();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageViewProfile.setElevation(10);
@@ -130,18 +133,27 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
 
     @Override
     public void OpenActivity(Class className, Bundle bundle) {
-        startActivityFromFragment(className,bundle);
+        startActivityFromFragment(className, bundle);
     }
 
     @Override
     public void logOutSuccess() {
         getActivity().finish();
-        startActivityFromFragment(LoginActivity.class,null);
+        startActivityFromFragment(LoginActivity.class, null);
     }
 
     @Override
     public void startProfileDetail(Bundle bundle) {
-        startActivityFromFragment(ProfileDetailActivity.class, bundle);
+        startActivityResultFromFragment(ProfileDetailActivity.class, bundle, 5);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+      //  super.onActivityResult(requestCode, resultCode, data);
+        Log.e("onDestroyonDestroyonDestroy","---4");
+          if (requestCode == 5)
+            presenter.changeData(data);
     }
 
     @Override

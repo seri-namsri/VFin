@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:theme="@style/ToolbarColoredBackArrow"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary" />
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/button_background_black_corner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:name = "Kanit"
+        android:hint="อีเมล"
+        android:padding="@dimen/margin"
+        android:id="@+id/editTextEmail"/>
+
+
+    <com.mvision.vfin.customview.ButtonWithFont
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin"
+        android:text="บันทึก"
+        android:id="@+id/buttonOk"
+        android:textColor="@color/colorOrangeText"
+        app:name = "Kanit"
+        android:background="@drawable/button_radius_yello"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>

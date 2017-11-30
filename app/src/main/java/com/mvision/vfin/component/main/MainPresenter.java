@@ -51,23 +51,5 @@ public class MainPresenter extends Presenter<MainContract.View> implements MainC
 
 
 
-        ProfileManager.getInstance().getMember(PreferencesMange.getInstance().getMemberID(), new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-
-            }
-
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-
-            }
-
-            @Override
-            public void onFail(String error) {
-
-            }
-        });
-
-
     }
 }

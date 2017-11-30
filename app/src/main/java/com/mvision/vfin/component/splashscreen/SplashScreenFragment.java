@@ -86,4 +86,6 @@ public class SplashScreenFragment extends BaseFragment implements SplashScreenCo
         getActivity().finish();
         startActivityFromFragment(LoginActivity.class,null);
     }
+
+
 }

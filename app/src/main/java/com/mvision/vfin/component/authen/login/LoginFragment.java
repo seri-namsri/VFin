@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import com.facebook.FacebookAuthorizationException;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.main.MainActivity;
@@ -115,6 +116,12 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
             @Override
             public void onError(FacebookException error) {
+                if (error instanceof FacebookAuthorizationException) {
+                if (AccessToken.getCurrentAccessToken() != null) {
+                    LoginManager.getInstance().logOut();
+                }
+            }
+                Log.e("FacebookException",error.toString());
                 //   UtilsLog.error(TAG, "onError " + error);
 //                new SweetAlertDialog(activity, SweetAlertDialog.WARNING_TYPE)
 //                        .setTitleText(getResources().getString(R.string.title_warning))

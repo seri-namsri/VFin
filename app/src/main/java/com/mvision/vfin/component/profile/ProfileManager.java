@@ -26,32 +26,34 @@ import rx.schedulers.Schedulers;
 public class ProfileManager {
 
     private static ProfileManager instance = null;
-    private static FirebaseFirestore db ;
+    private static FirebaseFirestore db;
+
     public static ProfileManager getInstance() {
         if (instance == null)
             instance = new ProfileManager();
         return instance;
     }
 
-    public void getMember(String memberId,final Query.CallBackData callBackData){
+    public void getMember(String memberId, final Query.CallBackData callBackData) {
         db = FirebaseFirestore.getInstance();
-        Query.getInstance().readDataDocument( db.document("member/"+memberId),new Member(), callBackData);
+        Query.getInstance().readDataDocument(db.document("member/" + memberId), new Member(), callBackData);
     }
 
-    public void getMemberNorealTime(String memberId,final Query.CallBackData callBackData){
+    public void getMemberNorealTime(String memberId, final Query.CallBackData callBackData) {
         db = FirebaseFirestore.getInstance();
         try {
-            Query.getInstance().readDataDocumentNorealTime( db.document("member/"+memberId),new Member(),
+            Query.getInstance().readDataDocumentNorealTime(db.document("member/" + memberId), new Member(),
                     callBackData);
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
     }
 
-    public void getMemberApi(final Query.CallBackData callBackData){
+    public void getMemberApi(final Query.CallBackData callBackData) {
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(com.mvision.vfin.api.request.Member.class).getMember(PreferencesMange
-                .getInstance().getMemberID()).subscribeOn(Schedulers.io())
+                .getInstance().getMemberID().trim()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MemberResponseModel>() {
                     @Override
@@ -77,14 +79,13 @@ public class ProfileManager {
 
                     @Override
                     public void onNext(MemberResponseModel s) {
-                        Log.e("MyAddressResponseModel",new Gson().toJson(s));
+                        Log.e("MyAddressResponseModel", new Gson().toJson(s));
                         callBackData.onSuccess(s);
 
                     }
 
                 });
     }
-
 
 
 }

@@ -88,7 +88,7 @@ public class EditTextWithFont extends android.support.v7.widget.AppCompatEditTex
                 setError(msg);
             }
 
-            return null;
+            return "";
         }
 
         return getText().toString();

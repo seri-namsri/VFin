@@ -23,6 +23,7 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
 
     @Override
     public void getLogin(String tel, String password) {
+
         if (tel != null && password != null)
         {
             LoginManage.getInstance().loginWithApi(tel, password, callBackData);
@@ -33,6 +34,7 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
         @Override
         public <T> void onSuccess(T t) {
             LoginResponseModel member = (LoginResponseModel) t;
+
             Utility.savePreferences(Contextor.getInstance().getContext(), "member_id",
                     member.result.member.memberCode);
             view.setUpViewLogin();
@@ -45,6 +47,7 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
 
         @Override
         public void onFail(String error) {
+
 
             view.showMessageFail(error);
         }

@@ -27,7 +27,6 @@ public abstract class BaseFragment extends Fragment implements BaseView{
 
 
     protected FragmentManager fragmentManager;
-    private ProgressDialog mProgressDialog;
     private View view;
     protected Presenter presenter;
     private Unbinder unbinder;
@@ -47,6 +46,11 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     }
 
 
+    public View getViewLayout(){
+        return  view ;
+    }
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -59,7 +63,6 @@ public abstract class BaseFragment extends Fragment implements BaseView{
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(setLayoutResourceIdentifier(), container, false);
         unbinder = ButterKnife.bind(this, view);
-      //  loadInfoToolbar();
         startView();
         return view;
     }
@@ -70,24 +73,9 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     @Override
     public void onDestroy() {
         super.onDestroy();
-      //  unbinder.unbind();
-
     }
 
 
-
-  /*  private void loadInfoToolbar() {
-        try {
-         //   mToolBar = (Toolbar) view.findViewById(R.id.toolbar);
-            ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getTitleToolBar());
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(getDisplayHomeAsUpEnabled());
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(getDisplayHomeAsUpEnabled());
-
-        } catch (Exception e) {
-            //   e.printStackTrace();
-        }
-    }*/
 
     public void applyFontForToolbarTitle(Toolbar toolbar) {
         for (int i = 0; i < toolbar.getChildCount(); i++) {
@@ -102,6 +90,12 @@ public abstract class BaseFragment extends Fragment implements BaseView{
         }
     }
 
+    protected void startActivityResultFromFragment(Class classN, Bundle data, int requestCode) {
+        Intent intent = new Intent(getActivity(), classN);
+        if (data != null)
+            intent.putExtras(data);
+        startActivityForResult(intent, requestCode);
+    }
 
     protected abstract void initializePresenter();
 
@@ -129,12 +123,5 @@ public abstract class BaseFragment extends Fragment implements BaseView{
         startActivity(intent);
     }
 
-    protected void startActivityFromFragmentPretest(Class classN, Bundle data) {
-        Intent intent = new Intent(getActivity(), classN);
-        if (data != null) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtras(data);
-        }
-        startActivity(intent);
-    }
+
 }

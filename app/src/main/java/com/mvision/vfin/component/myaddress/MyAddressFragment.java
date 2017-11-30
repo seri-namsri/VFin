@@ -1,11 +1,19 @@
 package com.mvision.vfin.component.myaddress;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
 import com.mvision.vfin.base.BaseFragment;
+import com.mvision.vfin.component.adddress.AddAddressActivity;
 
 import butterknife.BindView;
 
@@ -16,6 +24,7 @@ import butterknife.BindView;
 public class MyAddressFragment extends BaseFragment implements MyAddressContract.View{
 
     @BindView(R.id.recyclerView)RecyclerView recyclerView;
+    @BindView(R.id.toolbar)Toolbar toolbar;
 
     private MyAddressPresenter presenter ;
     public static MyAddressFragment newInstance() {
@@ -39,6 +48,19 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
 
     }
 
+
+    private void setUptoolBar() {
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        applyFontForToolbarTitle(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("เลือกที่อยู่");
+    }
+
+
+
+
     @Override
     public void setUpViewAddress(MyAddressResponseModel myAddressResponseModel) {
         MyAddressAdapter myAddressAdapter = new MyAddressAdapter(myAddressResponseModel);
@@ -56,7 +78,30 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
     @Override
     protected void startView() {
         presenter.getAddress();
+        setUptoolBar();
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_address, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.addAddress:
+                startActivityFromFragment(AddAddressActivity.class,null);
+               // startActivityForResult(new Intent(this,InterestActivity.class),1);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     protected int setLayoutResourceIdentifier() {

@@ -14,6 +14,9 @@
     <string name="key_price">key_price</string>
     <string name="key_memberID">key_memberID</string>
 
+    <!--menu-->
+    <string name="menu_add_address">menu_add_address</string>
+
 
 
 
