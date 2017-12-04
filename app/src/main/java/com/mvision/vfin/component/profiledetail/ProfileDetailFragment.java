@@ -11,11 +11,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
+import com.mvision.vfin.component.addeditdress.AddEditAddressActivity;
+import com.mvision.vfin.component.addeditdress.model.AddressModel;
 import com.mvision.vfin.component.editprofile.EditProfileActivity;
+import com.mvision.vfin.component.myaddress.MyAddressActivity;
 import com.mvision.vfin.component.profile.model.MemberResponseModel;
 import com.mvision.vfin.customview.TextViewWithFont;
 import com.mvision.vfin.utility.Log;
@@ -37,6 +43,8 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
 
     @BindView(R.id.textViewEmail)
     TextViewWithFont textViewEmail;
+    @BindView(R.id.textViewAddress)
+    TextViewWithFont textViewAddress;
     @BindView(R.id.textViewName)
     TextViewWithFont textViewName;
     @BindView(R.id.textViewTel)
@@ -45,12 +53,8 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
     TextViewWithFont textViewBirdDay;
     @BindView(R.id.textViewIdentiFication)
     TextViewWithFont textViewIdentiFication;
-    @BindView(R.id.textViewGender)
-    TextViewWithFont textViewGender;
     @BindView(R.id.imageViewProfile)
     ImageView imageViewProfile;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -103,26 +107,48 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
             textViewTel.setText(member.result.mobilePhoneNo);
             textViewBirdDay.setText(member.result.dateOfBirth);
             textViewIdentiFication.setText(member.result.personalId);
-            textViewGender.setText(member.result.sex);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageViewProfile.setElevation(10);
             }
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(linearLayoutManager);
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.placeholder(R.drawable.picture);
+            requestOptions.error(R.drawable.picture);
             CropCircleTransformation multi = new CropCircleTransformation();
-            Glide.with(this).load(member.result.avatarLink).apply(bitmapTransform(multi)).into(imageViewProfile);
+            Glide.with(this).load(member.result.avatarLink)
+                    .apply(bitmapTransform(multi))
+                    .apply(requestOptions)
+                    .into(imageViewProfile);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        /// AdapterAddress adapterAddress = new AdapterAddress(member.getAddress());
-        //  recyclerView.setAdapter(adapterAddress);
+    }
+
+    @Override
+    public void setUpViewAddress(AddressModel addressModel) {
+        textViewAddress.setVisibility(View.VISIBLE);
+        textViewAddress.setText(addressModel.getAddressAll());
     }
 
     @Override
     public void startEditProfile(Bundle bundle, int requestCode) {
         startActivityResultFromFragment(EditProfileActivity.class, bundle, requestCode);
+    }
+
+    @Override
+    public void startAddAddress(int requestCode) {
+        startActivityResultFromFragment(AddEditAddressActivity.class, null, requestCode);
+    }
+
+    @Override
+    public void startChangeAddress(int requestCode) {
+        startActivityResultFromFragment(MyAddressActivity.class, null, requestCode);
+    }
+
+    @Override
+    public void startEditAddress(Bundle bundle,int requestCode) {
+        startActivityResultFromFragment(AddEditAddressActivity.class, bundle, requestCode);
     }
 
     @Override
@@ -146,7 +172,6 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("MyAddressResponseModel","ssss!!!!!");
         presenter.changeData(requestCode, data);
     }
 
@@ -183,7 +208,8 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
 
 
     @OnClick({R.id.linearLayoutName, R.id.linearLayoutEmail, R.id
-            .linearLayoutBirdDay, R.id.linearLayoutPassword,R.id.imageViewProfile})
+            .linearLayoutBirdDay, R.id.linearLayoutPassword,R.id.imageViewProfile,R.id
+            .buttonAddressAdd,R.id.buttonEditMainAddress,R.id.buttonChangeMainAddress})
     public void onClick(View view) {
         presenter.clickEditProfile(view.getId());
 

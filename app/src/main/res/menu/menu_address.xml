@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/addAddress"
-        android:icon="@android:drawable/ic_input_add"
+        android:icon="@drawable/add"
         app:showAsAction="always"
         android:title="@string/menu_add_address" />
 

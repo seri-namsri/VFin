@@ -12,10 +12,15 @@ public interface SplashScreenContract {
         void showMainActivity();
 
         void showLoginActivity();
+
+        void showVersion(String version);
+
+
     }
 
     interface Presenter {
         void getAppFirst();
+        void getVersion();
 
     }
 

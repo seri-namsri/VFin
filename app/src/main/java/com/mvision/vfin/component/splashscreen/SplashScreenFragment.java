@@ -1,17 +1,22 @@
 package com.mvision.vfin.component.splashscreen;
 
 import android.os.Handler;
+import android.widget.TextView;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.authen.login.LoginActivity;
 import com.mvision.vfin.component.main.MainActivity;
 
+import butterknife.BindView;
+
 /**
  * Created by enter_01 on 11/13/2017 AD.
  */
 
 public class SplashScreenFragment extends BaseFragment implements SplashScreenContract.View{
+
+    @BindView(R.id.textViewVersionCode)TextView textViewVersionCode;
 
     public static  SplashScreenFragment newInstance() {
         SplashScreenFragment fragment = new SplashScreenFragment();
@@ -48,6 +53,7 @@ public class SplashScreenFragment extends BaseFragment implements SplashScreenCo
 
     @Override
     protected void startView() {
+        presenter.getVersion();
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
@@ -85,6 +91,11 @@ public class SplashScreenFragment extends BaseFragment implements SplashScreenCo
     public void showLoginActivity() {
         getActivity().finish();
         startActivityFromFragment(LoginActivity.class,null);
+    }
+
+    @Override
+    public void showVersion(String version) {
+        textViewVersionCode.setText(version);
     }
 
 

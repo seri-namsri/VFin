@@ -1,7 +1,9 @@
 package com.mvision.vfin.component.myaddress;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +15,11 @@ import android.view.MenuItem;
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
 import com.mvision.vfin.base.BaseFragment;
-import com.mvision.vfin.component.adddress.AddAddressActivity;
+import com.mvision.vfin.component.addeditdress.AddEditAddressActivity;
+import com.mvision.vfin.component.addeditdress.model.AddressModel;
+import com.mvision.vfin.utility.Utility;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 
@@ -35,7 +41,7 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
 
     @Override
     public void showMessageFail(String msg) {
-
+        Utility.ShowMsg(getActivity(),msg);
     }
 
     @Override
@@ -60,13 +66,31 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
 
 
 
-
+    private MyAddressAdapter myAddressAdapter ;
     @Override
     public void setUpViewAddress(MyAddressResponseModel myAddressResponseModel) {
-        MyAddressAdapter myAddressAdapter = new MyAddressAdapter(myAddressResponseModel);
+        myAddressAdapter = new MyAddressAdapter(myAddressResponseModel, new MyAddressAdapter.OnClickItem() {
+            @Override
+            public void itemClickEdit(AddressModel addressModel,int position) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("addressModel", Parcels.wrap(addressModel));
+                bundle.putInt("positionAddress", position);
+                startActivityResultFromFragment(AddEditAddressActivity.class,bundle,2);
+            }
+
+            @Override
+            public void itemClickSelect(AddressModel addressModel,int position) {
+                myAddressAdapter.setClickPosition(position);
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(myAddressAdapter);
+    }
+
+    @Override
+    public void updateDataAddress() {
+        myAddressAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -93,8 +117,7 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addAddress:
-                startActivityFromFragment(AddAddressActivity.class,null);
-               // startActivityForResult(new Intent(this,InterestActivity.class),1);
+                startActivityResultFromFragment(AddEditAddressActivity.class,null,1);
                 return true;
 
             default:
@@ -102,6 +125,14 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK){
+            presenter.getUpdateAddress(requestCode,data);
+        }
+
+    }
 
     @Override
     protected int setLayoutResourceIdentifier() {

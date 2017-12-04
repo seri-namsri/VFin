@@ -26,6 +26,7 @@
     <string name="header_mac_address">macAddress</string>
     <string name="header_operator">simMobileOperator</string>
     <string name="header_operator_code">simMobileOperatorCode</string>
+    <string name="header_token_session">tokenSession</string>
 
     <string name="value_cache">max-age=0</string>
     <string name="value_language">th-TH</string>

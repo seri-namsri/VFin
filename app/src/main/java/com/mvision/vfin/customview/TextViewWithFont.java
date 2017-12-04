@@ -79,4 +79,20 @@ public class TextViewWithFont extends android.support.v7.widget.AppCompatTextVie
         Kanit = Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Light.otf");
         Kanit_regular = Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Regular.otf");
     }
+
+
+    public String getTextDataNotNull(String msg) {
+
+        if (getText().toString().isEmpty()) {
+            if (msg == null){
+                setError("กรุณากรอกข้อมูลให้ครบ");
+            }else {
+                setError(msg);
+            }
+
+            return "";
+        }
+
+        return getText().toString();
+    }
 }

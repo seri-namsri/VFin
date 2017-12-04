@@ -2,6 +2,9 @@ package com.mvision.vfin.component.splashscreen;
 
 
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 import com.mvision.vfin.base.presenter.Presenter;
 import com.mvision.vfin.utility.Contextor;
 import com.mvision.vfin.utility.Utility;
@@ -29,6 +32,18 @@ public class SplashScreenPresenter extends Presenter<SplashScreenContract.View> 
 
         } else {
             view.showLoginActivity();
+        }
+    }
+
+    @Override
+    public void getVersion() {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = Contextor.getInstance().getContext().getPackageManager()
+                    .getPackageInfo(Contextor.getInstance().getContext().getPackageName(), 0);
+            view.showVersion("Version : " + packageInfo.versionName+"");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

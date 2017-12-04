@@ -149,7 +149,8 @@ public class MainActivity extends BaseActivity implements MainContract.View{
     @Override
     public void setUpView(ModelCoinAndBit modelCoinAndBit) {
         try {
-            buttonEnergy.setText(modelCoinAndBit.getAbility()+"/99");
+            buttonEnergy.setText(modelCoinAndBit.getAbility().current+"/"+modelCoinAndBit
+                    .getAbility().max);
             buttonCoin.setText(modelCoinAndBit.getWallet()+"");
         }catch (Exception e){}
     }

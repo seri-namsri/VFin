@@ -5,9 +5,14 @@ package com.mvision.vfin.component.main.model;
  */
 
 public class ModelCoinAndBit {
-    public int ability;
+    public Ability ability;
 
-    public int getAbility() {
+    public ModelCoinAndBit(Ability ability, double wallet) {
+        this.ability = ability;
+        this.wallet = wallet;
+    }
+
+    public Ability getAbility() {
         return ability;
     }
 
@@ -16,4 +21,23 @@ public class ModelCoinAndBit {
     }
 
     public double wallet;
+
+    public class Ability{
+        public int current;
+
+        public Ability (int current,int max){
+            this.current = current ;
+            this.max = max ;
+        }
+
+        public int getCurrent() {
+            return current;
+        }
+
+        public int getMax() {
+            return max;
+        }
+
+        public int max ;
+    }
 }

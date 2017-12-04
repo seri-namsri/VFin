@@ -296,12 +296,12 @@ public class RetrofitUtility {
                 Request.Builder requestBuilder = original.newBuilder()
                         .header(Contextor.getInstance().getContext().getString(R.string.header_cache),
                                 Contextor.getInstance().getContext().getString(R.string.value_cache))
-                        .header(Contextor.getInstance().getContext().getString(R.string.header_deviceId),
-                                Utility.getDeviceID(Contextor.getInstance().getContext
-                                        ()))
+                        .header(Contextor.getInstance().getContext().getString(R.string.header_deviceId),Utility.getDeviceID(Contextor.getInstance().getContext()))
                         .header(Contextor.getInstance().getContext().getString(R.string
                                 .header_api), "1")
                         .header(Contextor.getInstance().getContext().getString(R.string.header_package), packageName)
+                        .header(Contextor.getInstance().getContext().getString(R.string.header_token_session),
+                                PreferencesMange.getInstance().getTokenSession())
                      //   .header(Contextor.getInstance().getContext().getString(R.string
                       //  .header_signature),Utilities.Decryptor.byteArrayToHex(baseKey.getBytes()))
                         .header(Contextor.getInstance().getContext().getString(R.string.header_timestamp), "" + Calendar.getInstance().getTimeInMillis())

@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
+import com.mvision.vfin.component.addeditdress.model.AddressModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,12 +20,14 @@ import butterknife.ButterKnife;
  * Created by enter_01 on 11/24/2017 AD.
  */
 
-public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.ViewHolder>{
+public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.ViewHolder> {
 
-    private MyAddressResponseModel myAddressResponseModel ;
-    public MyAddressAdapter(MyAddressResponseModel myAddressResponseModel){
+    private MyAddressResponseModel myAddressResponseModel;
+    private OnClickItem onClickItem;
+
+    public MyAddressAdapter(MyAddressResponseModel myAddressResponseModel, OnClickItem onClickItem) {
         this.myAddressResponseModel = myAddressResponseModel;
-
+        this.onClickItem = onClickItem;
     }
 
 
@@ -34,16 +38,41 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
 
     }
 
+    private int clickPosition = -1;
+
+    public void setClickPosition(int position) {
+        clickPosition = position;
+        notifyDataSetChanged();
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.textViewAddress.setText(myAddressResponseModel.result.get(position).houseNo+ "" +
-                    " "+ myAddressResponseModel.result.get(position).alley + " "+
-                    myAddressResponseModel.result.get(position).road+ " "+
-                    myAddressResponseModel.result.get(position).subDistrict  + " "+
-                    myAddressResponseModel.result.get(position).district + " "+
-                    myAddressResponseModel.result.get(position).province + " "+
-                    myAddressResponseModel.result.get(position).postalCode   );
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        if (clickPosition >= 0 && clickPosition == position){
+            holder.imageClick.setBackgroundResource(R.drawable.checked);
+        }else {
+            holder.imageClick.setBackgroundResource(R.drawable.button_background_black_corner);
+        }
+
+        holder.textViewAddress.setText(myAddressResponseModel.result.get(position).houseNo + "" +
+                " " + myAddressResponseModel.result.get(position).postalCode + " " +
+                myAddressResponseModel.result.get(position).subDistrict + " " +
+                myAddressResponseModel.result.get(position).district + " " +
+                myAddressResponseModel.result.get(position).province);
+        holder.textViewAddressName.setText(myAddressResponseModel.result.get(position).getName());
+        holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickItem.itemClickEdit(myAddressResponseModel.result.get(position), position);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickItem.itemClickSelect(myAddressResponseModel.result.get(position),position);
+            }
+        });
     }
 
     @Override
@@ -53,9 +82,13 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.textViewAddress)
-        TextView  textViewAddress;
+        TextView textViewAddress;
+        @BindView(R.id.textViewAddressName)
+        TextView textViewAddressName;
         @BindView(R.id.buttonEdit)
         Button buttonEdit;
+        @BindView(R.id.imageClick)
+        ImageView imageClick;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -64,8 +97,10 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
         }
     }
 
-    public interface OnClickItemMore{
-        void itemClick(int position);
+    public interface OnClickItem {
+        void itemClickEdit(AddressModel addressModel, int position);
+
+        void itemClickSelect(AddressModel addressModel,int position);
     }
 
 }

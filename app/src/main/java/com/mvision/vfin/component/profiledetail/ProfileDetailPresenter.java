@@ -8,6 +8,7 @@ import com.mvision.vfin.R;
 import com.mvision.vfin.api.modelrequest.MemberUpdate;
 import com.mvision.vfin.api.response.UpdateProfileResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
+import com.mvision.vfin.component.addeditdress.model.AddressModel;
 import com.mvision.vfin.component.profile.model.MemberResponseModel;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Contextor;
@@ -32,6 +33,9 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
     private int requestCodeEmail = 2;
     private int requestCodeBirthDay = 3;
     private int requestCodeUploadProfile = 7;
+    private int requestCodeAddDress = 8;
+    private int requestCodeEditAddress = 9;
+    private int requestCodeChangeAddress = 10;
 
     public ProfileDetailPresenter(ProfileDetailContract.View view) {
         this.view = view;
@@ -79,6 +83,15 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
             case R.id.imageViewProfile:
                 view.showGallery();
                 break;
+            case R.id.buttonAddressAdd:
+                view.startAddAddress(requestCodeAddDress);
+                break;
+            case R.id.buttonEditMainAddress:
+                view.startEditAddress(null,requestCodeEditAddress);
+                break;
+            case R.id.buttonChangeMainAddress:
+                view.startChangeAddress(requestCodeChangeAddress);
+                break;
 
 
         }
@@ -90,7 +103,6 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
         try {
             MemberUpdate memberUpdate = Parcels.unwrap(data.getExtras().getParcelable("memberUpdate"));
             if (id == requestCodeName) {
-
                 memberResponseModel.result.firstName = memberUpdate.getFirstName();
                 memberResponseModel.result.lastName = memberUpdate.getLastName();
                 view.setUpViewProfile(memberResponseModel);
@@ -100,17 +112,22 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
             } else if (id == requestCodeBirthDay) {
                 memberResponseModel.result.dateOfBirth = memberUpdate.getDateOfBirth();
                 view.setUpViewProfile(memberResponseModel);
+            } else if (id == requestCodeAddDress || id == requestCodeEditAddress || id == requestCodeChangeAddress) {
+                AddressModel addressModel = Parcels.unwrap(data.getExtras().getParcelable("addressModel"));
+                view.setUpViewAddress(addressModel);
             }
 
         } catch (Exception e) {
-            if (id == requestCodeUploadProfile) {
-                try {
+            try {
+                if (id == requestCodeUploadProfile) {
+
                     InputStream is = Contextor.getInstance().getContext().getContentResolver().openInputStream(data.getData());
                     upDateImage(getBytes(is));
 
-                } catch (IOException e1) {
-                    e1.printStackTrace();
                 }
+
+            } catch (Exception e1) {
+                e1.printStackTrace();
             }
         }
 

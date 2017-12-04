@@ -10,7 +10,8 @@ import com.mvision.vfin.utility.UtilsEncoding;
  */
 
 public class LoginRequestModel {
-    private String userName,password, deviceId, platform, imei, imei2, macAddress, versionCode, deviceModelNam;
+    private String userName,password, deviceId, platform, imei, imei2, macAddress, versionCode,
+            deviceModelName;
     public LoginRequestModel(String userName,String password){
         this.userName = userName;
         this.password = UtilsEncoding.SHA1(password);
@@ -20,6 +21,6 @@ public class LoginRequestModel {
         this.imei2 = Utility.getIMEI2(Contextor.getInstance().getContext())+"";
         this.macAddress = Utility.getMACAddress("wlan0");
         this.versionCode = String.valueOf(BuildConfig.VERSION_CODE);
-        this.deviceModelNam = Utility.getDeviceName();
+        this.deviceModelName = Utility.getDeviceName();
     }
 }

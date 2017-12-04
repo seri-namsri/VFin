@@ -63,7 +63,6 @@ public class MyAddressManage {
 
                     @Override
                     public void onNext(MyAddressResponseModel s) {
-                        Log.e("MyAddressResponseModel",new Gson().toJson(s));
                         callBackData.onSuccess(s);
 
                     }

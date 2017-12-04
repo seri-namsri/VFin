@@ -89,6 +89,7 @@ public class LoginManage {
 
 
     public void loginWithApi(String userName, String password, final Query.CallBackData callBackData) {
+     //   Log.e("loginWithApi",new Gson().toJson(new LoginRequestModel(userName, password)));
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(com.mvision.vfin.api.request

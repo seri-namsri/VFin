@@ -2,10 +2,11 @@ package com.mvision.vfin.api.request;
 
 import com.mvision.vfin.api.modelrequest.LoginFaceBookRequestModel;
 import com.mvision.vfin.api.modelrequest.LoginRequestModel;
-import com.mvision.vfin.api.modelrequest.UpdateProfileRequestModel;
 import com.mvision.vfin.api.response.LoginResponseModel;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
+import com.mvision.vfin.api.response.SaveAddressResponse;
 import com.mvision.vfin.api.response.UpdateProfileResponseModel;
+import com.mvision.vfin.component.addeditdress.model.AddressModel;
 import com.mvision.vfin.component.profile.model.MemberResponseModel;
 
 import okhttp3.MultipartBody;
@@ -31,6 +32,10 @@ public interface Member {
 
     @POST("memberservice/v2/member/connectWithFacebook")
     Observable<LoginResponseModel> loginFaceBookVfin(@Body LoginFaceBookRequestModel body);
+
+    @POST("memberservice/v2/member/saveAddress")
+    Observable<SaveAddressResponse> saveAddress(@Query("memberCode")String memberCode,@Body
+            AddressModel body);
 
     @GET("memberservice/v2/member/getAddress")
     Observable<MyAddressResponseModel> myAddress(@Query("memberCode") String memberCode );

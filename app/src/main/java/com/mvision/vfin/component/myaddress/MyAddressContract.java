@@ -1,5 +1,7 @@
 package com.mvision.vfin.component.myaddress;
 
+import android.content.Intent;
+
 import com.mvision.vfin.api.response.MyAddressResponseModel;
 import com.mvision.vfin.base.BaseView;
 
@@ -11,10 +13,12 @@ public interface MyAddressContract {
     interface View extends BaseView {
 
         void setUpViewAddress(MyAddressResponseModel myAddressResponseModel);
+        void updateDataAddress();
     }
 
     interface Presenter {
         void getAddress();
+        void getUpdateAddress(int requestCode,Intent intent);
 
     }
 }

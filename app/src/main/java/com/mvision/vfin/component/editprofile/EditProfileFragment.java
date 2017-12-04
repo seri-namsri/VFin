@@ -1,6 +1,8 @@
 package com.mvision.vfin.component.editprofile;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,24 +10,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.modelrequest.MemberUpdate;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.customview.EditTextWithFont;
+import com.mvision.vfin.customview.TextViewWithFont;
+import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.Utility;
 
 import org.parceler.Parcels;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 
 /**
  * Created by enter_01 on 11/29/2017 AD.
  */
 
-public class EditProfileFragment extends BaseFragment implements EditProfileContract.View{
+public class EditProfileFragment extends BaseFragment implements EditProfileContract.View, DatePickerDialog.OnDateSetListener {
 
-    private EditProfilePresenter presenter ;
+    private EditProfilePresenter presenter;
 
     public static EditProfileFragment newInstance(Bundle bundle) {
         EditProfileFragment fragment = new EditProfileFragment();
@@ -36,7 +46,7 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
 
     @Override
     public void showMessageFail(String msg) {
-        Utility.ShowMsg(getActivity(),msg);
+        Utility.ShowMsg(getActivity(), msg);
     }
 
     @Override
@@ -51,13 +61,13 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
 
     @Override
     protected void initializePresenter() {
-       presenter = new EditProfilePresenter(this);
-       super.presenter = presenter;
+        presenter = new EditProfilePresenter(this);
+        super.presenter = presenter;
     }
 
     @Override
     protected void startView() {
-         presenter.getLayout();
+        presenter.getLayout();
     }
 
     @Override
@@ -74,21 +84,21 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
     @Override
     public void initVariableChangeName() {
         final EditTextWithFont editTextName = getViewLayout().findViewById(R.id.editTextName);
-        final EditTextWithFont  editTextSureName = getViewLayout().findViewById(R.id.editTextSureName);
+        final EditTextWithFont editTextSureName = getViewLayout().findViewById(R.id.editTextSureName);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
-        Toolbar  toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar,"ชื่อ-นามสกุล");
+        Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
+        setUptoolBar(toolbar, "ชื่อ-นามสกุล");
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                  presenter.upDateName(editTextName.getTextDataNotNull(null),
-                          editTextSureName.getText
-                          ().toString());
+                presenter.upDateName(editTextName.getTextDataNotNull(null),
+                        editTextSureName.getText
+                                ().toString());
             }
         });
     }
 
-    private void setUptoolBar(Toolbar toolbar,String title) {
+    private void setUptoolBar(Toolbar toolbar, String title) {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -100,27 +110,27 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
 
     @Override
     public void initVariableChangePassword() {
-        final EditTextWithFont  editTextPassOld = getViewLayout().findViewById(R.id.editTextPassOld);
-        final EditTextWithFont  editTextPassNew = getViewLayout().findViewById(R.id.editTextPassNew);
-        final EditTextWithFont  editTextPassNewConfirm = getViewLayout().findViewById(R.id.editTextPassNewConfirm);
+        final EditTextWithFont editTextPassOld = getViewLayout().findViewById(R.id.editTextPassOld);
+        final EditTextWithFont editTextPassNew = getViewLayout().findViewById(R.id.editTextPassNew);
+        final EditTextWithFont editTextPassNewConfirm = getViewLayout().findViewById(R.id.editTextPassNewConfirm);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
-        Toolbar  toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar,"รหัสผ่าน");
+        Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
+        setUptoolBar(toolbar, "รหัสผ่าน");
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.upDatePassWord(editTextPassOld.getTextDataNotNull(null),editTextPassNew
-                        .getTextDataNotNull(null),editTextPassNewConfirm.getTextDataNotNull(null));
+                presenter.upDatePassWord(editTextPassOld.getTextDataNotNull(null), editTextPassNew
+                        .getTextDataNotNull(null), editTextPassNewConfirm.getTextDataNotNull(null));
             }
         });
     }
 
     @Override
     public void initVariableChangeEmail() {
-        final EditTextWithFont  editTextEmail = getViewLayout().findViewById(R.id.editTextEmail);
+        final EditTextWithFont editTextEmail = getViewLayout().findViewById(R.id.editTextEmail);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
-        Toolbar  toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar,"อีเมล");
+        Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
+        setUptoolBar(toolbar, "อีเมล");
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,14 +141,36 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
 
     @Override
     public void initVariableChangeBirthDay() {
-        final EditTextWithFont  editTextBirthDay = getViewLayout().findViewById(R.id.editTextBirtDay);
+        final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        final TextViewWithFont editTextBirthDay = getViewLayout().findViewById(R.id.editTextBirtDay);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
-        Toolbar  toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar,"วันเกิด");
+        Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(), EditProfileFragment.this, 2017, 02, 01);
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface arg0, int arg1) {
+                Calendar newDate = Calendar.getInstance();
+
+                DatePicker datePicker = datePickerDialog.getDatePicker();
+                newDate.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+
+                editTextBirthDay.setText(dateFormatter.format(newDate.getTime()));
+
+            }
+
+        });
+        editTextBirthDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
+        setUptoolBar(toolbar, "วันเกิด");
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 presenter.upDateBirthDay(editTextBirthDay.getTextDataNotNull(null));
+                presenter.upDateBirthDay(editTextBirthDay.getTextDataNotNull(null));
             }
         });
     }
@@ -154,4 +186,7 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
     }
 
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+    }
 }

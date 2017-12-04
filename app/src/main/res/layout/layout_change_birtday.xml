@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary" />
 
-    <com.mvision.vfin.customview.EditTextWithFont
+    <com.mvision.vfin.customview.TextViewWithFont
         android:layout_margin="@dimen/margin"
         android:background="@drawable/button_background_black_corner"
         android:layout_width="match_parent"

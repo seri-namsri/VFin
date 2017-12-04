@@ -67,16 +67,19 @@ public class RewardFragment extends BaseFragment implements RewardContract.View{
 
     @Override
     public void setUpViewReward(ArrayList<ModelRewardMerge> modelList) {
-        RewardAdapter rewardAdapter = new RewardAdapter(modelList, new RewardAdapterInside.CallBackClick() {
-            @Override
-            public void clickItemReward(RewardModel rewardModel) {
-                Bundle bundle = new Bundle();
-                bundle.putString("reward_id",rewardModel.getReward_id());
-                startActivityFromFragment(RewardDetailActivity.class,bundle);
-            }
-        });
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(rewardAdapter);
+        try {
+            RewardAdapter rewardAdapter = new RewardAdapter(modelList, new RewardAdapterInside.CallBackClick() {
+                @Override
+                public void clickItemReward(RewardModel rewardModel) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("reward_id",rewardModel.getReward_id());
+                    startActivityFromFragment(RewardDetailActivity.class,bundle);
+                }
+            });
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(rewardAdapter);
+        }catch (Exception e){}
+
     }
 }

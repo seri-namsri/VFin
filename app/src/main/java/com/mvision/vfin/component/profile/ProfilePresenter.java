@@ -31,7 +31,7 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
     }
 
 
-    private MemberResponseModel memberResponseModel ;
+    private MemberResponseModel memberResponseModel;
 
 
     @Override
@@ -41,9 +41,9 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
         ProfileManager.getInstance().getMemberApi(new Query.CallBackData() {
             @Override
             public <T> void onSuccess(T t) {
-                memberResponseModel  =  (MemberResponseModel) t;
+                memberResponseModel = (MemberResponseModel) t;
 
-                Log.e("ProfileDetailPresenter",new Gson().toJson(memberResponseModel));
+                Log.e("ProfileDetailPresenter", new Gson().toJson(memberResponseModel));
                 view.setUpViewProfile(memberResponseModel);
             }
 
@@ -57,7 +57,6 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
 
             }
         });
-
 
 
     }
@@ -76,7 +75,7 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
                 break;
 
             case 2:
-                 className = MyProductActivity.class;
+                className = MyProductActivity.class;
                 break;
 
             case 3:
@@ -104,7 +103,6 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
 
     @Override
     public void clickProfile() {
-        Log.e("clickProfileclickProfile",new Gson().toJson(memberResponseModel));
         Bundle bundle = new Bundle();
         bundle.putParcelable("profile", Parcels.wrap(memberResponseModel));
         view.startProfileDetail(bundle);
@@ -112,12 +110,12 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
 
     @Override
     public void clickLevelDetail() {
-       view.startLevelDetail();
+        view.startLevelDetail();
     }
 
     @Override
     public void changeData(Intent intent) {
-        MemberResponseModel memberResponseModel = Parcels.unwrap(intent.getExtras().getParcelable
+        memberResponseModel = Parcels.unwrap(intent.getExtras().getParcelable
                 ("memberResponseModel"));
         view.setUpViewProfile(memberResponseModel);
     }

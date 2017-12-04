@@ -21,4 +21,13 @@ public class PreferencesMange {
     public void removeMemberID(){
          Utility.removeSavedPreferences(Contextor.getInstance().getContext(),"member_id");
     }
+
+
+    public String getTokenSession(){
+        return Utility.loadSavedPreferences(Contextor.getInstance().getContext(),"tokenSession");
+    }
+
+    public void removeTokenSession(){
+         Utility.removeSavedPreferences(Contextor.getInstance().getContext(),"tokenSession");
+    }
 }

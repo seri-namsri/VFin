@@ -1,5 +1,6 @@
 package com.mvision.vfin.component.main;
 
+import com.google.gson.Gson;
 import com.mvision.vfin.base.presenter.Presenter;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.component.profile.ProfileManager;
@@ -36,7 +37,9 @@ public class MainPresenter extends Presenter<MainContract.View> implements MainC
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ModelCoinAndBit modelCoinAndBit =   dataSnapshot.getValue(ModelCoinAndBit.class);
+                Gson gson = new Gson();
+                ModelCoinAndBit modelCoinAndBit = gson.fromJson(gson.toJson(dataSnapshot.getValue
+                        ()),ModelCoinAndBit.class);
                 view.setUpView(modelCoinAndBit);
              //   callBackData.onSuccess(dataSnapshot.getValue(ProductRealTimeModel.class));
                 return;

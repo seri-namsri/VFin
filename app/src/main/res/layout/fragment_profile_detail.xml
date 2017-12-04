@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBgApp"
@@ -35,7 +34,6 @@
                     android:id="@+id/imageViewProfile"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@drawable/button_radius"
                     app:layout_constraintBottom_toTopOf="@+id/card_view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -218,62 +216,91 @@
 
                 <com.mvision.vfin.customview.TextViewWithFont
                     android:id="@+id/textViewPassWord"
-                    android:text="*******"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
+                    android:text="*******"
                     android:textColor="@color/colorBlueText"
                     app:name="Kanit" />
 
             </LinearLayout>
-            <com.mvision.vfin.customview.TextViewWithFont
-                android:id="@+id/textViewGender"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                app:name="Kanit" />
 
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view_address"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                android:background="@color/colorPrimary"
-                android:foregroundGravity="center"
-                android:minHeight="60dp"
-                android:visibility="gone"
-                app:cardElevation="2dp"
-                tools:ignore="MissingConstraints">
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/margin">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+
+                <com.mvision.vfin.customview.TextViewWithFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="สถานที่จัดส่ง (ที่อยู่หลัก)"
+                    app:name="Kanit"
+                    app:type="bold" />
+
+
+                <com.mvision.vfin.customview.TextViewWithFont
+                    android:id="@+id/textViewAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin"
+                    android:visibility="gone"
+                    app:name="Kanit" />
+
+                <com.mvision.vfin.customview.ButtonWithFont
+                    android:id="@+id/buttonAddressAdd"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin"
+                    android:background="@drawable/button_radius_yello"
+                    android:text="เพิ่มที่อยู่การจัดส่ง"
+                    android:textColor="@color/colorOrangeText"
+                    app:name="Kanit"
+                    app:type="bold" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent" />
+                    android:orientation="horizontal">
 
-            </android.support.v7.widget.CardView>
+                    <com.mvision.vfin.customview.ButtonWithFont
+                        android:id="@+id/buttonEditMainAddress"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/margin"
+                        android:layout_weight="1"
+                        android:textColor="@color/colorTextGray"
+                        android:background="@drawable/button_background_black_corner"
+                        android:text="แก้ไขที่อยู่หลัก"
+                        app:name="Kanit"
+                        app:type="bold" />
 
-            <com.mvision.vfin.customview.ButtonWithFont
-                android:id="@+id/buttonAddDress"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="-15dp"
-                android:background="@drawable/button_radius_yello"
-                android:text="เพิ่มที่อยู่"
-                android:textColor="@color/colorOrangeText"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/card_view"
-                app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_view"
-                app:name="Kanit"
-                app:type="bold" />
+                    <com.mvision.vfin.customview.ButtonWithFont
+                        android:id="@+id/buttonChangeMainAddress"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/margin"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_radius_yello"
+                        android:text="เปลี่ยนสถานที่จัดส่งหลัก"
+                        android:textColor="@color/colorOrangeText"
+                        app:name="Kanit"
+                        app:type="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
 
 
         </LinearLayout>

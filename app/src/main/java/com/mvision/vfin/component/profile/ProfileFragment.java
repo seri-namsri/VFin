@@ -104,22 +104,27 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
 
     @Override
     public void setUpViewProfile(MemberResponseModel member) {
-        if (perCentView != null) {
-            perCentView.setC("0.4");
-            textViewName.setText(member.result.firstName);
-            textViewEmail.setText(member.result.email);
-            textViewProfilePercent.setText(member.result.memberLevel + "");
-            imageViewProfile.bringToFront();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                imageViewProfile.setElevation(10);
-                // buttonViewProfile.setElevation(40);
+        try {
+            if (perCentView != null) {
+                perCentView.setC("0.4");
+                textViewName.setText(member.result.firstName);
+                textViewEmail.setText(member.result.email);
+                textViewProfilePercent.setText(member.result.memberLevel + "");
+                imageViewProfile.bringToFront();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    imageViewProfile.setElevation(10);
+                    // buttonViewProfile.setElevation(40);
+                }
+                CropCircleTransformation multi = new CropCircleTransformation();
+
+                Glide.with(this).load(member.result.avatarLink).apply(bitmapTransform(multi)).into
+                        (imageViewProfile);
+
             }
-            CropCircleTransformation multi = new CropCircleTransformation();
-
-            Glide.with(this).load(member.result.avatarLink).apply(bitmapTransform(multi)).into
-                    (imageViewProfile);
-
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
 
     }
 

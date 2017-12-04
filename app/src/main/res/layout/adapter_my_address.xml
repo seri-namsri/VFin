@@ -2,27 +2,65 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/margin">
+    android:layout_height="wrap_content">
 
-    <com.mvision.vfin.customview.TextViewWithFont
+
+    <ImageView
+        android:id="@+id/imageClick"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_centerVertical="true"
-        android:id="@+id/textViewAddress"
-        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/button_background_black_corner" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/buttonEdit" />
+        android:layout_toLeftOf="@+id/buttonEdit"
+        android:layout_toRightOf="@+id/imageClick"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="@dimen/margin">
+
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:id="@+id/textViewAddressName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:id="@+id/textViewAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small_size"
+            app:name="Kanit" />
+
+    </LinearLayout>
 
     <com.mvision.vfin.customview.ButtonWithFont
         android:id="@+id/buttonEdit"
         android:layout_width="50dp"
-        android:textSize="@dimen/text_small_size"
+
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin"
         android:background="@drawable/button_background_red_corner"
         android:text="แก้ไข"
         android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/text_small_size"
         app:name="Kanit"
         app:type="bold" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@color/colorBgApp" />
 
 </RelativeLayout>

@@ -12,12 +12,9 @@ public class LoginResponseModel extends BaseRespone {
 
     public class Result {
 
-        public String tokenSession;
-        public Member member;
+        public String tokenSession,memberCode;
+
     }
 
-    public class Member{
-        public String avatarLink,firstName,lastName,email,sex,mobilePhoneNo,dateOfBirth,memberCode;
-    }
 
 }
