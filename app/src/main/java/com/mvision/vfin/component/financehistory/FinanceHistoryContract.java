@@ -1,5 +1,6 @@
 package com.mvision.vfin.component.financehistory;
 
+import com.mvision.vfin.api.response.WalletTransectionResponseModel;
 import com.mvision.vfin.base.BaseView;
 import com.mvision.vfin.component.financehistory.pojo.FinanceHistoryModel;
 
@@ -13,12 +14,17 @@ public interface FinanceHistoryContract {
 
     interface View extends BaseView {
 
-        void setUpViewFinanceHistory(ArrayList<FinanceHistoryModel>viewFinanceHistory);
+        void setUpViewFinanceHistory(WalletTransectionResponseModel walletTransectionResponseModel);
+        void setUpViewFinanceHistoryMore(WalletTransectionResponseModel  walletTransectionResponseModel);
+        void setUpCoin(String coin);
+        void setUpViewFinanceHistoryLoading();
 
     }
 
     interface Presenter {
         void getFinanceHistory();
+        void getFinanceHistoryMore();
+        void getCoin();
 
     }
 }

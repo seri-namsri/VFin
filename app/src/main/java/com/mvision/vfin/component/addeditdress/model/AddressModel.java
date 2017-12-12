@@ -1,5 +1,9 @@
 package com.mvision.vfin.component.addeditdress.model;
 
+import com.google.gson.annotations.SerializedName;
+import com.mvision.vfin.component.myaddress.Model.Amphur;
+import com.mvision.vfin.component.myaddress.Model.Province;
+
 import org.parceler.Parcel;
 
 /**
@@ -7,6 +11,8 @@ import org.parceler.Parcel;
  */
 @Parcel
 public class AddressModel {
+
+    @SerializedName("name")
    public String name;
 
     public String getName() {
@@ -25,11 +31,38 @@ public class AddressModel {
         this.receiver = receiver;
     }
 
+    @SerializedName("receiver")
     public String receiver;
+    @SerializedName("details")
     public String details;
+    @SerializedName("district")
     public String district;
+    @SerializedName("houseNo")
     public String houseNo;
-    public String province;
+
+    @SerializedName("province")
+    public Province province;
+
+    public String getTelNo() {
+        return (telNo != null) ?"เบอร์โทร : " +telNo : "";
+    }
+
+    public void setTelNo(String telNo) {
+        this.telNo = telNo;
+    }
+
+    @SerializedName("telNo")
+    public String telNo;
+
+    public void setAmphur(Amphur amphur) {
+        this.amphur = amphur;
+    }
+
+    @SerializedName("amphur")
+    public Amphur amphur;
+
+
+
 
     public Integer getId() {
         return id;
@@ -38,7 +71,7 @@ public class AddressModel {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    @SerializedName("id")
     public Integer id;
 
     public String getIsPrimary() {
@@ -48,7 +81,7 @@ public class AddressModel {
     public void setIsPrimary(String isPrimary) {
         this.isPrimary = isPrimary;
     }
-
+    @SerializedName("isPrimary")
     public String isPrimary;
 
     public String getSoi() {
@@ -60,7 +93,7 @@ public class AddressModel {
     }
 
     public String getReceiver() {
-        return (receiver != null) ?"ชื่อผู้ลับ : " +receiver : "";
+        return (receiver != null) ?"ชื่อผู้รับ : " +receiver : "";
 
     }
 
@@ -77,7 +110,7 @@ public class AddressModel {
     }
 
     public String getReceiveName() {
-        return (receiveName != null) ?"ชื่อผู้ลับ : " +receiveName : "";
+        return (receiveName != null) ?"ชื่อผู้รับ : " +receiveName : "";
     }
 
     public String getAddressName() {
@@ -99,7 +132,7 @@ public class AddressModel {
     public long getUpdatedDate() {
         return updatedDate;
     }
-
+    @SerializedName("soi")
     public String soi;
 
     public String getAlley() {
@@ -109,7 +142,7 @@ public class AddressModel {
     public void setAlley(String alley) {
         this.alley = alley;
     }
-
+    @SerializedName("alley")
     public String alley;
 
     public String getLane() {
@@ -135,8 +168,9 @@ public class AddressModel {
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
-
+    @SerializedName("lane")
     public String lane;
+    @SerializedName("road")
     public String road;
 
 
@@ -150,7 +184,7 @@ public class AddressModel {
     }
 
     public String getDistrict() {
-        return (district != null) ?"แขวง " +district : "";
+        return (district != null) ?district.trim() : "";
     }
 
     public void setDistrict(String district) {
@@ -166,10 +200,10 @@ public class AddressModel {
     }
 
     public String getProvince() {
-        return (province != null) ?province : "";
+        return (province != null) ?province.provinceName.trim() : "";
     }
 
-    public void setProvince(String province) {
+    public void setProvince(Province province) {
         this.province = province;
     }
 
@@ -180,15 +214,32 @@ public class AddressModel {
     public void setSubDistrict(String subDistrict) {
         this.subDistrict = subDistrict;
     }
+    @SerializedName("subDistrict")
+    public String subDistrict;
+    @SerializedName("postalCode")
+    public String postalCode;
 
-    public String subDistrict,postalCode;
-
-    public String updatedBy,createdBy,isActive,receiveName,
-            addressName,villageNo,deliveredDate;
-    public long createdDate,updatedDate;
+    @SerializedName("updatedBy")
+    public String updatedBy;
+    @SerializedName("createdBy")
+    public String createdBy;
+    @SerializedName("isActive")
+    public String isActive;
+    @SerializedName("receiveName")
+    public String receiveName;
+    @SerializedName("addressName")
+    public String addressName;
+    @SerializedName("villageNo")
+    public String villageNo;
+    @SerializedName("deliveredDate")
+    public String deliveredDate;
+    @SerializedName("createdDate")
+    public long createdDate;
+    @SerializedName("updatedDate")
+    public long updatedDate;
 
     public String getAddressAll(){
-        return getReceiver()+ "\n"+getHouseNo()+" "+getSoi()+" "+getRoad() +" "+getSubDistrict
-                ()+" "+getDistrict()+ " "+getProvince() +" "+getPostalCode();
+        return getReceiver()+ "\n"+ getTelNo() +"\n"+ getHouseNo()+" "+getDetails()+" "+getDistrict()
+                +" , "+ getProvince() +" "+getPostalCode();
     }
 }

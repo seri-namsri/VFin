@@ -1,21 +1,16 @@
-package com.mvision.vfin.component.myproduct;
-
-import android.view.View;
+package com.mvision.vfin.component.myproduct.myproducttransport;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
-import com.mvision.vfin.component.myaddress.MyAddressActivity;
-
-import butterknife.OnClick;
 
 /**
  * Created by enter_01 on 11/24/2017 AD.
  */
 
-public class MyProductFragment extends BaseFragment {
+public class MyProductTransportFragment extends BaseFragment {
 
-    public static MyProductFragment newInstance() {
-        MyProductFragment fragment = new MyProductFragment();
+    public static MyProductTransportFragment newInstance() {
+        MyProductTransportFragment fragment = new MyProductTransportFragment();
         return fragment;
     }
 
@@ -46,11 +41,8 @@ public class MyProductFragment extends BaseFragment {
 
     @Override
     protected int setLayoutResourceIdentifier() {
-        return R.layout.fragment_my_product;
+        return R.layout.fragment_my_product_process;
     }
 
-    @OnClick({R.id.buttonAddress})
-    public void  onClick(View view){
-        startActivityFromFragment(MyAddressActivity.class,null);
-    }
+
 }

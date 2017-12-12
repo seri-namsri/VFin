@@ -34,6 +34,7 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         fragmentManager = getActivity().getSupportFragmentManager();
         setHasOptionsMenu(true);
         initializePresenter();
@@ -108,6 +109,12 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     public void onResume() {
         super.onResume();
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        BaseActivity.activity = getActivity();
     }
 
     @Override

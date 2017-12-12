@@ -5,7 +5,7 @@ package com.mvision.vfin.base;
  */
 
 public interface BaseView {
-    void showMessageFail(String msg);
+     void showMessageFail(String msg);
 
     void showLoading();
 

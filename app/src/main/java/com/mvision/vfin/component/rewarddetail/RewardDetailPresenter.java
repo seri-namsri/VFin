@@ -32,23 +32,7 @@ public class RewardDetailPresenter extends Presenter<RewardDetailContract.View> 
 
     @Override
     public void getRewardDetail() {
-        RewardDetailManage.getInstance().getRewardDetail(reward_id, new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-                rewardModel = (RewardModel) t;
-                view.showRewardDetail(rewardModel);
-            }
 
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-
-            }
-
-            @Override
-            public void onFail(String error) {
-
-            }
-        });
     }
 
     @Override

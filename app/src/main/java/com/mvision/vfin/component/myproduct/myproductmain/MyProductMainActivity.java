@@ -1,4 +1,4 @@
-package com.mvision.vfin.component.myproduct;
+package com.mvision.vfin.component.myproduct.myproductmain;
 
 import android.support.v4.app.FragmentTransaction;
 
@@ -9,7 +9,7 @@ import com.mvision.vfin.base.BaseActivity;
  * Created by enter_01 on 11/24/2017 AD.
  */
 
-public class MyProductActivity extends BaseActivity {
+public class MyProductMainActivity extends BaseActivity {
     @Override
     public void showMessageFail(String msg) {
 
@@ -38,7 +38,7 @@ public class MyProductActivity extends BaseActivity {
     @Override
     protected void startView() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, MyProductFragment.newInstance());
+        transaction.replace(R.id.container, MyProductMainFragment.newInstance());
         transaction.commit();
     }
 }

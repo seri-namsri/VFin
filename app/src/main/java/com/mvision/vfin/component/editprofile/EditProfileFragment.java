@@ -12,11 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.modelrequest.MemberUpdate;
 import com.mvision.vfin.base.BaseFragment;
+import com.mvision.vfin.component.profile.model.MemberResponseModel;
 import com.mvision.vfin.customview.EditTextWithFont;
 import com.mvision.vfin.customview.TextViewWithFont;
 import com.mvision.vfin.utility.Log;
@@ -82,9 +84,11 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
 
 
     @Override
-    public void initVariableChangeName() {
+    public void initVariableChangeName(MemberResponseModel memberResponseModel) {
         final EditTextWithFont editTextName = getViewLayout().findViewById(R.id.editTextName);
         final EditTextWithFont editTextSureName = getViewLayout().findViewById(R.id.editTextSureName);
+        editTextName.setText(memberResponseModel.result.firstName);
+        editTextSureName.setText(memberResponseModel.result.lastName);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
         setUptoolBar(toolbar, "ชื่อ-นามสกุล");
@@ -97,6 +101,8 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
             }
         });
     }
+
+
 
     private void setUptoolBar(Toolbar toolbar, String title) {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -126,8 +132,9 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
     }
 
     @Override
-    public void initVariableChangeEmail() {
+    public void initVariableChangeEmail(MemberResponseModel memberResponseModel) {
         final EditTextWithFont editTextEmail = getViewLayout().findViewById(R.id.editTextEmail);
+        editTextEmail.setText(memberResponseModel.result.email);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
         setUptoolBar(toolbar, "อีเมล");
@@ -140,9 +147,10 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
     }
 
     @Override
-    public void initVariableChangeBirthDay() {
+    public void initVariableChangeBirthDay(MemberResponseModel memberResponseModel) {
         final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         final TextViewWithFont editTextBirthDay = getViewLayout().findViewById(R.id.editTextBirtDay);
+        editTextBirthDay.setText(memberResponseModel.result.dateOfBirth);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
         final DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -171,6 +179,47 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
             @Override
             public void onClick(View view) {
                 presenter.upDateBirthDay(editTextBirthDay.getTextDataNotNull(null));
+            }
+        });
+    }
+
+    @Override
+    public void initVariableChangeGender(MemberResponseModel memberResponseModel) {
+        final RadioButton  radioButtonMen = getViewLayout().findViewById(R.id.radioButtonMen);
+        final RadioButton  radioButtonFemale = getViewLayout().findViewById(R.id.radioButtonFemale);
+        Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
+        Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
+        setUptoolBar(toolbar, "เพศ");
+        final String[] gender = {""};
+        if (memberResponseModel.result.gender.equals("female")){
+            radioButtonFemale.setChecked(true);
+        }else if (memberResponseModel.result.gender.equals("male")){
+            radioButtonMen.setChecked(true);
+
+        }
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (radioButtonMen.isChecked()){
+                    gender[0] = "male";
+                }else if (radioButtonFemale.isChecked()){
+                    gender[0] = "female";
+                }
+                presenter.upDateGender(gender[0]);
+            }
+        });
+    }
+
+    @Override
+    public void initVariableChangePersonal() {
+        final EditTextWithFont editTextPersonalId = getViewLayout().findViewById(R.id.editTextPersonalId);
+        Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
+        Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
+        setUptoolBar(toolbar, "เลขบัตรประจำตัวประชาชน");
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.upDatePersonal(editTextPersonalId.getTextDataNotNull(null));
             }
         });
     }

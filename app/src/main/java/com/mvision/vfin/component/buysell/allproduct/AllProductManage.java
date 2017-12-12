@@ -58,6 +58,7 @@ public class AllProductManage {
                 arrayList.add(productRealTimeModel.getId() + "");
                 if (count[0] <= productRealTimeModels.size()) {
                     productRealTimeModel.setIntegerArrayListId(arrayList);
+                    Log.e("getAllProductFormRealtime",new Gson().toJson(productRealTimeModels));
                     callBackData.onSuccessAll(productRealTimeModels);
                     //    productRealTimeModels.clear();
                 }

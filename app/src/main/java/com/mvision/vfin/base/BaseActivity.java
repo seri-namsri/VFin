@@ -1,5 +1,6 @@
 package com.mvision.vfin.base;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
-
+    public static Activity activity ;
     protected Toolbar mToolBar;
     private ProgressDialog mProgressDialog;
     private Unbinder unbinder;
@@ -29,6 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
         setContentView(setLayoutResourceIdentifier());
      //   loadInfoToolbar();
+      //  activity = this;
         unbinder = ButterKnife.bind(this);
         initializePresenter();
         if (presenter != null) {
@@ -37,6 +39,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         startView();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        activity = this;
+    }
 
     @Override
     protected void onDestroy() {

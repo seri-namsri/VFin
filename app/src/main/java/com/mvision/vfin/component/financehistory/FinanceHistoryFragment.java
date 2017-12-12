@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.mvision.vfin.R;
+import com.mvision.vfin.api.response.WalletTransectionResponseModel;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.financehistory.pojo.FinanceHistoryModel;
 
@@ -21,8 +23,11 @@ import butterknife.BindView;
 public class FinanceHistoryFragment extends BaseFragment implements FinanceHistoryContract.View{
 
     @BindView(R.id.toolbar)Toolbar toolbar;
+    @BindView(R.id.textViewCoin)TextView textViewCoin;
     @BindView(R.id.recyclerViewHistoryFinance)RecyclerView recyclerViewHistoryFinance;
     private FinanceHistoryPresenter presenter ;
+    private LinearLayoutManager linearLayoutManager ;
+    private FinanceHistoryAdapter financeHistoryAdapter;
     public static FinanceHistoryFragment newInstance() {
         FinanceHistoryFragment fragment = new FinanceHistoryFragment();
         return fragment;
@@ -52,6 +57,7 @@ public class FinanceHistoryFragment extends BaseFragment implements FinanceHisto
 
     @Override
     protected void startView() {
+        presenter.getCoin();
         presenter.getFinanceHistory();
         setUpToolbar();
     }
@@ -67,14 +73,56 @@ public class FinanceHistoryFragment extends BaseFragment implements FinanceHisto
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         applyFontForToolbarTitle(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัตการเงิน");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ประวัติคะแนน");
     }
 
     @Override
-    public void setUpViewFinanceHistory(ArrayList<FinanceHistoryModel> viewFinanceHistory) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+    public void setUpViewFinanceHistory(WalletTransectionResponseModel walletTransectionResponseModel) {
+        linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerViewHistoryFinance.setLayoutManager(linearLayoutManager);
-        FinanceHistoryAdapter financeHistoryAdapter = new FinanceHistoryAdapter(viewFinanceHistory);
+        financeHistoryAdapter = new FinanceHistoryAdapter(walletTransectionResponseModel);
         recyclerViewHistoryFinance.setAdapter(financeHistoryAdapter);
+        recyclerViewHistoryFinance.addOnScrollListener(onScrollListener);
     }
+
+    @Override
+    public void setUpViewFinanceHistoryMore(WalletTransectionResponseModel walletTransectionResponseModel) {
+        loading = true;
+       financeHistoryAdapter.addWalletTransecTion(walletTransectionResponseModel);
+    }
+
+    @Override
+    public void setUpCoin(String coin) {
+        textViewCoin.setText(coin);
+    }
+
+    @Override
+    public void setUpViewFinanceHistoryLoading() {
+        financeHistoryAdapter.checkLoading();
+    }
+
+
+    private int pastVisiblesItems, visibleItemCount, totalItemCount;
+    private boolean loading = true;
+
+
+   private RecyclerView.OnScrollListener onScrollListener =   new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            if (dy > 0) //check for scroll down
+            {
+                visibleItemCount = linearLayoutManager.getChildCount();
+                totalItemCount = linearLayoutManager.getItemCount();
+                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (loading) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        loading = false;
+                        presenter.getFinanceHistoryMore();
+                    }
+                }
+            }
+        }
+
+    };
 }

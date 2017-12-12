@@ -1,5 +1,8 @@
 package com.mvision.vfin.component.buysell.allproduct.pojo;
 
+
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
@@ -7,11 +10,24 @@ import java.util.ArrayList;
  */
 
 public class ProductRealTimeModel {
-    public String ownerCode,avatarLink,ownerName,name,imgUrl;
+    @SerializedName("ownerCode")
+    public String ownerCode;
+    @SerializedName("avatarLink")
+    public String avatarLink;
+    @SerializedName("ownerName")
+    public String ownerName;
+    @SerializedName("name")
+    public String name;
+    @SerializedName("imgUrl")
+    public String imgUrl;
+    @SerializedName("nextPrice")
     public int nextPrice;
+    @SerializedName("id")
     public int id;
+    @SerializedName("expiredTime")
     public long expiredTime;
-
+    @SerializedName("startTime")
+    public long startTime;
     public String getOwnerCode() {
         return ownerCode;
     }
@@ -48,8 +64,9 @@ public class ProductRealTimeModel {
         return startTime;
     }
 
-    public long startTime;
 
+
+   // @SerializedName("integerArrayListId")
     public ArrayList<String>integerArrayListId;
 
     public ArrayList<String> getIntegerArrayListId() {

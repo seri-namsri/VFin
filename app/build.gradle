@@ -11,7 +11,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
       //  multiDexEnabled true
@@ -23,9 +23,17 @@ android {
         multiDexEnabled true
     }
     buildTypes {
+
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFile 'proguard-facebook.pro'
+            proguardFile 'proguard-gson.pro'
+            proguardFile 'proguard-square-retrofit2.pro'
+            proguardFile 'proguard-support-v7-appcompat.pro'
+            proguardFile 'proguard-glide.pro'
+            proguardFile 'proguard-google-play-services.pro'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
         }
     }
     externalNativeBuild {
@@ -63,7 +71,7 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:3.0.1'
 
     //firestore
-    compile 'com.google.firebase:firebase-firestore:11.6.0'
+  //  compile 'com.google.firebase:firebase-firestore:11.6.0'
     compile 'com.google.firebase:firebase-messaging:11.6.0'
     compile 'com.google.firebase:firebase-database:11.6.0'
 
@@ -76,16 +84,7 @@ dependencies {
     //viewpager indicator
     compile 'me.relex:circleindicator:1.2.2@aar'
 
-    compile 'de.hdodenhof:circleimageview:2.2.0'
-    /*media player*/
- /*   compile 'tv.danmaku.ijk.media:ijkplayer-java:0.4.4.1'
-    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.4.4.1'
-    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.4.4.1'
-    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.4.4.1'
-    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.4.4.1'
-    /*ads*/
-  /*  compile files('libs/YouTubeAndroidPlayerApi.jar')
-    compile files('libs/sdk.jar')*/
+
     compile 'com.android.support:multidex:1.0.2'
 
     compile "com.squareup.okhttp3:logging-interceptor:3.2.0"
@@ -99,6 +98,7 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.22.0'
 
     //compile 'com.android.support:multidex:1.0.1'
+
 }
 
 

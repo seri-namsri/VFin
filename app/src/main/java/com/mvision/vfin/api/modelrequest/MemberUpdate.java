@@ -1,6 +1,8 @@
 package com.mvision.vfin.api.modelrequest;
 
+import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.utility.PreferencesMange;
+import com.mvision.vfin.utility.UtilsEncoding;
 
 import org.parceler.Parcel;
 
@@ -9,8 +11,10 @@ import org.parceler.Parcel;
  */
 @Parcel
 public class MemberUpdate{
-    private String email;
-    private String password;
+    @SerializedName("email")
+    public String email;
+    @SerializedName("password")
+    public String password;
 
     public String getEmail() {
         return email;
@@ -37,11 +41,11 @@ public class MemberUpdate{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = UtilsEncoding.SHA1(password);
     }
 
     public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+        this.newPassword = UtilsEncoding.SHA1(newPassword);
     }
 
     public void setDateOfBirth(String dateOfBirth) {
@@ -55,13 +59,38 @@ public class MemberUpdate{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    @SerializedName("newPassword")
+    public String newPassword;
+    @SerializedName("dateOfBirth")
+    public String dateOfBirth;
+    @SerializedName("firstName")
+    public String firstName;
+    @SerializedName("lastName")
+    public String lastName;
 
-    private String newPassword;
-    private String dateOfBirth;
-    private String firstName;
-    private String lastName;
+    public String getGender() {
+        return gender;
+    }
 
-    private String memberCode = PreferencesMange.getInstance().getMemberID();
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @SerializedName("gender")
+    public String gender;
+
+    public String getPersonalId() {
+        return personalId;
+    }
+
+    public void setPersonalId(String personalId) {
+        this.personalId = personalId;
+    }
+
+    @SerializedName("personalId")
+    public String personalId;
+    @SerializedName("memberCode")
+    public String memberCode = PreferencesMange.getInstance().getMemberID();
 
 
 }

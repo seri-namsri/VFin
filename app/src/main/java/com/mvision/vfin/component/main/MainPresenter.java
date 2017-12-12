@@ -29,11 +29,9 @@ public class MainPresenter extends Presenter<MainContract.View> implements MainC
 
     @Override
     public void showView() {
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("walletAndAbility/" + PreferencesMange
                 .getInstance().getMemberID());
-        Log.e("PreferencesMange",PreferencesMange.getInstance().getMemberID());
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -51,8 +49,5 @@ public class MainPresenter extends Presenter<MainContract.View> implements MainC
              //   Log.w("getAllProductFormRealtime", "Failed to read value.", error.toException());
             }
         });
-
-
-
     }
 }

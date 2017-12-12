@@ -1,5 +1,6 @@
 package com.mvision.vfin.api.modelrequest;
 
+import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.component.addeditdress.model.AddressModel;
 import com.mvision.vfin.utility.PreferencesMange;
 
@@ -8,7 +9,9 @@ import com.mvision.vfin.utility.PreferencesMange;
  */
 
 public class SaveAddressRequest {
+    @SerializedName("memberCode")
     private String memberCode;
+    @SerializedName("address")
     private AddressModel address;
     public SaveAddressRequest(AddressModel addressModel){
         this.memberCode = PreferencesMange.getInstance().getMemberID();

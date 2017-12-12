@@ -1,7 +1,18 @@
 package com.mvision.vfin.component.profiledetail;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.util.Base64;
 
 import com.google.gson.Gson;
 import com.mvision.vfin.R;
@@ -36,6 +47,8 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
     private int requestCodeAddDress = 8;
     private int requestCodeEditAddress = 9;
     private int requestCodeChangeAddress = 10;
+    private int requestCodeChangeGender = 11;
+    private int requestCodeChangePersonalId = 12;
 
     public ProfileDetailPresenter(ProfileDetailContract.View view) {
         this.view = view;
@@ -51,14 +64,19 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
 
     @Override
     public void getProfile() {
-        view.setUpViewProfile(memberResponseModel);
+        try {
+            view.setUpViewProfile(memberResponseModel);
+            view.setUpViewAddress(memberResponseModel.result.address);
 
+        } catch (NullPointerException e) {
+        }
     }
 
     @Override
     public void clickEditProfile(int id) {
         int requestCode = 0;
         Bundle bundle = new Bundle();
+        bundle.putParcelable("profile", Parcels.wrap(memberResponseModel));
         switch (id) {
             case R.id.linearLayoutName:
                 requestCode = requestCodeName;
@@ -80,21 +98,42 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
                 bundle.putInt("layoutEditProfile", R.layout.layout_change_password);
                 view.startEditProfile(bundle, requestCode);
                 break;
+            case R.id.linearLayoutGender:
+                requestCode = requestCodeChangeGender;
+                bundle.putInt("layoutEditProfile", R.layout.layout_change_gender);
+                view.startEditProfile(bundle, requestCode);
+                break;
+            case R.id.linearLayoutIdentiFication:
+                requestCode = requestCodeChangePersonalId;
+                bundle.putInt("layoutEditProfile", R.layout.layout_change_iden);
+                view.startEditProfile(bundle, requestCode);
+                break;
             case R.id.imageViewProfile:
-                view.showGallery();
+                upLoadImage();
                 break;
             case R.id.buttonAddressAdd:
-                view.startAddAddress(requestCodeAddDress);
-                break;
-            case R.id.buttonEditMainAddress:
-                view.startEditAddress(null,requestCodeEditAddress);
-                break;
-            case R.id.buttonChangeMainAddress:
                 view.startChangeAddress(requestCodeChangeAddress);
                 break;
-
-
         }
+
+    }
+    int permsRequestCode = 200;
+    private void upLoadImage() {
+        if (shouldAskPermission()) {
+            String[] perms = {"android.permission.READ_EXTERNAL_STORAGE"};
+
+                //  verifyStoragePermissions()
+                view.onRequestPermissions(perms, permsRequestCode);
+
+
+
+        } else {
+            view.showGallery();
+        }
+    }
+
+    private boolean shouldAskPermission() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
 
     }
 
@@ -112,6 +151,12 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
             } else if (id == requestCodeBirthDay) {
                 memberResponseModel.result.dateOfBirth = memberUpdate.getDateOfBirth();
                 view.setUpViewProfile(memberResponseModel);
+            } else if (id == requestCodeChangeGender) {
+                memberResponseModel.result.gender = memberUpdate.getGender();
+                view.setUpViewProfile(memberResponseModel);
+            } else if (id == requestCodeChangePersonalId) {
+                memberResponseModel.result.personalId = memberUpdate.getPersonalId();
+                view.setUpViewProfile(memberResponseModel);
             } else if (id == requestCodeAddDress || id == requestCodeEditAddress || id == requestCodeChangeAddress) {
                 AddressModel addressModel = Parcels.unwrap(data.getExtras().getParcelable("addressModel"));
                 view.setUpViewAddress(addressModel);
@@ -121,8 +166,15 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
             try {
                 if (id == requestCodeUploadProfile) {
 
-                    InputStream is = Contextor.getInstance().getContext().getContentResolver().openInputStream(data.getData());
-                    upDateImage(getBytes(is));
+                    //  InputStream is = Contextor.getInstance().getContext().getContentResolver()
+                    //      .openInputStream(data.getData());
+                    resizeImage(data, new CallBackImage() {
+                        @Override
+                        public void data(byte[] image) {
+                            upDateImage(image);
+                        }
+                    });
+
 
                 }
 
@@ -130,6 +182,73 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
                 e1.printStackTrace();
             }
         }
+
+    }
+
+    private interface CallBackImage {
+        void data(byte[] image);
+    }
+
+    private void resizeImage(final Intent data, final CallBackImage callBackImage) {
+
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = Contextor.getInstance().getContext().getContentResolver().query
+                            (selectedImage,
+                                    filePathColumn, null, null, null);
+
+                    if (cursor == null || cursor.getCount() < 1) {
+                        return; // no cursor or no record. DO YOUR ERROR HANDLING
+                    }
+
+                    cursor.moveToFirst();
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+
+                    if (columnIndex < 0) // no column index
+                        return; // DO YOUR ERROR HANDLING
+
+                    String picturePath = cursor.getString(columnIndex);
+
+                    BitmapFactory.Options opts = new BitmapFactory.Options();
+                    opts.inJustDecodeBounds = false;
+                    opts.inPreferredConfig = Bitmap.Config.RGB_565;
+                    opts.inDither = true;
+                    cursor.close(); // close cursor
+                    Bitmap photo = BitmapFactory.decodeFile(picturePath, opts);
+                    //  Matrix matrix = new Matrix();
+                    //    matrix.postRotate(getImageOrientation(picturePath));
+
+
+                    Bitmap rotatedBitmap = photo;
+
+                    final int maxSize = 260;
+                    int outWidth;
+                    int outHeight;
+                    int inWidth = rotatedBitmap.getWidth();
+                    int inHeight = rotatedBitmap.getHeight();
+                    if (inWidth > inHeight) {
+                        outWidth = maxSize;
+                        outHeight = (inHeight * maxSize) / inWidth;
+                    } else {
+                        outHeight = maxSize;
+                        outWidth = (inWidth * maxSize) / inHeight;
+                    }
+
+                    rotatedBitmap = Bitmap.createScaledBitmap(rotatedBitmap, outWidth, outHeight, false);
+                    //   rotatedBitmap = Bitmap.createScaledBitmap(photo, (int) (rotatedBitmap.getWidth() * 0.1), (int) (rotatedBitmap.getHeight() * 0.1), true);
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    rotatedBitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
+                    callBackImage.data(byteArray);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 
@@ -178,5 +297,10 @@ public class ProfileDetailPresenter extends Presenter<ProfileDetailContract.View
     @Override
     public void uploadImageProfile(File file) {
 
+    }
+
+    @Override
+    public void checkPermissions(int requestCode, String[] permissions, int[] grantResults) {
+           view.showGallery();
     }
 }

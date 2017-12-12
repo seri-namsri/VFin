@@ -1,5 +1,6 @@
 package com.mvision.vfin.api.response;
 
+import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.base.BaseRespone;
 
 /**
@@ -7,10 +8,11 @@ import com.mvision.vfin.base.BaseRespone;
  */
 
 public class UpdateProfileResponseModel extends BaseRespone{
-
+    @SerializedName("result")
     public Result result;
 
     public class Result {
+        @SerializedName("avatarLink")
         public String avatarLink;
     }
 

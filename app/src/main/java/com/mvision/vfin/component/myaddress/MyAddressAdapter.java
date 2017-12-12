@@ -45,21 +45,31 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
         notifyDataSetChanged();
     }
 
+    public void setAddAddress() {
+        clickPosition = -1;
+        notifyDataSetChanged();
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         if (clickPosition >= 0 && clickPosition == position){
             holder.imageClick.setBackgroundResource(R.drawable.checked);
-        }else {
+        }else if ( clickPosition < 0 && myAddressResponseModel.result.get
+                (position).isPrimary.equals("yes")){
+            holder.imageClick.setBackgroundResource(R.drawable.checked);
+        }
+
+        else {
             holder.imageClick.setBackgroundResource(R.drawable.button_background_black_corner);
         }
 
-        holder.textViewAddress.setText(myAddressResponseModel.result.get(position).houseNo + "" +
-                " " + myAddressResponseModel.result.get(position).postalCode + " " +
-                myAddressResponseModel.result.get(position).subDistrict + " " +
-                myAddressResponseModel.result.get(position).district + " " +
-                myAddressResponseModel.result.get(position).province);
+        holder.textViewAddress.setText(myAddressResponseModel.result.get(position).houseNo + " " +
+                myAddressResponseModel.result.get(position).details + " " +
+                myAddressResponseModel.result.get(position).province.provinceName +" "+
+                        myAddressResponseModel.result.get(position).district + " " +
+                myAddressResponseModel.result.get(position).postalCode );
         holder.textViewAddressName.setText(myAddressResponseModel.result.get(position).getName());
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override

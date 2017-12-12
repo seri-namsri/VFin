@@ -1,0 +1,7 @@
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+-dontwarn retrofit2.Platform$Java8
+-dontwarn okio.**
+-keep class okio.** {*;}

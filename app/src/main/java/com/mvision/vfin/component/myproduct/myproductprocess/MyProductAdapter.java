@@ -1,32 +1,31 @@
-package com.mvision.vfin.customview.dialoglist;
+package com.mvision.vfin.component.myproduct.myproductprocess;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mvision.vfin.R;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by enter_01 on 12/4/2017 AD.
+ * Created by enter_01 on 12/8/2017 AD.
  */
 
-public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.ViewHolder>{
-    ArrayList<Object>arrayList ;
-    public DialogListAdapter(ArrayList<Object>arrayList,Class t){
+public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.ViewHolder>{
 
+    public MyProductAdapter(){
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_dialog_list,
-                parent, false));
+
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
+                .adapter_my_producr, parent, false));
     }
 
     @Override
@@ -36,12 +35,14 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return R.layout.adapter_dialog_list;
+        return 6;
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textViewName)
-        TextView textViewName;
+        @BindView(R.id.textViewName)TextView textViewName;
+        @BindView(R.id.textViewOrder)TextView textViewOrder;
+        @BindView(R.id.imageViewProduct)ImageView imageViewProduct;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -49,6 +50,4 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
 
         }
     }
-
-
 }

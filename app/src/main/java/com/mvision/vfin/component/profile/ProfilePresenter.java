@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.presenter.Presenter;
 import com.mvision.vfin.component.financehistory.FinanceHistoryActivity;
-import com.mvision.vfin.component.myproduct.MyProductActivity;
+import com.mvision.vfin.component.myproduct.myproductmain.MyProductMainActivity;
 import com.mvision.vfin.component.profile.model.MemberResponseModel;
 import com.mvision.vfin.component.profile.model.ProfileMore;
 import com.mvision.vfin.firebase.Firestore.Query;
@@ -37,7 +37,6 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
     @Override
     public void getProfile() {
         view.setUpViewMore(setDateMore());
-
         ProfileManager.getInstance().getMemberApi(new Query.CallBackData() {
             @Override
             public <T> void onSuccess(T t) {
@@ -75,7 +74,7 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
                 break;
 
             case 2:
-                className = MyProductActivity.class;
+                className = MyProductMainActivity.class;
                 break;
 
             case 3:
@@ -128,7 +127,7 @@ public class ProfilePresenter extends Presenter<ProfileContract.View> implements
         moreArrayList.add(profileMore);
 
         profileMore = new ProfileMore();
-        profileMore.setName("ประวัติการเงิน");
+        profileMore.setName("ประวัติคะแนน");
         profileMore.setRes_image(R.drawable.ic_financial_history);
         moreArrayList.add(profileMore);
 

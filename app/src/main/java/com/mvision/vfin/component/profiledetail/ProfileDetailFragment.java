@@ -2,9 +2,11 @@ package com.mvision.vfin.component.profiledetail;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
@@ -28,6 +32,8 @@ import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.Utility;
 
 import org.parceler.Parcels;
+
+import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,10 +59,16 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
     TextViewWithFont textViewBirdDay;
     @BindView(R.id.textViewIdentiFication)
     TextViewWithFont textViewIdentiFication;
+    @BindView(R.id.textViewGender)
+    TextViewWithFont textViewGender;
     @BindView(R.id.imageViewProfile)
     ImageView imageViewProfile;
+    @BindView(R.id.imageUpload)
+    ImageView imageUpload;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.linearLayoutIdentiFication)
+    LinearLayout linearLayoutIdentiFication;
 
     private ProfileDetailPresenter presenter;
 
@@ -103,18 +115,23 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
         try {
             setUptoolBar();
             textViewEmail.setText(member.result.email + "");
-            textViewName.setText(member.result.firstName);
+            textViewName.setText(member.result.firstName+ " "+ member.result.lastName);
             textViewTel.setText(member.result.mobilePhoneNo);
             textViewBirdDay.setText(member.result.dateOfBirth);
+            if (member.result.personalId != null){
+                linearLayoutIdentiFication.setEnabled(false);
+            }
             textViewIdentiFication.setText(member.result.personalId);
+            textViewGender.setText(member.result.gender);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageViewProfile.setElevation(10);
+                imageUpload.setElevation(10);
             }
             RequestOptions requestOptions = new RequestOptions();
-            requestOptions.placeholder(R.drawable.picture);
-            requestOptions.error(R.drawable.picture);
+            requestOptions.placeholder(R.drawable.button_background_gray_c);
+            requestOptions.error(R.drawable.button_background_gray_c);
             CropCircleTransformation multi = new CropCircleTransformation();
-            Glide.with(this).load(member.result.avatarLink)
+            Glide.with(this).load(new URL(member.result.avatarLink))
                     .apply(bitmapTransform(multi))
                     .apply(requestOptions)
                     .into(imageViewProfile);
@@ -127,8 +144,12 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
 
     @Override
     public void setUpViewAddress(AddressModel addressModel) {
-        textViewAddress.setVisibility(View.VISIBLE);
-        textViewAddress.setText(addressModel.getAddressAll());
+        try {
+            textViewAddress.setVisibility(View.VISIBLE);
+            textViewAddress.setText(addressModel.getAddressAll());
+        }catch (NullPointerException e){
+            textViewAddress.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -163,8 +184,28 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
     }
 
     @Override
+    public void onRequestPermissions(String[] perms, int permsRequestCode) {
+        requestPermissions(perms, permsRequestCode);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 200:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    presenter.checkPermissions(requestCode,permissions,grantResults);
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @Override
     public void showGallery() {
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, 7);
     }
@@ -209,7 +250,7 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
 
     @OnClick({R.id.linearLayoutName, R.id.linearLayoutEmail, R.id
             .linearLayoutBirdDay, R.id.linearLayoutPassword,R.id.imageViewProfile,R.id
-            .buttonAddressAdd,R.id.buttonEditMainAddress,R.id.buttonChangeMainAddress})
+            .buttonAddressAdd,R.id.linearLayoutGender,R.id.linearLayoutIdentiFication})
     public void onClick(View view) {
         presenter.clickEditProfile(view.getId());
 

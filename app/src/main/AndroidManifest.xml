@@ -3,6 +3,8 @@
     package="com.mvision.vfin">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.mvision.vfin.ApplicationVFin"
@@ -49,11 +51,13 @@
 
         <activity android:name="com.mvision.vfin.component.myaddress.MyAddressActivity"/>
 
-        <activity android:name="com.mvision.vfin.component.myproduct.MyProductActivity"/>
-
         <activity android:name=".component.editprofile.EditProfileActivity"/>
 
         <activity android:name=".component.addeditdress.AddEditAddressActivity"/>
+
+        <activity android:name=".component.provinceamphur.ProvinceAmphurActivity"/>
+
+        <activity android:name=".component.myproduct.myproductmain.MyProductMainActivity"/>
 
 
         <service

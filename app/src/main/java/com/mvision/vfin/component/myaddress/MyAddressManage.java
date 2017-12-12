@@ -3,6 +3,7 @@ package com.mvision.vfin.component.myaddress;
 import com.mvision.vfin.api.modelrequest.ErrorModel;
 import com.mvision.vfin.api.request.Member;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
+import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.PreferencesMange;
@@ -47,6 +48,42 @@ public class MyAddressManage {
 
                     @Override
                     public void onError(Throwable e) {
+                        ErrorMange.getInstance().setError(e, new ErrorMange.CallBackError() {
+                            @Override
+                            public void reloadConnect() {
+                                myAddress(callBackData);
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onNext(MyAddressResponseModel s) {
+                        callBackData.onSuccess(s);
+
+                    }
+
+                });
+
+    }
+
+
+    public void updateAddressIsPrimary(final Query.CallBackData callBackData,long addressID) {
+        RetrofitUtility.getInstance()
+                .getRetrofit()
+                .create(Member.class).updateAddressIsPrimary(PreferencesMange.getInstance()
+                .getMemberID(),addressID).subscribeOn
+                (Schedulers
+                .io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ErrorModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                         e.printStackTrace();
                         if (e instanceof HttpException) {
                             ResponseBody body = ((HttpException) e).response().errorBody();
@@ -62,11 +99,9 @@ public class MyAddressManage {
                     }
 
                     @Override
-                    public void onNext(MyAddressResponseModel s) {
+                    public void onNext(ErrorModel s) {
                         callBackData.onSuccess(s);
-
                     }
-
                 });
 
     }

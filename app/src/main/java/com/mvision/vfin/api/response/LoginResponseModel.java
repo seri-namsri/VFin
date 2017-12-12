@@ -1,5 +1,6 @@
 package com.mvision.vfin.api.response;
 
+import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.base.BaseRespone;
 
 /**
@@ -7,12 +8,14 @@ import com.mvision.vfin.base.BaseRespone;
  */
 
 public class LoginResponseModel extends BaseRespone {
-
+    @SerializedName("result")
     public Result result;
 
     public class Result {
-
-        public String tokenSession,memberCode;
+        @SerializedName("tokenSession")
+        public String tokenSession;
+        @SerializedName("memberCode")
+        public String memberCode;
 
     }
 

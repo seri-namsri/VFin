@@ -1,5 +1,6 @@
 package com.mvision.vfin.api.response;
 
+import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.base.BaseRespone;
 import com.mvision.vfin.component.addeditdress.model.AddressModel;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class MyAddressResponseModel extends BaseRespone{
-
+    @SerializedName("result")
     public ArrayList <AddressModel> result;
 
 

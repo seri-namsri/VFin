@@ -68,6 +68,7 @@ public class RetrofitUtility {
                         .create();
                 retrofit = new Retrofit.Builder()
                         .baseUrl("http://52.74.191.27:8080")
+                       // .baseUrl("http://192.168.1.8:8080")
                         .client(getRequestHeader())
                         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                         .addConverterFactory(GsonConverterFactory.create(gson))

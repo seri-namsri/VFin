@@ -25,6 +25,7 @@ public interface ProfileDetailContract {
         void startChangeAddress(int requestCode);
         void startEditAddress(Bundle bundle,int requestCode);
         void finishFragment(MemberResponseModel member);
+        void onRequestPermissions(String[] perms,int permsRequestCode);
         void showGallery();
     }
 
@@ -34,6 +35,7 @@ public interface ProfileDetailContract {
         void changeData(int id, Intent data);
         void getfinishFragment();
         void uploadImageProfile(File file);
+        void checkPermissions(int requestCode, String[] permissions, int[] grantResults);
 
 
     }

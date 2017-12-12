@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
@@ -22,6 +23,7 @@ import com.mvision.vfin.utility.Utility;
 import org.parceler.Parcels;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by enter_01 on 11/24/2017 AD.
@@ -38,6 +40,10 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
         return fragment;
     }
 
+    @OnClick({R.id.buttonOK})
+    public void onClick(View view){
+        presenter.updateAddressIsPrimary();
+    }
 
     @Override
     public void showMessageFail(String msg) {
@@ -72,6 +78,7 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
         myAddressAdapter = new MyAddressAdapter(myAddressResponseModel, new MyAddressAdapter.OnClickItem() {
             @Override
             public void itemClickEdit(AddressModel addressModel,int position) {
+
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("addressModel", Parcels.wrap(addressModel));
                 bundle.putInt("positionAddress", position);
@@ -81,6 +88,7 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
             @Override
             public void itemClickSelect(AddressModel addressModel,int position) {
                 myAddressAdapter.setClickPosition(position);
+                presenter.clickAddress(addressModel);
             }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -90,7 +98,22 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
 
     @Override
     public void updateDataAddress() {
-        myAddressAdapter.notifyDataSetChanged();
+        myAddressAdapter.setAddAddress();
+    }
+
+    @Override
+    public void updateAddressIsPrimarySuccess(AddressModel addressModel) {
+        Intent returnIntent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("addressModel", Parcels.wrap(addressModel));
+        returnIntent.putExtras(bundle);
+        getActivity().setResult(Activity.RESULT_OK, returnIntent);
+        getActivity().finish();
+    }
+
+    @Override
+    public void updateAddressIsPrimaryFail() {
+        getActivity().finish();
     }
 
     @Override

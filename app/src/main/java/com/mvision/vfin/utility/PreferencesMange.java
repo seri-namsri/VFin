@@ -15,6 +15,8 @@ public class PreferencesMange {
     }
 
     public String getMemberID(){
+        Log.e("memberCode",Utility.loadSavedPreferences(Contextor.getInstance().getContext(),
+                "member_id"));
         return Utility.loadSavedPreferences(Contextor.getInstance().getContext(),"member_id");
     }
 
@@ -24,6 +26,7 @@ public class PreferencesMange {
 
 
     public String getTokenSession(){
+        Log.e("getTokenSession",Utility.loadSavedPreferences(Contextor.getInstance().getContext(),"tokenSession"));
         return Utility.loadSavedPreferences(Contextor.getInstance().getContext(),"tokenSession");
     }
 

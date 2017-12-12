@@ -2,6 +2,7 @@ package com.mvision.vfin.api.modelrequest;
 
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.utility.Log;
 
 /**
@@ -15,8 +16,9 @@ public class UpdateProfileRequestModel {
         this.type = type;
         this.member = new Gson().toJson(member);
     }
-
+    @SerializedName("type")
     private String type;
+    @SerializedName("member")
     private String member;
 
 }

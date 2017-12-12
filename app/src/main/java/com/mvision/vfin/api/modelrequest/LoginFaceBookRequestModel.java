@@ -1,7 +1,6 @@
 package com.mvision.vfin.api.modelrequest;
 
-import android.content.Context;
-
+import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.BuildConfig;
 import com.mvision.vfin.utility.Contextor;
 import com.mvision.vfin.utility.Utility;
@@ -11,7 +10,23 @@ import com.mvision.vfin.utility.Utility;
  */
 
 public class LoginFaceBookRequestModel {
-    private String facebookId, deviceId, platform, imei, imei2, macAddress, versionCode, deviceModelName;
+    @SerializedName("facebookId")
+    private String facebookId;
+    @SerializedName("deviceId")
+    private String deviceId;
+    @SerializedName("platform")
+    private String platform;
+    @SerializedName("imei")
+    private String imei;
+    @SerializedName("imei2")
+    private String imei2;
+    @SerializedName("macAddress")
+    private String macAddress;
+    @SerializedName("versionCode")
+    private String versionCode;
+    @SerializedName("deviceModelName")
+    private String deviceModelName;
+
 
     public LoginFaceBookRequestModel(String facebookId) {
         this.facebookId = facebookId;

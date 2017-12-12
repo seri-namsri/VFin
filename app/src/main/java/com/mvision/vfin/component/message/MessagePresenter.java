@@ -21,21 +21,6 @@ public class MessagePresenter extends Presenter<MessageContract.View> implements
     @Override
     public void getMessage() {
         view.showLoading();
-        MessageManage.getInstance().getMessage(new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-            }
 
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-                view.hideLoading();
-                view.setUpViewMessage((ArrayList<MessageData>) tArrayList);
-            }
-
-            @Override
-            public void onFail(String error) {
-                Log.d("getMessage",error);
-            }
-        });
     }
 }

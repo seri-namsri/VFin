@@ -1,9 +1,12 @@
 package com.mvision.vfin.api.request;
 
+import com.mvision.vfin.api.modelrequest.ErrorModel;
 import com.mvision.vfin.api.modelrequest.LoginFaceBookRequestModel;
 import com.mvision.vfin.api.modelrequest.LoginRequestModel;
+import com.mvision.vfin.api.response.AmphurResponseModel;
 import com.mvision.vfin.api.response.LoginResponseModel;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
+import com.mvision.vfin.api.response.ProvinceResponseModel;
 import com.mvision.vfin.api.response.SaveAddressResponse;
 import com.mvision.vfin.api.response.UpdateProfileResponseModel;
 import com.mvision.vfin.component.addeditdress.model.AddressModel;
@@ -40,8 +43,19 @@ public interface Member {
     @GET("memberservice/v2/member/getAddress")
     Observable<MyAddressResponseModel> myAddress(@Query("memberCode") String memberCode );
 
+    @POST("memberservice/v2/member/updateAddressIsPrimary")
+    Observable<ErrorModel> updateAddressIsPrimary(@Query("memberCode") String memberCode , @Query
+            ("addressId")long addressId);
+
     @GET("memberservice/v2/member/getMember")
     Observable<MemberResponseModel> getMember(@Query("memberCode") String memberCode );
+
+    @GET("memberservice/v2/member/getProvince")
+    Observable<ProvinceResponseModel> getProvince();
+
+    @GET("memberservice/v2/member/getAmphur")
+    Observable<AmphurResponseModel> getAmphur(@Query("provinceId")int provinceId);
+
     @FormUrlEncoded
     @POST("memberservice/v2/member/updateMemberProfile")
     Observable<UpdateProfileResponseModel> updateMember(@Field("member") String member, @Field("type") String type);

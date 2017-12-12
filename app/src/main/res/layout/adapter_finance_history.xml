@@ -26,16 +26,31 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewName" />
 
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        app:name = "Kanit"
+        app:type = "bold"
+        android:textColor="#95989A"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDate"
+        android:textSize="@dimen/text_small_size"
+        android:layout_alignParentRight="true"/>
 
     <com.mvision.vfin.customview.TextViewWithFont
         android:layout_width="wrap_content"
         app:name = "Kanit"
         app:type = "bold"
+        android:layout_marginTop="@dimen/text_big_size"
+        android:layout_marginBottom="@dimen/text_big_size"
         android:layout_centerVertical="true"
         android:layout_height="wrap_content"
         android:id="@+id/textViewPrice"
-        android:textColor="@color/colorGreenText"
         android:textSize="@dimen/text_big2_size"
         android:layout_alignParentRight="true"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#95989A"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

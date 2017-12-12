@@ -20,7 +20,7 @@ public class MyAddressPresenter extends Presenter<MyAddressContract.View> implem
 
     private MyAddressContract.View view;
     private MyAddressResponseModel myAddressResponseModel;
-
+    private AddressModel addressModel ;
     public MyAddressPresenter(MyAddressContract.View view) {
         this.view = view;
     }
@@ -47,15 +47,51 @@ public class MyAddressPresenter extends Presenter<MyAddressContract.View> implem
     }
 
     @Override
+    public void updateAddressIsPrimary() {
+        try {
+            MyAddressManage.getInstance().updateAddressIsPrimary(new Query.CallBackData() {
+                @Override
+                public <T> void onSuccess(T t) {
+                    view.updateAddressIsPrimarySuccess(addressModel);
+                }
+
+                @Override
+                public <T> void onSuccessAll(ArrayList<T> tArrayList) {
+
+                }
+
+                @Override
+                public void onFail(String error) {
+
+                }
+            },addressModel.id);
+        }catch (NullPointerException e){
+            view.updateAddressIsPrimaryFail();
+        }
+
+    }
+
+    @Override
     public void getUpdateAddress(int requestCode,Intent intent) {
         AddressModel addressModel = Parcels.unwrap(intent.getParcelableExtra("addressModel"));
-        if (requestCode == 1)
-        myAddressResponseModel.result.add(addressModel);
+        if (requestCode == 1){
+            if (myAddressResponseModel.result == null)
+                myAddressResponseModel.result = new ArrayList<>();
+            myAddressResponseModel.result.add(0,addressModel);
+        }
+
         else if (requestCode == 2){
             int position = intent.getIntExtra("positionAddress",-1);
             myAddressResponseModel.result.set(position,addressModel);
+            this.addressModel  = addressModel;
         }
 
         view.updateDataAddress();
+    }
+
+
+    @Override
+    public void clickAddress(AddressModel addressModel) {
+        this.addressModel = addressModel ;
     }
 }

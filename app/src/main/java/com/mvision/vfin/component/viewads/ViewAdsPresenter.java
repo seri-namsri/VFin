@@ -20,21 +20,6 @@ public class ViewAdsPresenter extends Presenter<ViewAdsContract.View> implements
 
     @Override
     public void getViewAds() {
-         ViewAdsManage.getInstance().getAds(new Query.CallBackData() {
-             @Override
-             public <T> void onSuccess(T t) {
 
-             }
-
-             @Override
-             public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-                 view.setUpViewAds((ArrayList<ViewAdsModel>) tArrayList);
-             }
-
-             @Override
-             public void onFail(String error) {
-
-             }
-         });
     }
 }

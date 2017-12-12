@@ -155,8 +155,6 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-      //  super.onActivityResult(requestCode, resultCode, data);
-        Log.e("onDestroyonDestroyonDestroy","---4");
           if (requestCode == 5)
             presenter.changeData(data);
     }

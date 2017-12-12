@@ -1,47 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        app:theme="@style/ToolbarColoredBackArrow"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary"
+        app:theme="@style/ToolbarColoredBackArrow" />
 
-    <com.mvision.vfin.customview.EditTextWithFont
-        android:layout_margin="@dimen/margin"
-        android:background="@drawable/button_background_black_corner"
+    <com.mvision.vfin.customview.TextViewWithFont
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:name = "Kanit"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
         android:hint="ชื่อ"
-        android:padding="@dimen/margin"
-        android:id="@+id/editTextName"/>
+        android:paddingLeft="@dimen/margin"
+        app:name="Kanit" />
 
     <com.mvision.vfin.customview.EditTextWithFont
-        android:hint="นามสกุล"
-        android:padding="@dimen/margin"
-        android:layout_margin="@dimen/margin"
-        android:background="@drawable/button_background_black_corner"
+        android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:name = "Kanit"
-        android:id="@+id/editTextSureName"/>
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/button_background_black_corner"
+        android:padding="@dimen/margin"
+        app:name="Kanit" />
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:hint="นามสกุล"
+        android:paddingLeft="@dimen/margin"
+        app:name="Kanit" />
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:id="@+id/editTextSureName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/button_background_black_corner"
+        android:padding="@dimen/margin"
+        app:name="Kanit" />
 
     <com.mvision.vfin.customview.ButtonWithFont
-        android:layout_width="match_parent"
-        android:layout_margin="@dimen/margin"
-        android:text="บันทึก"
         android:id="@+id/buttonOk"
-        android:textColor="@color/colorOrangeText"
-        app:name = "Kanit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
         android:background="@drawable/button_radius_yello"
-        android:layout_height="wrap_content" />
-
+        android:text="บันทึก"
+        android:textColor="@color/colorOrangeText"
+        app:name="Kanit" />
 
 
 </LinearLayout>

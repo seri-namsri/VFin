@@ -30,15 +30,29 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/margin">
 
-                <ImageView
-                    android:id="@+id/imageViewProfile"
+                <RelativeLayout
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    app:layout_constraintBottom_toTopOf="@+id/card_view"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/card_view"
-                    app:layout_constraintVertical_bias="0.44" />
+                    android:layout_height="100dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toTopOf="@+id/card_view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/card_view"
+                        app:layout_constraintVertical_bias="0.44" />
+
+                     <ImageView
+                         android:id="@+id/imageUpload"
+                         android:layout_marginTop="-20dp"
+                         android:src="@drawable/photo_camera"
+                         android:layout_width="30dp"
+                         android:layout_height="30dp"
+                         android:layout_alignParentRight="true"
+                         android:layout_below="@+id/imageViewProfile"/>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -192,6 +206,40 @@
 
             </LinearLayout>
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/margin">
+
+
+                <com.mvision.vfin.customview.TextViewWithFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="เพศ"
+                    app:name="Kanit"
+                    app:type="bold" />
+
+
+                <com.mvision.vfin.customview.TextViewWithFont
+                    android:id="@+id/textViewGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin"
+                    android:textColor="@color/colorBlueText"
+                    app:name="Kanit" />
+
+            </LinearLayout>
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
@@ -263,42 +311,11 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin"
                     android:background="@drawable/button_radius_yello"
-                    android:text="เพิ่มที่อยู่การจัดส่ง"
+                    android:text="แก้ไขที่อยู่"
                     android:textColor="@color/colorOrangeText"
                     app:name="Kanit"
                     app:type="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.mvision.vfin.customview.ButtonWithFont
-                        android:id="@+id/buttonEditMainAddress"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="@dimen/margin"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorTextGray"
-                        android:background="@drawable/button_background_black_corner"
-                        android:text="แก้ไขที่อยู่หลัก"
-                        app:name="Kanit"
-                        app:type="bold" />
-
-                    <com.mvision.vfin.customview.ButtonWithFont
-                        android:id="@+id/buttonChangeMainAddress"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="@dimen/margin"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_radius_yello"
-                        android:text="เปลี่ยนสถานที่จัดส่งหลัก"
-                        android:textColor="@color/colorOrangeText"
-                        app:name="Kanit"
-                        app:type="bold" />
-                </LinearLayout>
 
             </LinearLayout>
 

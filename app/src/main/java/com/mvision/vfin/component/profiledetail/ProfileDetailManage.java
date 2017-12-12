@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.mvision.vfin.api.modelrequest.ErrorModel;
 import com.mvision.vfin.api.modelrequest.MemberUpdate;
 import com.mvision.vfin.api.response.UpdateProfileResponseModel;
+import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.RetrofitUtility;
@@ -33,7 +34,7 @@ public class ProfileDetailManage {
     }
 
 
-    public void upLoadImage(byte[] imageBytes, final Query.CallBackData callBackData) {
+    public void upLoadImage(final byte[] imageBytes, final Query.CallBackData callBackData) {
 
         RequestBody image = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
         RequestBody member = RequestBody.create(MediaType.parse("text/plain"), new Gson().toJson(new MemberUpdate()));
@@ -51,24 +52,17 @@ public class ProfileDetailManage {
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
-                        if (e instanceof HttpException) {
-                            ResponseBody body = ((HttpException) e).response().errorBody();
-                            try {
-                                ErrorModel errorModel = new Gson().fromJson(body
-                                        .string(), ErrorModel.class);
-                                callBackData.onFail(errorModel.message);
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
+                        ErrorMange.getInstance().setError(e, new ErrorMange.CallBackError() {
+                            @Override
+                            public void reloadConnect() {
+                                upLoadImage(imageBytes,callBackData);
                             }
-                        }
+                        });
 
                     }
 
                     @Override
                     public void onNext(UpdateProfileResponseModel s) {
-                        Log.e("MyAddressResponseModel111111", "PPPPPP");
-                        //     Log.e("MyAddressResponseModel",new Gson().toJson(s));
                         callBackData.onSuccess(s);
 
                     }

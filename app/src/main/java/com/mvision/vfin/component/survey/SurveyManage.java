@@ -2,7 +2,6 @@ package com.mvision.vfin.component.survey;
 
 import com.mvision.vfin.component.survey.pojo.SurveyModel;
 import com.mvision.vfin.firebase.Firestore.Query;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 public class SurveyManage {
 
     private static SurveyManage instance = null;
-    private static FirebaseFirestore db ;
     public static SurveyManage getInstance() {
         if (instance == null)
             instance = new SurveyManage();
@@ -21,26 +19,7 @@ public class SurveyManage {
     }
 
 
-    public void getSurvey(final Query.CallBackData callBackData){
-        db = FirebaseFirestore.getInstance();
-
-        Query.getInstance().readDataCollection( db.collection("survey"),new
-                SurveyModel(), new Query.CallBackData() {
-            @Override
-            public <T> void onSuccess(T t) {
-                callBackData.onSuccess(t);
-
-            }
-
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
-                callBackData.onSuccessAll(tArrayList);
-            }
-
-            @Override
-            public void onFail(String error) {
-            }
-        });
+    public void getSurvey(final Query.CallBackData callBackData) {
     }
 
 }
