@@ -11,84 +11,95 @@
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
 
-
-    <com.mvision.vfin.customview.ButtonWithFont
-        app:name = "Kanit"
-        app:type = "bold"
-        android:layout_margin="@dimen/margin"
-        android:id="@+id/buttonCoin"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/button_radius_green"
-        android:drawableLeft="@drawable/ic_coin"
-        android:drawablePadding="-20dp"
-        android:padding="@dimen/margin"
-        android:text="1"
-        android:textColor="@android:color/white" />
+        android:layout_height="wrap_content">
 
 
+        <com.mvision.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonCoin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/button_radius"
+            android:drawableLeft="@drawable/ic_coin"
+            android:drawablePadding="-20dp"
+            android:padding="@dimen/margin"
+            android:textColor="@android:color/white"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:elevation="2dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonCoin"
+        android:layout_below="@+id/relativeLayout"
         android:visibility="visible">
 
         <LinearLayout
-            android:padding="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginTop="@dimen/margin"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/margin">
 
             <com.mvision.vfin.customview.TextViewWithFont
-                app:name = "Kanit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ยอดเงินของคุณ"/>
+                android:text="ยอดเงินของคุณ"
+                app:name="Kanit" />
+
             <com.mvision.vfin.customview.ButtonWithFont
-                app:name = "Kanit"
-                app:type = "bold"
-                android:layout_marginTop="@dimen/margin"
-                android:drawableLeft="@drawable/ic_coin"
-                android:padding="8dp"
-                android:text="9900099"
-                android:textColor="@android:color/white"
-                android:drawableRight="@drawable/bt_add_more"
-                android:background="@drawable/button_radius_blue"
+                android:id="@+id/buttonVCoin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-            />
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_radius_blue"
+                android:drawableLeft="@drawable/ic_coin"
+                android:drawableRight="@drawable/bt_add_more"
+                android:padding="@dimen/margin"
+                android:textColor="@android:color/white"
+                app:name="Kanit"
+                app:type="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:padding="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginTop="@dimen/margin"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/margin">
+
             <com.mvision.vfin.customview.TextViewWithFont
-                app:name = "Kanit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="จำนวณครั้งที่ซื้อได้"/>
+                android:text="จำนวณครั้งที่ซื้อได้"
+                app:name="Kanit" />
+
             <com.mvision.vfin.customview.ButtonWithFont
-                app:name = "Kanit"
-                app:type = "bold"
-                android:textColor="@android:color/white"
-                android:drawableLeft="@drawable/ic_power"
-                android:padding="@dimen/margin"
-                android:text="99/99"
-                android:drawableRight="@drawable/bt_add_more"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/button_radius_blue"
+                android:id="@+id/buttonBit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-         />
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_radius_blue"
+                android:drawableLeft="@drawable/ic_power"
+                android:drawableRight="@drawable/bt_add_more"
+                android:padding="@dimen/margin"
+                android:textColor="@android:color/white"
+                app:name="Kanit"
+                app:type="bold" />
         </LinearLayout>
 
 

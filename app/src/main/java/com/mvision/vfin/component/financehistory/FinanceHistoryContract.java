@@ -25,6 +25,7 @@ public interface FinanceHistoryContract {
         void getFinanceHistory();
         void getFinanceHistoryMore();
         void getCoin();
+        void stopRealTime();
 
     }
 }

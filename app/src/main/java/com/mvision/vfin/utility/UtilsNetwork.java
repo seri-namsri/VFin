@@ -1,12 +1,15 @@
 package com.mvision.vfin.utility;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
 import android.text.TextUtils;
@@ -22,8 +25,15 @@ import java.util.List;
  */
 public class UtilsNetwork {
     protected final static String TAG = UtilsNetwork.class.getSimpleName();
+    private static UtilsNetwork instance = null;
 
-    public static boolean isOnline(Context context) {
+    public static UtilsNetwork getInstance() {
+        if (instance == null)
+            instance = new UtilsNetwork();
+        return instance;
+    }
+
+    public boolean isOnline(Context context) {
         boolean status = false;
         try {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -38,11 +48,25 @@ public class UtilsNetwork {
         return status;
     }
 
-    public static ModelCellSite getSellSite(Context context) {
+    private ModelCellSite getSellSite(Context context) {
         String unknown = "unknown";
         ModelCellSite cellSite = new ModelCellSite();
         TelephonyManager phone = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (phone.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
+
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return null;
+            }
             GsmCellLocation cellLocation = (GsmCellLocation) phone.getCellLocation();
             if ((cellLocation != null) && (phone.getNetworkOperator() != null) && (phone.getNetworkOperator().length() > 3)) {
                 cellSite.setCellID(String.valueOf(cellLocation.getCid()));
@@ -67,12 +91,12 @@ public class UtilsNetwork {
         return cellSite;
     }
 
-    public static String getPhoneType(Context context) {
+    public  String getPhoneType(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return getType(telephonyManager.getPhoneType());
     }
 
-    private static String getType(int phoneType) {
+    private  String getType(int phoneType) {
         switch (phoneType) {
             case TelephonyManager.PHONE_TYPE_NONE:
                 return "none";
@@ -87,7 +111,7 @@ public class UtilsNetwork {
         }
     }
 
-    public static String getBrandOperator(int operator) {
+    public  String getBrandOperator(int operator) {
         switch (operator) {
             case 52000:
                 return "CAT";
@@ -116,7 +140,7 @@ public class UtilsNetwork {
         }
     }
 
-    public static String getNetworkClass(Context context) {
+    public  String getNetworkClass(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectivityManager.getActiveNetworkInfo();
         if (info == null || !info.isConnected())
@@ -196,7 +220,7 @@ public class UtilsNetwork {
      * @param useIPv4 true=return ipv4, false=return ipv6
      * @return address or empty string
      */
-    public static String getIPAddress(boolean useIPv4) {
+    public  String getIPAddress(boolean useIPv4) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface intf : interfaces) {
@@ -233,7 +257,7 @@ public class UtilsNetwork {
      * @param interfaceName eth0, wlan0 or NULL=use first interface
      * @return mac address or empty string
      */
-    public static String getMACAddress(String interfaceName) {
+    public  String getMACAddress(String interfaceName) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface intf : interfaces) {
@@ -254,7 +278,7 @@ public class UtilsNetwork {
         return "";
     }
 
-    public static String getSimOperatorName(Context context) {
+    public  String getSimOperatorName(Context context) {
         TelephonyManager telephonyManager = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
         String simOperatorName = telephonyManager.getSimOperatorName();
         if(TextUtils.isEmpty(simOperatorName.trim())){
@@ -263,7 +287,7 @@ public class UtilsNetwork {
         return simOperatorName;
     }
 
-    public static String getSSID(Context context) {
+    public  String getSSID(Context context) {
         String ssid = "Unknown";
         if (getNetworkClass(context).equals("WIFI")) {
             WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -273,7 +297,7 @@ public class UtilsNetwork {
         return ssid;
     }
 
-    public static boolean isLocation(Context context) {
+    public  boolean isLocation(Context context) {
         LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             return true;
@@ -282,7 +306,7 @@ public class UtilsNetwork {
         }
     }
 
-    public static NetworkInfo getNetworkInfo(Context context) {
+    public  NetworkInfo getNetworkInfo(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo();
     }
@@ -293,20 +317,20 @@ public class UtilsNetwork {
      * @param context
      * @return
      */
-    public static boolean isConnected(Context context) {
-        NetworkInfo info = UtilsNetwork.getNetworkInfo(context);
+    public  boolean isConnected(Context context) {
+        NetworkInfo info = UtilsNetwork.getInstance().getNetworkInfo(context);
         return (info != null && info.isConnected());
     }
 
 
-    public static boolean isConnectedWifi(Context context) {
-        NetworkInfo info = UtilsNetwork.getNetworkInfo(context);
+    public  boolean isConnectedWifi(Context context) {
+        NetworkInfo info = UtilsNetwork.getInstance().getNetworkInfo(context);
         return (info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_WIFI);
     }
 
 
-    public static boolean isConnectedMobile(Context context) {
-        NetworkInfo info = UtilsNetwork.getNetworkInfo(context);
+    public  boolean isConnectedMobile(Context context) {
+        NetworkInfo info = UtilsNetwork.getInstance().getNetworkInfo(context);
         return (info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_MOBILE);
     }
 
@@ -316,9 +340,9 @@ public class UtilsNetwork {
      * @param context
      * @return
      */
-    public static boolean isConnectedFast(Context context) {
-        NetworkInfo info = UtilsNetwork.getNetworkInfo(context);
-        return (info != null && info.isConnected() && UtilsNetwork.isConnectionFast(info.getType(), info.getSubtype()));
+    public  boolean isConnectedFast(Context context) {
+        NetworkInfo info = UtilsNetwork.getInstance().getNetworkInfo(context);
+        return (info != null && info.isConnected() && UtilsNetwork.getInstance().isConnectionFast(info.getType(), info.getSubtype()));
     }
 
     /**
@@ -328,7 +352,7 @@ public class UtilsNetwork {
      * @param subType
      * @return
      */
-    public static boolean isConnectionFast(int type, int subType) {
+    public  boolean isConnectionFast(int type, int subType) {
         if (type == ConnectivityManager.TYPE_WIFI) {
             return true;
         } else if (type == ConnectivityManager.TYPE_MOBILE) {

@@ -133,7 +133,9 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     private void setUpLocationPermission(int code) {
         if (shouldAskPermission()) {
-            String[] perms = {Manifest.permission.READ_PHONE_STATE};
+            String[] perms = {Manifest.permission.READ_PHONE_STATE,Manifest.permission
+                    .ACCESS_FINE_LOCATION};
+
             try {
                 requestPermissions(perms, code);
             } catch (Exception e) {
@@ -153,7 +155,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 Utility.ShowMsg(getActivity(),"กรุณาเปิด Permissions");
             }
         } else if (requestCode == FACEBOOK) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                   ) {
                 ckickFaceBook();
             }else {
                 Utility.ShowMsg(getActivity(),"กรุณาเปิด Permissions");
@@ -165,8 +168,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     private boolean checkReadPhoneStatPermission() {
         String permission = Manifest.permission.READ_PHONE_STATE;
+        String permissionLo = Manifest.permission.ACCESS_FINE_LOCATION;
         int res = getContext().checkCallingOrSelfPermission(permission);
-        return (res == PackageManager.PERMISSION_GRANTED);
+        int resLo = getContext().checkCallingOrSelfPermission(permissionLo);
+        return (res == PackageManager.PERMISSION_GRANTED && resLo == PackageManager.PERMISSION_GRANTED);
     }
 
 

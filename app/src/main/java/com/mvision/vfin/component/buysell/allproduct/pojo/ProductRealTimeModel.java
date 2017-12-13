@@ -3,12 +3,14 @@ package com.mvision.vfin.component.buysell.allproduct.pojo;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
 /**
  * Created by enter_01 on 11/22/2017 AD.
  */
-
+@Parcel
 public class ProductRealTimeModel {
     @SerializedName("ownerCode")
     public String ownerCode;
@@ -18,16 +20,31 @@ public class ProductRealTimeModel {
     public String ownerName;
     @SerializedName("name")
     public String name;
-    @SerializedName("imgUrl")
-    public String imgUrl;
+    @SerializedName("mainImage")
+    public String mainImage;
     @SerializedName("nextPrice")
     public int nextPrice;
     @SerializedName("id")
     public int id;
+
+    public int getMarketPrice() {
+        return marketPrice;
+    }
+
+    @SerializedName("marketPrice")
+    public int marketPrice;
     @SerializedName("expiredTime")
     public long expiredTime;
     @SerializedName("startTime")
     public long startTime;
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+    @SerializedName("images")
+    public ArrayList<String>images;
+
+
     public String getOwnerCode() {
         return ownerCode;
     }
@@ -48,8 +65,8 @@ public class ProductRealTimeModel {
         return name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getMainImage() {
+        return mainImage;
     }
 
     public int getNextPrice() {

@@ -2,8 +2,11 @@ package com.mvision.vfin.component.buysell.allproduct;
 
 import com.mvision.vfin.api.modelrequest.ErrorModel;
 import com.mvision.vfin.api.modelrequest.TradeBuy;
+import com.mvision.vfin.api.request.Apipublic;
+import com.mvision.vfin.api.response.TimeResponseModel;
 import com.mvision.vfin.api.response.TradeBuyResponseModel;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
+import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.PreferencesMange;
@@ -40,16 +43,18 @@ public class AllProductManage {
     }
 
     private ArrayList<String> arrayList;
-
+    private  ChildEventListener childEventListener ;
+    private DatabaseReference myRef;
     public void getAllProductFormRealtime(final Query.CallBackDataRealTime callBackData) {
 
         final long[] count = {0};
         final ArrayList<ProductRealTimeModel> productRealTimeModels = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("product");
+        myRef = database.getReference("product");
+
         arrayList = new ArrayList<>();
 
-        final ChildEventListener childEventListener = new ChildEventListener() {
+       childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 ProductRealTimeModel productRealTimeModel = dataSnapshot.getValue
@@ -58,7 +63,6 @@ public class AllProductManage {
                 arrayList.add(productRealTimeModel.getId() + "");
                 if (count[0] <= productRealTimeModels.size()) {
                     productRealTimeModel.setIntegerArrayListId(arrayList);
-                    Log.e("getAllProductFormRealtime",new Gson().toJson(productRealTimeModels));
                     callBackData.onSuccessAll(productRealTimeModels);
                     //    productRealTimeModels.clear();
                 }
@@ -81,6 +85,8 @@ public class AllProductManage {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Log.e("onChildRemoved",new Gson().toJson(arrayList));
+                Log.e("onChildRemoved002",dataSnapshot.getKey());
                 int position = arrayList.indexOf(dataSnapshot.getKey());
                 if (position >= 0) {
                     arrayList.remove(position);
@@ -91,57 +97,31 @@ public class AllProductManage {
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         };
 
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
-                count[0] = dataSnapshot.getChildrenCount();
 
+                count[0] = dataSnapshot.getChildrenCount();
+                if (count[0] == 0){
+                    callBackData.onFail("");
+                }
                 myRef.addChildEventListener(childEventListener);
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
-
     }
 
-
-    public void getProductIdFormRealtime(FirebaseDatabase database, String id, final Query
-            .CallBackData
-            callBackData) {
-
-
-        DatabaseReference myRef = database.getReference("product/" + id);
-        final String[] key = {""};
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                callBackData.onSuccess(dataSnapshot.getValue(ProductRealTimeModel.class));
-                return;
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("getAllProductFormRealtime", "Failed to read value.", error.toException());
-            }
-        });
-
-
-    }
 
 
     public void tradeBuyProduct(final Query.CallBackDataTrade callBackData, final ProductRealTimeModel productRealTimeModel) {
@@ -190,6 +170,46 @@ public class AllProductManage {
                 });
 
     }
+
+    public void getTime(final Query.CallBackData callBackData){
+        RetrofitUtility.getInstance()
+                .getRetrofit()
+                .create(Apipublic.class)
+                .getTime()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<TimeResponseModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ErrorMange.getInstance().setError(e, new ErrorMange.CallBackError() {
+                            @Override
+                            public void reloadConnect() {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onNext(TimeResponseModel s) {
+                        callBackData.onSuccess(s);
+
+                    }
+
+                });
+    }
+
+    public void onStopRealTime(){
+        if (childEventListener !=null)
+        myRef.removeEventListener(childEventListener);
+    }
+
+
+
 
 
 }

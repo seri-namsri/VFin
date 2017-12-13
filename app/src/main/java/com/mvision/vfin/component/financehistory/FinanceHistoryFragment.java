@@ -93,7 +93,7 @@ public class FinanceHistoryFragment extends BaseFragment implements FinanceHisto
 
     @Override
     public void setUpCoin(String coin) {
-        textViewCoin.setText(coin);
+        textViewCoin.setText(coin+"");
     }
 
     @Override
@@ -125,4 +125,17 @@ public class FinanceHistoryFragment extends BaseFragment implements FinanceHisto
         }
 
     };
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stopRealTime();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.stopRealTime();
+    }
 }

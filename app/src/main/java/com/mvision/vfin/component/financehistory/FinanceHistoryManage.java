@@ -12,6 +12,7 @@ import com.mvision.vfin.component.financehistory.pojo.FinanceHistoryModel;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
+import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.PreferencesMange;
 import com.mvision.vfin.utility.RetrofitUtility;
 
@@ -59,30 +60,40 @@ public class FinanceHistoryManage {
 
                     @Override
                     public void onNext(WalletTransectionResponseModel s) {
-                            callBackData.onSuccess(s);
+                        callBackData.onSuccess(s);
                     }
                 });
     }
+    private ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            Gson gson = new Gson();
+            ModelCoinAndBit modelCoinAndBit = gson.fromJson(gson.toJson(dataSnapshot.getValue
+                    ()), ModelCoinAndBit.class);
+            callBackData.onSuccess(modelCoinAndBit);
+            return;
+        }
 
-    public void getCoin(final Query.CallBackData callBackData){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("walletAndAbility/" + PreferencesMange
+        @Override
+        public void onCancelled(DatabaseError error) {
+        }
+    };
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private     DatabaseReference myRef ;
+    private  Query.CallBackData callBackData ;
+    public void getCoin(final Query.CallBackData callBackData) {
+        this.callBackData = callBackData;
+         myRef = database.getReference("walletAndAbility/" + PreferencesMange
                 .getInstance().getMemberID());
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Gson gson = new Gson();
-                ModelCoinAndBit modelCoinAndBit = gson.fromJson(gson.toJson(dataSnapshot.getValue
-                        ()),ModelCoinAndBit.class);
-                callBackData.onSuccess(modelCoinAndBit);
-                return;
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
+        myRef.addValueEventListener(valueEventListener);
 
     }
+
+
+    public void stopFileBaseRealtime() {
+        myRef.removeEventListener(valueEventListener);
+    }
+
 
 }

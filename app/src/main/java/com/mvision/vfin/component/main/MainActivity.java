@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseActivity;
 import com.mvision.vfin.component.activity.PageActivityFragment;
+import com.mvision.vfin.component.buysell.allproduct.AllProductFragment;
 import com.mvision.vfin.component.buysell.mainproduct.BuySellFragment;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.component.message.MessageFragment;
@@ -82,7 +83,7 @@ public class MainActivity extends BaseActivity implements MainContract.View{
                         selectedFragment = MessageFragment.newInstance();
                         break;
                     case 2:
-                        selectedFragment = BuySellFragment.newInstance();
+                        selectedFragment = AllProductFragment.newInstance();
                         break;
                     case 3:
                         selectedFragment = PageActivityFragment.newInstance();

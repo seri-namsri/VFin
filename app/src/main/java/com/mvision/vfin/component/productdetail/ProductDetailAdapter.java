@@ -10,9 +10,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mvision.vfin.R;
 import com.mvision.vfin.component.buysell.allproduct.pojo.MemberBuy;
+import com.mvision.vfin.component.productdetail.pojo.MemberProductHistory;
 import com.mvision.vfin.utility.Contextor;
 import com.mvision.vfin.utility.ConvertDate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,10 +29,10 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class ProductDetailAdapter extends  RecyclerView.Adapter<ProductDetailAdapter.ViewHolder> {
 
-    private List<MemberBuy>memberArrayList ;
+    private ArrayList<MemberProductHistory>memberProductHistory ;
 
-    public ProductDetailAdapter(List<MemberBuy> memberArrayList){
-         this.memberArrayList = memberArrayList ;
+    public ProductDetailAdapter(ArrayList<MemberProductHistory> memberProductHistory){
+         this.memberProductHistory = memberProductHistory ;
     }
 
     @Override
@@ -42,21 +44,21 @@ public class ProductDetailAdapter extends  RecyclerView.Adapter<ProductDetailAda
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-           holder.textViewUsername.setText(memberArrayList.get(position).getUsername().substring(0,4)+"xxxxx");
-           holder.textViewPrice.setText(memberArrayList.get(position).getPrice()+"");
-           holder.textViewDate.setText(ConvertDate.getInstance().TimestampToFormatDateAndTimeTH(memberArrayList.get(position)
-                   .getDate_buy()+"","dd MMM yyyy HH:mm น."));
+           holder.textViewUsername.setText(memberProductHistory.get(position).getName());
+           holder.textViewPrice.setText(memberProductHistory.get(position).getBuyPrice()+"");
+           holder.textViewDate.setText(ConvertDate.getInstance().TimestampToFormatDateAndTimeTH
+                   (memberProductHistory.get(position).getBuyTime()/1000+"","dd MMM yyyy HH:mm " +
+                           "น."));
 
         CropCircleTransformation multi = new CropCircleTransformation();
         Glide.with(Contextor.getInstance().getContext())
-                .load(memberArrayList.get(position)
-                        .getImageProfile()).apply(bitmapTransform(multi))
+                .load(memberProductHistory.get(position).getAvatarLink()).apply(bitmapTransform(multi))
                 .into(holder.imageViewProfile);
     }
 
     @Override
     public int getItemCount() {
-        return memberArrayList.size();
+        return memberProductHistory.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

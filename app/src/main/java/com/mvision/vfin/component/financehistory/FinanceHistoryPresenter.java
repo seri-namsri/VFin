@@ -55,6 +55,11 @@ public class FinanceHistoryPresenter extends Presenter<FinanceHistoryContract
         });
     }
 
+    @Override
+    public void stopRealTime() {
+        FinanceHistoryManage.getInstance().stopFileBaseRealtime();
+    }
+
     private Query.CallBackData callBackData = new Query.CallBackData() {
         @Override
         public <T> void onSuccess(T t) {

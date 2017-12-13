@@ -10,19 +10,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.buysell.allproduct.pojo.MemberBuy;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductModel;
+import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
+import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.component.productdetail.alertdetail.AlertDetailFragment;
+import com.mvision.vfin.component.productdetail.pojo.MemberProductHistory;
 import com.mvision.vfin.utility.Contextor;
 import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.PreferencesMange;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -64,6 +70,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     TextView textViewTimeProduct;
     @BindView(R.id.buttonCoin)
     Button buttonCoin;
+    @BindView(R.id.buttonVCoin)
+    Button buttonVCoin;
+    @BindView(R.id.buttonBit)
+    Button buttonBit;
+    @BindView(R.id.progress)
+    ProgressBar progress;
 
     private ProductDetailPresenter presenter;
 
@@ -97,7 +109,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     protected void startView() {
+        presenter.getCoin();
         presenter.getProductDetail();
+        presenter.getMemberProductHistory();
     }
 
     @Override
@@ -105,30 +119,28 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         return R.layout.fragment_product_detail;
     }
 
-    private String memberIdOwner,productName,imageProduct ;
-
-
-    public List<MemberBuy> getMember_buy_sub(List<MemberBuy>  member_buy) {
-        try {
-            return member_buy.subList(member_buy.size() - 5, member_buy.size() );
-        } catch (Exception e) {
-            return member_buy;
-        }
-    }
     @Override
-    public void setUpViewProductDetail(ProductModel productDetail) {
+    public void setUpViewProductDetail(ProductRealTimeModel productDetail) {
 
         textViewTitle.setText(productDetail.getName());
-        textViewDetail.setText(productDetail.getDetail());
+        textViewDetail.setText("");
+
         ProductDetailPager productDetailPager = new ProductDetailPager(productDetail
-                .getImage_product());
+                .getImages());
         viewPager.setAdapter(productDetailPager);
         indicator.setViewPager(viewPager);
-        productName = productDetail.getName();
-        imageProduct = productDetail.getImage_product().get(0);
-        priceMarket.setText("ราคาตลาด\n"+productDetail.getPrice_market());
-        setUpBottomSheet(productDetail);
-        if (productDetail.getMember_buy()!=null){
+
+
+        //  imageProduct = productDetail.getImage_product().get(0);
+        priceMarket.setText("ราคาตลาด\n" + productDetail.getMarketPrice());
+        textViewNameOwner.setText(productDetail.getOwnerName());
+        CropCircleTransformation multi = new CropCircleTransformation();
+        Glide.with(Contextor.getInstance().getContext())
+                .load(productDetail.avatarLink).apply(bitmapTransform(multi))
+                .into(imageViewOwner);
+        setUpBottomSheet();
+
+       /* if (productDetail.getMember_buy()!=null){
             ProductDetailAdapter productDetailAdapter = new ProductDetailAdapter(
                     getMember_buy_sub(productDetail.getMember_buy()));
 
@@ -136,23 +148,23 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             recyclerView.setLayoutManager(linearLayoutManager);
             recyclerView.setAdapter(productDetailAdapter);
 
-            textViewNameOwner.setText(productDetail.getMember_buy().get(productDetail
-                    .getMember_buy().size() - 1).getUsername().substring(0,4)+"xxxxx");
-            CropCircleTransformation multi = new CropCircleTransformation();
-            Glide.with(Contextor.getInstance().getContext())
-                    .load(productDetail.getMember_buy().get(productDetail
-                            .getMember_buy().size() - 1).getImageProfile()).apply(bitmapTransform(multi))
-                    .into(imageViewOwner);
-            memberIdOwner = productDetail.getMember_buy().get(productDetail
-                    .getMember_buy().size() - 1).getMember_id();
+
 
         }else {
             buttonCoin.setText(productDetail.getPrice() + "");
             buttonCoin.setTag(productDetail.getPrice() + "");
         }
 
-      //  priceMarket.setText("ราคาตลาด\n"+productDetail.getPrice_market());
+      //  priceMarket.setText("ราคาตลาด\n"+productDetail.getPrice_market());*/
 
+    }
+
+    @Override
+    public void setUpViewMemberProductHistory(ArrayList<MemberProductHistory> memberProductHistory) {
+        ProductDetailAdapter productDetailAdapter = new ProductDetailAdapter(memberProductHistory);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(productDetailAdapter);
     }
 
     @Override
@@ -161,89 +173,77 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         editNameDialogFragment.show(getFragmentManager(), "dialog");
     }
 
-    private BottomSheetBehavior mBottomSheetBehavior;
-    private CountDownTimer countDownTimer;
+    @Override
+    public void setUpViewCoin(ModelCoinAndBit modelCoinAndBit) {
+        buttonVCoin.setText(modelCoinAndBit.getWallet() + "");
+        buttonBit.setText(modelCoinAndBit.getAbility().getCurrent() + "/" + modelCoinAndBit.getAbility
+                ().getMax());
+    }
 
-    private void setUpBottomSheet(ProductModel productDetail) {
+    @Override
+    public void startTime(String time) {
+        textViewTimeProduct.setText(time);
+    }
+
+    @Override
+    public void setTimeOut() {
+        buttonCoin.setText("หมดเวลา");
+        textViewTimeProduct.setText("หมดเวลา");
+        buttonCoin.setEnabled(false);
+        buttonCoin.setBackgroundResource(R.drawable.button_radius);
+    }
+
+    @Override
+    public void setTimeOutMyItem() {
+        buttonCoin.setText("สินค้าเป็นของคุณ");
+        textViewTimeProduct.setText("หมดเวลา");
+        buttonCoin.setEnabled(false);
+        buttonCoin.setBackgroundResource(R.drawable.button_radius);
+    }
+
+    @Override
+    public void setSell(ProductRealTimeModel productRealTimeModel) {
+        buttonCoin.setText("รอคนซื้อ " + productRealTimeModel.getNextPrice() + " Vin point");
+        buttonCoin.setEnabled(false);
+        buttonCoin.setBackgroundResource(R.drawable.button_radius);
+    }
+
+    @Override
+    public void setBuy(ProductRealTimeModel productRealTimeModel) {
+        buttonCoin.setText("ซื้อเลย " + productRealTimeModel.getNextPrice() + " Vin point");
+        buttonCoin.setEnabled(true);
+        buttonCoin.setBackgroundResource(R.drawable.button_radius_green);
+    }
+
+    @Override
+    public void buttonLoadingShow() {
+        buttonCoin.setText("");
+        progress.setVisibility(View.VISIBLE);
+        buttonCoin.setEnabled(false);
+        buttonCoin.setBackgroundResource(R.drawable.button_radius);
+    }
+
+    @Override
+    public void buttonLoadingHide() {
+        progress.setVisibility(View.GONE);
+
+    }
+
+    private BottomSheetBehavior mBottomSheetBehavior;
+
+    private void setUpBottomSheet() {
         mBottomSheetBehavior = BottomSheetBehavior.from(design_bottom_sheet);
         linearLayout.setVisibility(View.VISIBLE);
         mBottomSheetBehavior.setHideable(false);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        if (productDetail.getMember_buy() != null) {
-            int price = productDetail.getMember_buy().get(productDetail
-                    .getMember_buy().size() - 1).getPrice();
-            double totel = (1 / 100.0f) *  price;
-            price = (int) (price+Math.ceil(totel));
-            //buttonCoin.setText(price + "");
-            buttonCoin.setTag(price + "");
-            // price = price + totel;
-            if (PreferencesMange.getInstance().getMemberID().equals(productDetail.getMember_buy().get(productDetail
-                    .getMember_buy().size() - 1).getMember_id())) {
-                buttonCoin.setEnabled(false);
-                buttonCoin.setText("รอคนซื้อ "+ price +
-                        " Vin point");
-                buttonCoin.setBackgroundResource(R.drawable.button_radius);
-            } else {
-                buttonCoin.setText("ซื้อเลย "+ price +
-                        " Vin point");
-                buttonCoin.setEnabled(true);
-                buttonCoin.setTag(productDetail.getPrice() + "");
-                buttonCoin.setBackgroundResource(R.drawable.button_radius_green);
-            }
-
-
-        }else {
-            buttonCoin.setText("ซื้อเลย "+ productDetail.getPrice() +
-                    " Vin point");
-            buttonCoin.setTag(productDetail.getPrice() + "");
-            buttonCoin.setEnabled(true);
-            buttonCoin.setBackgroundResource(R.drawable.button_radius_green);
-        }
-
-
-        //
-
-
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-        final TimeZone tz = TimeZone.getTimeZone("UTC");
-        final SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-        long tsLong = System.currentTimeMillis() / 1000;
-
-        final long time1 = productDetail.getTime() - tsLong;
-
-        final int millis = (int) time1;
-        df.setTimeZone(tz);
-        String time = df.format(new Date(millis));
-        textViewTimeProduct.setText(time);
-        countDownTimer = new CountDownTimer(time1, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                try {
-                    int millis = (int) (millisUntilFinished);
-                    df.setTimeZone(tz);
-                    String time = df.format(new Date(millis));
-                    textViewTimeProduct.setText(time);
-                } catch (Exception e) {
-                }
-
-            }
-
-            public void onFinish() {
-                Log.e("done!");
-            }
-        }.start();
-
-
     }
+
 
     @OnClick({R.id.buttonCoin, R.id.buttonProductDetail})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonCoin:
-                presenter.buyProduct(Integer.parseInt(buttonCoin.getTag().toString()),
-                        memberIdOwner,productName,imageProduct);
+                  presenter.buyProduct();
                 break;
             case R.id.buttonProductDetail:
                 presenter.getProductDetailAlert();
@@ -255,6 +255,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void onDestroy() {
         super.onDestroy();
-        countDownTimer.cancel();
+        presenter.stopTime();
+        presenter.stopRealTime();
     }
 }

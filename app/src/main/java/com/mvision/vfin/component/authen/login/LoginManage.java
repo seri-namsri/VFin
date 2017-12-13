@@ -33,7 +33,7 @@ public class LoginManage {
 
 
     public void loginWithApi(final String userName, final String password, final Query.CallBackData callBackData) {
-     //   Log.e("loginWithApi",new Gson().toJson(new LoginRequestModel(userName, password)));
+        Log.e("loginWithApi",new Gson().toJson(new LoginRequestModel(userName, password)));
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(com.mvision.vfin.api.request
@@ -68,7 +68,7 @@ public class LoginManage {
 
     public void loginWithFaceBook(final String facebookID, final Query.CallBackData callBackData) {
         LoginFaceBookRequestModel a = new LoginFaceBookRequestModel(facebookID);
-       // Log.e("loginWithFaceBook",new Gson().toJson(a));
+        Log.e("loginWithFaceBook",new Gson().toJson(a));
         RetrofitUtility.getInstance().getRetrofit().create(com.mvision.vfin.api.request.Member.class)
                 .loginFaceBookVfin(new LoginFaceBookRequestModel(facebookID))
                 .subscribeOn(Schedulers.io())

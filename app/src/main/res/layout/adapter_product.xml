@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/relative"
         android:layout_centerHorizontal="true"
+        android:maxLines="1"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_normal_size"
         app:name="Kanit"
@@ -105,6 +106,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:visibility="gone"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/margin"
         android:background="@drawable/bt_fav" />
@@ -146,7 +148,7 @@
         app:name="Kanit"/>
 
         <ProgressBar
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/progress"
             android:elevation="2dp"
             android:layout_centerInParent="true"

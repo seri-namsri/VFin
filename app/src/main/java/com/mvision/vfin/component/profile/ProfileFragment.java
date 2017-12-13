@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,12 +44,18 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     TextView textViewName;
     @BindView(R.id.textViewEmail)
     TextView textViewEmail;
-    @BindView(R.id.textViewProfilePercent)
-    TextView textViewProfilePercent;
+    @BindView(R.id.textViewLevel)
+    TextView textViewLevel;
+    @BindView(R.id.textViewLevelDetail)
+    TextView textViewLevelDetail;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.perCentView)
     PercenView perCentView;
+    @BindView(R.id.framLayout)
+    FrameLayout framLayout;
+    @BindView(R.id.framLayoutLevel)
+    FrameLayout framLayoutLevel;
     @BindView(R.id.buttonViewProfile)
     Button buttonViewProfile;
     ProfilePresenter presenter;
@@ -109,10 +116,15 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
                 perCentView.setC("0.4");
                 textViewName.setText(member.result.firstName);
                 textViewEmail.setText(member.result.email);
-                textViewProfilePercent.setText(member.result.memberLevel + "");
+                textViewLevel.setText("เลเวลของคุณคือ "+member.result.memberLevel+"");
+                textViewLevelDetail.setText("อีก 2,502 คะแนน จะเลื่อนขั้นเป็น เลเวล 5");
                 imageViewProfile.bringToFront();
+                framLayout.setVisibility(View.VISIBLE);
+                framLayoutLevel.setVisibility(View.VISIBLE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     imageViewProfile.setElevation(10);
+                    framLayout.setElevation(10);
+                    framLayoutLevel.setElevation(10);
                     // buttonViewProfile.setElevation(40);
                 }
                 CropCircleTransformation multi = new CropCircleTransformation();

@@ -1,5 +1,6 @@
 package com.mvision.vfin.component.buysell.allproduct;
 
+import com.mvision.vfin.api.response.TimeResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
 import com.mvision.vfin.firebase.Firestore.Query;
@@ -34,7 +35,7 @@ public class AllProductPresenter extends Presenter<AllProductContract.View> impl
 
             @Override
             public <T> void onSuccessItemChange(int position) {
-                 view.changeItem(position);
+                view.changeItem(position);
             }
 
             @Override
@@ -47,10 +48,17 @@ public class AllProductPresenter extends Presenter<AllProductContract.View> impl
             @Override
             public void onFail(String error) {
                 view.hideLoading();
-                view.showMessageFail(error);
+                view.showNotFoundData();
+                //    view.showMessageFail(error);
             }
         });
 
+    }
+
+
+    @Override
+    public void stopRealTime() {
+        AllProductManage.getInstance().onStopRealTime();
     }
 
     @Override

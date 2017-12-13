@@ -18,13 +18,15 @@ public interface AllProductContract {
         void removeItem(int position);
         void changeItem(int position);
         void changeItemFail(int position);
+        void showNotFoundData();
 
     }
 
     interface Presenter {
         void getProductAll();
-
+        void stopRealTime();
         void buyProduct(ProductRealTimeModel productModel);
+
 
     }
 }

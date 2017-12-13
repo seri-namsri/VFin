@@ -1,4 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 
 apply plugin: 'kotlin-android'
 
@@ -11,7 +26,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0.6"
+        versionName "1.0.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
       //  multiDexEnabled true
@@ -70,8 +85,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
     compile 'jp.wasabeef:glide-transformations:3.0.1'
 
-    //firestore
-  //  compile 'com.google.firebase:firebase-firestore:11.6.0'
+    //firebase
     compile 'com.google.firebase:firebase-messaging:11.6.0'
     compile 'com.google.firebase:firebase-database:11.6.0'
 
@@ -97,7 +111,9 @@ dependencies {
     /*facebook*/
     compile 'com.facebook.android:facebook-android-sdk:4.22.0'
 
-    //compile 'com.android.support:multidex:1.0.1'
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true;
+    }
 
 }
 

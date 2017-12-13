@@ -306,23 +306,16 @@ public class RetrofitUtility {
                      //   .header(Contextor.getInstance().getContext().getString(R.string
                       //  .header_signature),Utilities.Decryptor.byteArrayToHex(baseKey.getBytes()))
                         .header(Contextor.getInstance().getContext().getString(R.string.header_timestamp), "" + Calendar.getInstance().getTimeInMillis())
-                       // .header(Contextor.getInstance().getContext().getString(R.string
-                       // .header_token), SharedPrefs.getInstance(context).getTokenSession())
-                      //  .header(Contextor.getInstance().getContext().getString(R.string
-                      //  .header_member_object_id), SharedPrefs.getInstance(context)
-                      //  .getMemberObjectId())
-                    //    .header(Contextor.getInstance().getContext().getString(R.string
-                     //   .header_language), locale)
-//                        .header(Contextor.getInstance().getContext().getString(R.string
-                      //          .header_imei), Utility.Device.getIMEI1(Contextor.getInstance()
-                     //   .getContext()))
-                      //  .header(Contextor.getInstance().getContext().getString(R.string
-                       // .header_imei2), Utility.Device.getIMEI2(Contextor.getInstance()
-                      //  .getContext()))
-                        .header(Contextor.getInstance().getContext().getString(R.string.header_model), Utility.Device.getDeviceName())
+                        .header(Contextor.getInstance().getContext().getString(R.string
+                        .header_language), "TH")
+                        .header(Contextor.getInstance().getContext().getString(R.string
+                                .header_imei), Utility.getIMEI1(Contextor.getInstance().getContext())+"")
+                        .header(Contextor.getInstance().getContext().getString(R.string
+                        .header_imei2),  Utility.getIMEI2(Contextor.getInstance().getContext())+"")
+                        .header(Contextor.getInstance().getContext().getString(R.string.header_model),Utility.getDeviceName())
                         .header(Contextor.getInstance().getContext().getString(R.string.header_version), String.valueOf(BuildConfig.VERSION_CODE))
-                        .header(Contextor.getInstance().getContext().getString(R.string.header_mac_address), UtilsNetwork.getMACAddress("wlan0"))
-                        .header(Contextor.getInstance().getContext().getString(R.string.header_operator), UtilsNetwork.getSimOperatorName(Contextor.getInstance().getContext()))
+                        .header(Contextor.getInstance().getContext().getString(R.string.header_mac_address),  Utility.getMACAddress("wlan0"))
+                        .header(Contextor.getInstance().getContext().getString(R.string.header_operator), UtilsNetwork.getInstance().getSimOperatorName(Contextor.getInstance().getContext()))
                         .header(Contextor.getInstance().getContext().getString(R.string.header_operator_code), Utility.TelephonyManagers.getInstance(Contextor.getInstance().getContext()).getSimOperator()); // <-- this is the important line
 
                 Request request = requestBuilder.build();
