@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.TimeResponseModel;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
+import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Contextor;
 import com.mvision.vfin.utility.PreferencesMange;
@@ -34,11 +35,28 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private ArrayList<ProductRealTimeModel> productModel;
     private CallBackClick callBackClick;
-
+    private ModelCoinAndBit modelCoinAndBit ;
     ProductAdapter(ArrayList<ProductRealTimeModel> productModel, CallBackClick
             callBackClick) {
         this.productModel = productModel;
         this.callBackClick = callBackClick;
+        AllProductManage.getInstance().getCoin(new Query.CallBackData() {
+            @Override
+            public <T> void onSuccess(T t) {
+                modelCoinAndBit = (ModelCoinAndBit) t;
+            }
+
+            @Override
+            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
+
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
+
 
     }
 
@@ -52,6 +70,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         //  checkClick = 0 ;
         notifyItemChanged(position);
     }
+
+
 
 
     void dataChangeFail(int position) {
@@ -139,15 +159,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 holder.buttonPrice.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        holder.buttonPrice.setEnabled(false);
-                        holder.buttonPrice.setBackgroundResource(R.drawable.button_radius);
-                        holder.buttonPrice.setText("");
-                        holder.progress.setVisibility(View.VISIBLE);
-                        callBackClick.clickItemProductBuy(productModel, Long.parseLong(holder
-                                        .buttonPrice
-                                        .getTag(R.string.key_price)
-                                        .toString())
-                                , holder.buttonPrice.getTag(R.string.key_memberID).toString());
+                        if (modelCoinAndBit.getAbility().current <= 0){
+                            callBackClick.clickItemFail("จำนวนบิตไม่พอ");
+                        }else if (modelCoinAndBit.getWallet() <= productModel.getNextPrice()){
+                            callBackClick.clickItemFail("จำนวนเงินไม่พอ");
+                        }else {
+                            holder.buttonPrice.setEnabled(false);
+                            holder.buttonPrice.setBackgroundResource(R.drawable.button_radius);
+                            holder.buttonPrice.setText("");
+                            holder.progress.setVisibility(View.VISIBLE);
+                            callBackClick.clickItemProductBuy(productModel, Long.parseLong(holder
+                                            .buttonPrice
+                                            .getTag(R.string.key_price)
+                                            .toString())
+                                    , holder.buttonPrice.getTag(R.string.key_memberID).toString());
+                        }
+
                     }
                 });
 
@@ -240,5 +267,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         void clickItemProduct(ProductRealTimeModel productModel);
 
         void clickItemProductBuy(ProductRealTimeModel productModel, long price, String memberIdOwner);
+
+        void clickItemFail(String error);
     }
 }

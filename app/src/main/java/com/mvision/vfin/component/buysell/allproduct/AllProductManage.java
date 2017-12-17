@@ -6,9 +6,9 @@ import com.mvision.vfin.api.request.Apipublic;
 import com.mvision.vfin.api.response.TimeResponseModel;
 import com.mvision.vfin.api.response.TradeBuyResponseModel;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
+import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
-import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.PreferencesMange;
 import com.mvision.vfin.utility.RetrofitUtility;
 import com.google.firebase.database.ChildEventListener;
@@ -42,19 +42,18 @@ public class AllProductManage {
         return instance;
     }
 
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private ArrayList<String> arrayList;
-    private  ChildEventListener childEventListener ;
+    private ChildEventListener childEventListener;
     private DatabaseReference myRef;
+    private DatabaseReference myRefCoins;
+    private ArrayList<ProductRealTimeModel> productRealTimeModels ;
     public void getAllProductFormRealtime(final Query.CallBackDataRealTime callBackData) {
-
         final long[] count = {0};
-        final ArrayList<ProductRealTimeModel> productRealTimeModels = new ArrayList<>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        productRealTimeModels = new ArrayList<>();
         myRef = database.getReference("product");
-
         arrayList = new ArrayList<>();
-
-       childEventListener = new ChildEventListener() {
+        childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 ProductRealTimeModel productRealTimeModel = dataSnapshot.getValue
@@ -73,7 +72,7 @@ public class AllProductManage {
                 try {
                     int position = arrayList.indexOf(dataSnapshot.getKey());
                     if (position >= 0) {
-                        ProductRealTimeModel productRealTimeModel = dataSnapshot.getValue (ProductRealTimeModel.class);
+                        ProductRealTimeModel productRealTimeModel = dataSnapshot.getValue(ProductRealTimeModel.class);
                         productRealTimeModels.set(position, productRealTimeModel);
                         callBackData.onSuccessItemChange(position);
                     }
@@ -85,8 +84,6 @@ public class AllProductManage {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Log.e("onChildRemoved",new Gson().toJson(arrayList));
-                Log.e("onChildRemoved002",dataSnapshot.getKey());
                 int position = arrayList.indexOf(dataSnapshot.getKey());
                 if (position >= 0) {
                     arrayList.remove(position);
@@ -109,7 +106,7 @@ public class AllProductManage {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 count[0] = dataSnapshot.getChildrenCount();
-                if (count[0] == 0){
+                if (count[0] == 0) {
                     callBackData.onFail("");
                 }
                 myRef.addChildEventListener(childEventListener);
@@ -122,14 +119,37 @@ public class AllProductManage {
         });
     }
 
+    private ValueEventListener valueEventListener ;
+    public void getCoin(final Query.CallBackData callBackData){
+        myRefCoins= database.getReference("walletAndAbility/" + PreferencesMange
+                .getInstance().getMemberID());
+         valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Gson gson = new Gson();
+                ModelCoinAndBit modelCoinAndBit = gson.fromJson(gson.toJson(dataSnapshot.getValue
+                        ()),ModelCoinAndBit.class);
+                callBackData.onSuccess(modelCoinAndBit);
+                //   callBackData.onSuccess(dataSnapshot.getValue(ProductRealTimeModel.class));
+                return;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                //   Log.w("getAllProductFormRealtime", "Failed to read value.", error.toException());
+            }
+        };
+        myRefCoins.addValueEventListener(valueEventListener);
+    }
 
 
     public void tradeBuyProduct(final Query.CallBackDataTrade callBackData, final ProductRealTimeModel productRealTimeModel) {
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(com.mvision.vfin.api.request.Product.class)
-                .tradebuy(new TradeBuy(PreferencesMange.getInstance().getMemberID(), productRealTimeModel.getNextPrice(),
-                        productRealTimeModel.getId()))
+                .tradeBuy(new TradeBuy(PreferencesMange.getInstance().getMemberID(), productRealTimeModel.getNextPrice(),
+                        productRealTimeModel.getId() + ""))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<TradeBuyResponseModel>() {
@@ -171,7 +191,7 @@ public class AllProductManage {
 
     }
 
-    public void getTime(final Query.CallBackData callBackData){
+    public void getTime(final Query.CallBackData callBackData) {
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(Apipublic.class)
@@ -203,13 +223,13 @@ public class AllProductManage {
                 });
     }
 
-    public void onStopRealTime(){
-        if (childEventListener !=null)
-        myRef.removeEventListener(childEventListener);
+    public void onStopRealTime() {
+        if (childEventListener != null)
+            myRef.removeEventListener(childEventListener);
+
+        if (valueEventListener != null)
+            myRef.removeEventListener(valueEventListener);
     }
-
-
-
 
 
 }

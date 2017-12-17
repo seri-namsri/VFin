@@ -13,20 +13,17 @@ import java.util.ArrayList;
 public interface AllProductContract {
 
     interface View extends BaseView {
-
         void setUpViewAllProduct(ArrayList<ProductRealTimeModel>allProduct);
         void removeItem(int position);
         void changeItem(int position);
+        void changeItemByCoin(int position,double wallet);
         void changeItemFail(int position);
         void showNotFoundData();
-
     }
 
     interface Presenter {
         void getProductAll();
         void stopRealTime();
         void buyProduct(ProductRealTimeModel productModel);
-
-
     }
 }

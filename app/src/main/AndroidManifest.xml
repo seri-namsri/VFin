@@ -60,6 +60,12 @@
 
         <activity android:name=".component.myproduct.myproductmain.MyProductMainActivity"/>
 
+        <activity android:name=".component.forgotpassword.validateotp.ValidateOtpActivity"/>
+
+        <activity android:name=".component.forgotpassword.confrimpassword.ConfirmPasswordActivity"/>
+
+        <activity android:name=".component.authen.register.RegisterActivity"/>
+
 
         <service
             android:name="com.mvision.vfin.firebase.fcm.MyFirebaseMessagingService">

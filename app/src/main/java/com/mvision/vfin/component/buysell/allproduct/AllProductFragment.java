@@ -119,6 +119,11 @@ public class AllProductFragment extends BaseFragment implements AllProductContra
                             memberIdOwner) {
                         presenter.buyProduct(productModel);
                     }
+
+                    @Override
+                    public void clickItemFail(String error) {
+                        Utility.ShowMsg(getActivity(),error);
+                    }
                 });
                 recyclerView.setAdapter(productAdapter);
             }
@@ -139,6 +144,10 @@ public class AllProductFragment extends BaseFragment implements AllProductContra
     public void changeItem(int position) {
         if (productAdapter != null)
             productAdapter.dataChange(position);
+    }
+
+    @Override
+    public void changeItemByCoin(int position,double wallet) {
     }
 
     @Override

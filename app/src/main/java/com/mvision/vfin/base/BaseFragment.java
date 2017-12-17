@@ -84,7 +84,7 @@ public abstract class BaseFragment extends Fragment implements BaseView{
             if (view instanceof TextView) {
                 TextView tv = (TextView) view;
                 if (tv.getText().equals(getActivity().getTitle())) {
-                    tv.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Regular.otf"));
+                    tv.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Light.otf"));
                     break;
                 }
             }

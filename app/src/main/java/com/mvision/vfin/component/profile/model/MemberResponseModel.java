@@ -20,6 +20,11 @@ public class MemberResponseModel extends BaseRespone{
         public String avatarLink;
         @SerializedName("firstName")
         public String firstName;
+
+        public String getLastName() {
+            return (lastName==null) ? "" : lastName;
+        }
+
         @SerializedName("lastName")
         public String lastName;
         @SerializedName("email")

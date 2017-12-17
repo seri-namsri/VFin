@@ -122,19 +122,21 @@
             <com.mvision.vfin.customview.TextViewWithFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:type ="bold"
                 android:text="ยอดเงินของคุณ"
                 app:name="Kanit" />
 
-            <com.mvision.vfin.customview.ButtonWithFont
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:id="@+id/buttonBit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/margin"
                 android:layout_marginTop="@dimen/margin"
-                android:background="@drawable/button_radius_blue"
                 android:drawableLeft="@drawable/ic_coin"
-                android:drawableRight="@drawable/bt_add_more"
                 android:padding="8dp"
-                android:text="9900099"
-                android:textColor="@android:color/white"
+                android:paddingLeft="@dimen/margin"
+                android:textSize="@dimen/text_big2_size"
+                android:textColor="@color/colorTextGray"
                 app:name="Kanit"
                 app:type="bold" />
         </LinearLayout>
@@ -149,6 +151,7 @@
 
             <com.mvision.vfin.customview.TextViewWithFont
                 android:layout_width="wrap_content"
+                app:type ="bold"
                 android:layout_height="wrap_content"
                 android:text="กดซื้อทันที"
                 app:name="Kanit" />
@@ -157,11 +160,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
-                android:id="@+id/buttonBuy"
+                android:id="@+id/buttonCoin"
+                android:textSize="@dimen/text_big_size"
                 android:background="@drawable/button_radius_green"
                 android:drawableLeft="@drawable/ic_coin"
                 android:padding="@dimen/margin"
-                android:text="99/99"
                 android:textColor="@android:color/white"
                 app:name="Kanit"
                 app:type="bold" />

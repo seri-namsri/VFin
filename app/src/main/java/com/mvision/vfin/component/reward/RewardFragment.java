@@ -1,16 +1,21 @@
 package com.mvision.vfin.component.reward;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.reward.pojo.ModelRewardMerge;
 import com.mvision.vfin.component.reward.pojo.RewardModel;
 import com.mvision.vfin.component.rewarddetail.RewardDetailActivity;
+import com.mvision.vfin.utility.Log;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -66,18 +71,20 @@ public class RewardFragment extends BaseFragment implements RewardContract.View{
     }
 
     @Override
-    public void setUpViewReward(ArrayList<ModelRewardMerge> modelList) {
+    public void setUpViewReward(ArrayList<RewardModel> modelList) {
         try {
-            RewardAdapter rewardAdapter = new RewardAdapter(modelList, new RewardAdapterInside.CallBackClick() {
+            RewardAdapterInside rewardAdapter = new RewardAdapterInside(modelList, new
+                    RewardAdapterInside
+                    .CallBackClick() {
                 @Override
                 public void clickItemReward(RewardModel rewardModel) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("reward_id",rewardModel.getReward_id());
+                    bundle.putParcelable("reward", Parcels.wrap(rewardModel));
                     startActivityFromFragment(RewardDetailActivity.class,bundle);
                 }
             });
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(linearLayoutManager);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+            recyclerView.setLayoutManager(gridLayoutManager);
             recyclerView.setAdapter(rewardAdapter);
         }catch (Exception e){}
 

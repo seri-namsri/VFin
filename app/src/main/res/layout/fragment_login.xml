@@ -25,6 +25,7 @@
 
 
     <com.mvision.vfin.customview.EditTextWithFont
+        android:text="mik3@windowslive.com"
         android:id="@+id/editTextTel"
         android:digits="1234567890_-.qwertyuioplkjhgfdsazxcvbnm.@"
         android:layout_width="match_parent"
@@ -43,6 +44,7 @@
         app:type="bold" />
 
     <com.mvision.vfin.customview.EditTextWithFont
+        android:text="111111"
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:maxLength="255"
@@ -106,6 +108,7 @@
             android:layout_margin="@dimen/margin"
             android:layout_weight="1"
             android:text="ลืมรหัสผ่าน"
+            android:id="@+id/textViewForgotPassword"
             android:textColor="@android:color/white"
             app:name="Kanit"
             app:type="bold" />
@@ -120,6 +123,7 @@
             android:text="สมัครสมาชิก"
             android:textColor="@android:color/white"
             app:name="Kanit"
+            android:id="@+id/textViewRegister"
             app:type="bold" />
 
     </LinearLayout>

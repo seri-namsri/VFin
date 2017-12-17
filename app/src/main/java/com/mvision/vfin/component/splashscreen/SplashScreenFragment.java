@@ -94,6 +94,11 @@ public class SplashScreenFragment extends BaseFragment implements SplashScreenCo
     }
 
     @Override
+    public void showBeforeLoginActivity() {
+
+    }
+
+    @Override
     public void showVersion(String version) {
         textViewVersionCode.setText(version);
     }

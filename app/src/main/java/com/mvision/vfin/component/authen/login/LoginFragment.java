@@ -10,6 +10,8 @@ import android.view.View;
 import com.facebook.FacebookAuthorizationException;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
+import com.mvision.vfin.component.authen.register.RegisterActivity;
+import com.mvision.vfin.component.forgotpassword.requestforgotpassword.RequestForgotPasswordDialogFragment;
 import com.mvision.vfin.component.main.MainActivity;
 import com.mvision.vfin.customview.EditTextWithFont;
 import com.mvision.vfin.utility.Log;
@@ -51,7 +53,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         return fragment;
     }
 
-    @OnClick({R.id.buttonLogin, R.id.buttonLoginWithFacebook})
+    @OnClick({R.id.buttonLogin, R.id.buttonLoginWithFacebook, R.id.textViewForgotPassword, R.id.textViewRegister})
     public void onClick(View view) {
 
         switch (view.getId()) {
@@ -64,15 +66,31 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 break;
             case R.id.buttonLoginWithFacebook:
                 if (checkReadPhoneStatPermission()) {
-                    ckickFaceBook();
+                    clickFaceBook();
                 } else {
                     setUpLocationPermission(FACEBOOK);
                 }
+                break;
+            case R.id.textViewForgotPassword:
+                showForgotPassword();
+                break;
+            case R.id.textViewRegister:
+                gotoRegister();
                 break;
         }
 
 
     }
+
+    private void showForgotPassword() {
+        RequestForgotPasswordDialogFragment requestForgotPasswordDialogFragment = RequestForgotPasswordDialogFragment.newInstance();
+        requestForgotPasswordDialogFragment.show(getFragmentManager(), "dialog");
+    }
+
+    private void gotoRegister() {
+        startActivityFromFragment(RegisterActivity.class, null);
+    }
+
 
     private void clickVfin() {
         presenter.getLogin(editTextTel.getTextDataNotNull(getActivity()
@@ -82,7 +100,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     }
 
 
-    private void ckickFaceBook() {
+    private void clickFaceBook() {
         setupFacebook();
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList
                 ("public_profile", "user_friends", "email"));
@@ -117,11 +135,11 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
             @Override
             public void onError(FacebookException error) {
                 if (error instanceof FacebookAuthorizationException) {
-                if (AccessToken.getCurrentAccessToken() != null) {
-                    LoginManager.getInstance().logOut();
+                    if (AccessToken.getCurrentAccessToken() != null) {
+                        LoginManager.getInstance().logOut();
+                    }
                 }
-            }
-                Log.e("FacebookException",error.toString());
+                Log.e("FacebookException", error.toString());
                 //   UtilsLog.error(TAG, "onError " + error);
 //                new SweetAlertDialog(activity, SweetAlertDialog.WARNING_TYPE)
 //                        .setTitleText(getResources().getString(R.string.title_warning))
@@ -133,7 +151,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     private void setUpLocationPermission(int code) {
         if (shouldAskPermission()) {
-            String[] perms = {Manifest.permission.READ_PHONE_STATE,Manifest.permission
+            String[] perms = {Manifest.permission.READ_PHONE_STATE, Manifest.permission
                     .ACCESS_FINE_LOCATION};
 
             try {
@@ -151,15 +169,14 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         if (requestCode == VFIN) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 clickVfin();
-            }else {
-                Utility.ShowMsg(getActivity(),"กรุณาเปิด Permissions");
+            } else {
+                Utility.ShowMsg(getActivity(), "กรุณาเปิด Permissions");
             }
         } else if (requestCode == FACEBOOK) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                   ) {
-                ckickFaceBook();
-            }else {
-                Utility.ShowMsg(getActivity(),"กรุณาเปิด Permissions");
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                clickFaceBook();
+            } else {
+                Utility.ShowMsg(getActivity(), "กรุณาเปิด Permissions");
             }
         }
 

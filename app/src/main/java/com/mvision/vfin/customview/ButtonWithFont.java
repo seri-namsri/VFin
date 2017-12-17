@@ -20,7 +20,7 @@ public class ButtonWithFont extends android.support.v7.widget.AppCompatButton {
     private int FONT_KANIT_REGULAR = 3;
     private int fontType;
     private int fontName;
-    private Typeface arundina, Kanit, Kanit_regular;
+    private Typeface  Kanit;
 
     public ButtonWithFont(Context context) {
         super(context);
@@ -44,13 +44,8 @@ public class ButtonWithFont extends android.support.v7.widget.AppCompatButton {
             fontName = a.getInt(R.styleable.font_name, defaultDimension);
             fontType = a.getInt(R.styleable.font_type, defaultDimension);
             a.recycle();
-            if (fontName == FONT_ARUNDINA) {
-                setFontType(arundina);
-            } else if (fontName == FONT_KANIT) {
                 setFontType(Kanit);
-            }else if (fontName == FONT_KANIT_REGULAR) {
-                setFontType(Kanit_regular);
-            }
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -69,8 +64,6 @@ public class ButtonWithFont extends android.support.v7.widget.AppCompatButton {
 
 
     private void getFont(Context context){
-        arundina = Typeface.createFromAsset(context.getAssets(), "fonts/Arundina.ttf");
         Kanit = Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Light.otf");
-        Kanit_regular = Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Regular.otf");
     }
 }

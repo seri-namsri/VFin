@@ -21,7 +21,7 @@ public class EditTextWithFont extends android.support.v7.widget.AppCompatEditTex
     private int FONT_ROBOTO = 3;
     private int fontType;
     private int fontName;
-    private Typeface arundina, Kanit, Kanit_regular, roboto;
+    private Typeface Kanit;
 
     public EditTextWithFont(Context context) {
         super(context);
@@ -47,13 +47,8 @@ public class EditTextWithFont extends android.support.v7.widget.AppCompatEditTex
             fontName = a.getInt(R.styleable.font_name, defaultDimension);
             fontType = a.getInt(R.styleable.font_type, defaultDimension);
             a.recycle();
-            if (fontName == FONT_ARUNDINA) {
-                setFontType(arundina);
-            } else if (fontName == FONT_KANIT) {
-                setFontType(Kanit);
-            } else if (fontName == FONT_KANIT_REGULAR) {
-                setFontType(Kanit_regular);
-            }
+            setFontType(Kanit);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,18 +68,18 @@ public class EditTextWithFont extends android.support.v7.widget.AppCompatEditTex
 
 
     private void getFont(Context context) {
-        arundina = Typeface.createFromAsset(context.getAssets(), "fonts/Arundina.ttf");
+        //  arundina = Typeface.createFromAsset(context.getAssets(), "fonts/Arundina.ttf");
         Kanit = Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Light.otf");
-        Kanit_regular = Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Regular.otf");
+        //   Kanit_regular = Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Regular.otf");
         // roboto = Typeface.createFromAsset(context.getAssets(), "fonts/RobotoSlab-Regular.otf");
     }
 
     public String getTextDataNotNull(String msg) {
 
         if (getText().toString().isEmpty()) {
-            if (msg == null){
+            if (msg == null) {
                 setError("กรุณากรอกข้อมูลให้ครบ");
-            }else {
+            } else {
                 setError(msg);
             }
 
@@ -93,7 +88,6 @@ public class EditTextWithFont extends android.support.v7.widget.AppCompatEditTex
 
         return getText().toString();
     }
-
 
 
 }

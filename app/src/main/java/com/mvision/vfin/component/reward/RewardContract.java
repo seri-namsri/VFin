@@ -2,6 +2,7 @@ package com.mvision.vfin.component.reward;
 
 import com.mvision.vfin.base.BaseView;
 import com.mvision.vfin.component.reward.pojo.ModelRewardMerge;
+import com.mvision.vfin.component.reward.pojo.RewardModel;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public interface RewardContract {
 
     interface View extends BaseView {
 
-        void setUpViewReward(ArrayList<ModelRewardMerge> modelList);
+        void setUpViewReward(ArrayList<RewardModel> modelList);
     }
 
     interface Presenter {

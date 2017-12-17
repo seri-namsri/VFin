@@ -23,6 +23,23 @@ public class RewardPresenter extends Presenter<RewardContract.View> implements R
     @Override
     public void getReward() {
         view.showLoading();
+        RewardManage.getInstance().getRewardList(new Query.CallBackData() {
+            @Override
+            public <T> void onSuccess(T t) {
+                view.hideLoading();
+                view.setUpViewReward((ArrayList<RewardModel>) t);
+            }
+
+            @Override
+            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
+
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
 
     }
 }

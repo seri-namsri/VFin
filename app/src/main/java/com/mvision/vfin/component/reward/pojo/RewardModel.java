@@ -1,5 +1,7 @@
 package com.mvision.vfin.component.reward.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
@@ -9,46 +11,34 @@ import java.util.ArrayList;
  */
 @Parcel
 public class RewardModel {
-    public String getName() {
-        return name;
-    }
-
+    @SerializedName("productCode")
+    public String productCode;
+    @SerializedName("quantity")
+    public int quantity;
+    @SerializedName("priorityWeight")
+    public int priorityWeight;
+    @SerializedName("currentPrice")
+    public int currentPrice;
+    @SerializedName("name")
     public String name;
-
-    public String getCat_id() {
-        return cat_id;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public String getFull_detail() {
-        return full_detail;
-    }
-
-    public String getReward_id() {
-        return reward_id;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public ArrayList<String> getImage_product() {
-        return image_product;
-    }
-
-    public String cat_id;
-
-    public String getCat_name() {
-        return cat_name;
-    }
-
-    public String cat_name;
-    public String detail;
-    public String full_detail;
-    public String reward_id ;
-    public int price ;
-    public ArrayList<String>image_product;
+    @SerializedName("mainImage")
+    public String imgUrl;
+    @SerializedName("id")
+    public String id;
+    @SerializedName("languageCode")
+    public String languageCode;
+    @SerializedName("briefDetails")
+    public String briefDetails;
+    @SerializedName("fullDetails")
+    public String fullDetails;
+    @SerializedName("marketPrice")
+    public int marketPrice;
+    @SerializedName("vatPercent")
+    public int vatPercent;
+    @SerializedName("priceUnit")
+    public String priceUnit;
+    @SerializedName("weight")
+    public String weight;
+    @SerializedName("images")
+    public ArrayList<String> images;
 }

@@ -58,6 +58,8 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     FrameLayout framLayoutLevel;
     @BindView(R.id.buttonViewProfile)
     Button buttonViewProfile;
+    @BindView(R.id.buttonImageReward)
+    Button buttonImageReward;
     ProfilePresenter presenter;
 
     public static ProfileFragment newInstance() {
@@ -114,12 +116,14 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
         try {
             if (perCentView != null) {
                 perCentView.setC("0.4");
-                textViewName.setText(member.result.firstName);
+                textViewName.setText(member.result.firstName + " "+ member.result.getLastName() );
                 textViewEmail.setText(member.result.email);
                 textViewLevel.setText("เลเวลของคุณคือ "+member.result.memberLevel+"");
                 textViewLevelDetail.setText("อีก 2,502 คะแนน จะเลื่อนขั้นเป็น เลเวล 5");
                 imageViewProfile.bringToFront();
                 framLayout.setVisibility(View.VISIBLE);
+                perCentView.setVisibility(View.VISIBLE);
+                buttonImageReward.setVisibility(View.VISIBLE);
                 framLayoutLevel.setVisibility(View.VISIBLE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     imageViewProfile.setElevation(10);

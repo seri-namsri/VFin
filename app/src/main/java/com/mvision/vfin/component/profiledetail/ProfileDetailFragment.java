@@ -115,7 +115,7 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
         try {
             setUptoolBar();
             textViewEmail.setText(member.result.email + "");
-            textViewName.setText(member.result.firstName+ " "+ member.result.lastName);
+            textViewName.setText(member.result.firstName+ " "+ member.result.getLastName());
             textViewTel.setText(member.result.mobilePhoneNo);
             textViewBirdDay.setText(member.result.dateOfBirth);
             if (member.result.personalId != null){

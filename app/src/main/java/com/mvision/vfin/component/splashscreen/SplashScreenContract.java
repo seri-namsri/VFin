@@ -13,6 +13,8 @@ public interface SplashScreenContract {
 
         void showLoginActivity();
 
+        void showBeforeLoginActivity();
+
         void showVersion(String version);
 
 

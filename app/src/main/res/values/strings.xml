@@ -10,6 +10,7 @@
     <string name="activity_ads">ดูโฆษณา\nรับ Vin Point</string>
     <string name="activity_install">โหลดแอปพลิเคชั่น\nรับ Vin Point</string>
     <string name="activity_work">ทำงาน\nรับ Vin Point</string>
+    <string name="OTP"><u>กดขอ OTP อีกครั้ง</u></string>
 
     <string name="key_price">key_price</string>
     <string name="key_memberID">key_memberID</string>

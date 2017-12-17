@@ -54,3 +54,4 @@
 
 # VFIN
 -keep  class com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel { *; }
+-keep  class com.mvision.vfin.component.productdetail.pojo.MemberProductHistory { *; }

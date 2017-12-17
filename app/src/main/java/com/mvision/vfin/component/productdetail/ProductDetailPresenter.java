@@ -19,6 +19,7 @@ import org.parceler.Parcels;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 
@@ -31,6 +32,7 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
 
     private ProductDetailContract.View view;
     private ProductRealTimeModel productModel;
+    private int statusBuy = -1;
 
     public ProductDetailPresenter(ProductDetailContract.View view) {
         this.view = view;
@@ -50,13 +52,12 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
 
     @Override
     public void getMemberProductHistory() {
-        ProductDetailManage.getInstance(callBackMemberData).getMemberProductHistory(productModel.id+"");
+        ProductDetailManage.getInstance(callBackMemberData).getMemberProductHistory(productModel.id + "");
     }
 
     @Override
     public void getProductDetailAlert() {
-
-        //   view.setUpViewProductDetailDetail(productModel.getFull_detail());
+           view.setUpViewProductDetailDetail(productModel.fullDetails);
     }
 
     @Override
@@ -91,7 +92,7 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
         }
 
         @Override
-        public void getMemberProductHistory(ArrayList<MemberProductHistory> memberProductHistories) {
+        public void getMemberProductHistory(List<MemberProductHistory> memberProductHistories) {
             view.setUpViewMemberProductHistory(memberProductHistories);
         }
     };
@@ -104,10 +105,13 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
                 TimeResponseModel timeResponseModel = (TimeResponseModel) t;
                 view.buttonLoadingHide();
                 if (productRealTimeModel.getExpiredTime() < timeResponseModel.result) {
-                    if (checkItemOwner(productRealTimeModel.getOwnerCode()))
+                    if (checkItemOwner(productRealTimeModel.getOwnerCode())) {
                         view.setTimeOutMyItem();
-                    else
+                        statusBuy = 0;
+                    } else {
+                        statusBuy = 1;
                         view.setTimeOut();
+                    }
                 } else if (checkItemOwner(productRealTimeModel.ownerCode)) {
                     timeCountDown(productRealTimeModel.expiredTime, timeResponseModel.result);
                     view.setSell(productRealTimeModel);
@@ -123,6 +127,7 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
 
             @Override
             public void onFail(String error) {
+                view.showMessageFail(error);
             }
 
         });
@@ -156,10 +161,13 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
             }
 
             public void onFinish() {
-                if (checkItemOwner(productModel.getOwnerCode()))
+                if (checkItemOwner(productModel.getOwnerCode())) {
                     view.setTimeOutMyItem();
-                else
+                    statusBuy = 0;
+                } else {
+                    statusBuy = 1;
                     view.setTimeOut();
+                }
             }
         }.start();
     }
@@ -175,28 +183,36 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
 
     @Override
     public void buyProduct() {
-        view.buttonLoadingShow();
-        AllProductManage.getInstance().tradeBuyProduct(new Query.CallBackDataTrade() {
-            @Override
-            public <T> void onSuccess(T t) {
-              //  view.buttonLoadingHide();
-            }
+        if (statusBuy <0){
+            view.buttonLoadingShow();
+            AllProductManage.getInstance().tradeBuyProduct(new Query.CallBackDataTrade() {
+                @Override
+                public <T> void onSuccess(T t) {
+                    //  view.buttonLoadingHide();
+                }
 
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
+                @Override
+                public <T> void onSuccessAll(ArrayList<T> tArrayList) {
 
-            }
+                }
 
-            @Override
-            public void onFail(String error) {
+                @Override
+                public void onFail(String error) {
+                    view.showMessageFail(error);
+                    checkDataStatusTrade(productModel);
+                }
 
-            }
+                @Override
+                public void onItemFail(int position) {
 
-            @Override
-            public void onItemFail(int position) {
+                }
+            }, productModel);
+        }else  if (statusBuy == 0){
+            view.gotoMyProduct();
+        }else if (statusBuy == 1 ){
+            view.gotoProduct();
+        }
 
-            }
-        }, productModel);
 
     }
 

@@ -131,7 +131,7 @@ public class MainActivity extends BaseActivity implements MainContract.View{
     }
 
     public void changeTabsFont(TabLayout layoutWithFont) {
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Kanit-Regular.otf");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Kanit-Light.otf");
         ViewGroup vg = (ViewGroup) layoutWithFont.getChildAt(0);
         int tabsCount = vg.getChildCount();
         for (int j = 0; j < tabsCount; j++) {

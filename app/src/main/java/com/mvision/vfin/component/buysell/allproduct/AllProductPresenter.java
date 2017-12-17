@@ -1,10 +1,9 @@
 package com.mvision.vfin.component.buysell.allproduct;
 
-import com.mvision.vfin.api.response.TimeResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
+import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.firebase.Firestore.Query;
-
 import java.util.ArrayList;
 
 /**
@@ -22,6 +21,7 @@ public class AllProductPresenter extends Presenter<AllProductContract.View> impl
     @Override
     public void getProductAll() {
         view.showLoading();
+
         AllProductManage.getInstance().getAllProductFormRealtime(new Query.CallBackDataRealTime() {
             @Override
             public <T> void onSuccess(T t) {
@@ -64,28 +64,29 @@ public class AllProductPresenter extends Presenter<AllProductContract.View> impl
     @Override
     public void buyProduct(final ProductRealTimeModel productModel) {
 
-        AllProductManage.getInstance().tradeBuyProduct(new Query.CallBackDataTrade() {
-            @Override
-            public <T> void onSuccess(T t) {
+            AllProductManage.getInstance().tradeBuyProduct(new Query.CallBackDataTrade() {
+                @Override
+                public <T> void onSuccess(T t) {
 
-            }
+                }
 
-            @Override
-            public <T> void onSuccessAll(ArrayList<T> tArrayList) {
+                @Override
+                public <T> void onSuccessAll(ArrayList<T> tArrayList) {
 
-            }
+                }
 
-            @Override
-            public void onFail(String error) {
+                @Override
+                public void onFail(String error) {
 
-                view.showMessageFail(error);
-            }
+                    view.showMessageFail(error);
+                }
 
-            @Override
-            public void onItemFail(int position) {
-                view.changeItemFail(position);
-            }
-        },productModel);
+                @Override
+                public void onItemFail(int position) {
+                    view.changeItemFail(position);
+                }
+            },productModel);
+
 
     }
 

@@ -22,6 +22,10 @@ public class ProductRealTimeModel {
     public String name;
     @SerializedName("mainImage")
     public String mainImage;
+    @SerializedName("briefDetails")
+    public String briefDetails;
+    @SerializedName("fullDetails")
+    public String fullDetails;
     @SerializedName("nextPrice")
     public int nextPrice;
     @SerializedName("id")

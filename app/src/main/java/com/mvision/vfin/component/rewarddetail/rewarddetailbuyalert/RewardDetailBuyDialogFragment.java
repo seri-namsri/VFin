@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mvision.vfin.R;
+import com.mvision.vfin.api.response.TradeBuyResponseModel;
 import com.mvision.vfin.base.BaseDialogFragment;
 import com.mvision.vfin.component.reward.pojo.RewardModel;
 
@@ -49,8 +50,13 @@ public class RewardDetailBuyDialogFragment extends BaseDialogFragment implements
 
     @Override
     public void showRewardDetailBuy(RewardModel rewardModel) {
-        textViewName.setText(rewardModel.getName());
-        textViewPrice.setText(rewardModel.getPrice() + "");
+        textViewName.setText(rewardModel.name);
+        textViewPrice.setText(rewardModel.currentPrice + "");
+    }
+
+    @Override
+    public void tradeProductSuccess(TradeBuyResponseModel rewardModel) {
+
     }
 
     @Override
@@ -76,8 +82,11 @@ public class RewardDetailBuyDialogFragment extends BaseDialogFragment implements
                 dismiss();
                 break;
             case R.id.buttonOk:
+                presenter.tradeProduct();
                 dismiss();
                 break;
         }
     }
+
+
 }

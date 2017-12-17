@@ -21,11 +21,13 @@ import com.mvision.vfin.component.buysell.allproduct.pojo.MemberBuy;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductModel;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
+import com.mvision.vfin.component.myproduct.myproductmain.MyProductMainActivity;
 import com.mvision.vfin.component.productdetail.alertdetail.AlertDetailFragment;
 import com.mvision.vfin.component.productdetail.pojo.MemberProductHistory;
 import com.mvision.vfin.utility.Contextor;
 import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.PreferencesMange;
+import com.mvision.vfin.utility.Utility;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,7 +90,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     public void showMessageFail(String msg) {
-
+        Utility.ShowMsg(getActivity(),msg);
     }
 
     @Override
@@ -123,15 +125,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     public void setUpViewProductDetail(ProductRealTimeModel productDetail) {
 
         textViewTitle.setText(productDetail.getName());
-        textViewDetail.setText("");
+        textViewDetail.setText(productDetail.briefDetails);
 
         ProductDetailPager productDetailPager = new ProductDetailPager(productDetail
                 .getImages());
         viewPager.setAdapter(productDetailPager);
         indicator.setViewPager(viewPager);
 
-
-        //  imageProduct = productDetail.getImage_product().get(0);
         priceMarket.setText("ราคาตลาด\n" + productDetail.getMarketPrice());
         textViewNameOwner.setText(productDetail.getOwnerName());
         CropCircleTransformation multi = new CropCircleTransformation();
@@ -140,27 +140,10 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 .into(imageViewOwner);
         setUpBottomSheet();
 
-       /* if (productDetail.getMember_buy()!=null){
-            ProductDetailAdapter productDetailAdapter = new ProductDetailAdapter(
-                    getMember_buy_sub(productDetail.getMember_buy()));
-
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(linearLayoutManager);
-            recyclerView.setAdapter(productDetailAdapter);
-
-
-
-        }else {
-            buttonCoin.setText(productDetail.getPrice() + "");
-            buttonCoin.setTag(productDetail.getPrice() + "");
-        }
-
-      //  priceMarket.setText("ราคาตลาด\n"+productDetail.getPrice_market());*/
-
     }
 
     @Override
-    public void setUpViewMemberProductHistory(ArrayList<MemberProductHistory> memberProductHistory) {
+    public void setUpViewMemberProductHistory(List<MemberProductHistory> memberProductHistory) {
         ProductDetailAdapter productDetailAdapter = new ProductDetailAdapter(memberProductHistory);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -188,17 +171,17 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void setTimeOut() {
         buttonCoin.setText("หมดเวลา");
+        buttonCoin.setEnabled(true);
         textViewTimeProduct.setText("หมดเวลา");
-        buttonCoin.setEnabled(false);
         buttonCoin.setBackgroundResource(R.drawable.button_radius);
     }
 
     @Override
     public void setTimeOutMyItem() {
         buttonCoin.setText("สินค้าเป็นของคุณ");
+        buttonCoin.setEnabled(true);
         textViewTimeProduct.setText("หมดเวลา");
-        buttonCoin.setEnabled(false);
-        buttonCoin.setBackgroundResource(R.drawable.button_radius);
+        buttonCoin.setBackgroundResource(R.drawable.button_radius_green);
     }
 
     @Override
@@ -227,6 +210,16 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     public void buttonLoadingHide() {
         progress.setVisibility(View.GONE);
 
+    }
+
+    @Override
+    public void gotoMyProduct() {
+        startActivityFromFragment(MyProductMainActivity.class,null);
+    }
+
+    @Override
+    public void gotoProduct() {
+        getActivity().finish();
     }
 
     private BottomSheetBehavior mBottomSheetBehavior;

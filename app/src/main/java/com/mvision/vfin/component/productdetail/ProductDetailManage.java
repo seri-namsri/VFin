@@ -19,6 +19,7 @@ import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.PreferencesMange;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by enter_01 on 11/7/2017 AD.
@@ -98,21 +99,26 @@ public class ProductDetailManage {
     public interface CallBackMemberData {
         void memberData(ProductRealTimeModel productRealTimeModel);
         void getCoin(ModelCoinAndBit modelCoinAndBit);
-        void getMemberProductHistory(ArrayList<MemberProductHistory> memberProductHistories);
+        void getMemberProductHistory(List<MemberProductHistory> memberProductHistories);
     }
 
     public void getMemberProductHistory(String productId){
-        final ArrayList<MemberProductHistory>memberProductHistories = new ArrayList<>();
-        myRefProductHistory = database.getReference("memberProductHistory/" + productId)
-                .limitToFirst(5).getRef();
+        final List<MemberProductHistory> memberProductHistories = new ArrayList<>();
+
+        myRefProductHistory = database.getReference("memberProductHistory/" + productId);
         valueEventListenerProductHistory = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                MemberProductHistory memberProductHistory = dataSnapshot.getValue
-                        (MemberProductHistory.class);
-                memberProductHistories.add(memberProductHistory);
-                if (memberProductHistories.size() >=1)
-                    callBackMemberData.getMemberProductHistory(memberProductHistories);
+                int index = 0 ;
+                MemberProductHistory memberProductHistory = dataSnapshot.getValue(MemberProductHistory.class);
+                memberProductHistories.add(0,memberProductHistory);
+                if (memberProductHistories.size() >= 5)
+                    index = 5;
+                else
+                    index = memberProductHistories.size();
+
+                    callBackMemberData.getMemberProductHistory(memberProductHistories.subList(0,
+                            index));
             }
 
             @Override
@@ -135,7 +141,8 @@ public class ProductDetailManage {
 
             }
         };
-        myRefProductHistory.addChildEventListener(valueEventListenerProductHistory);
+        myRefProductHistory.limitToLast(5).addChildEventListener(valueEventListenerProductHistory);
+
     }
 
 }

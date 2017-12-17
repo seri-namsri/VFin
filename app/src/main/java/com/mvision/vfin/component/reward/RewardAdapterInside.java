@@ -38,10 +38,10 @@ public class RewardAdapterInside extends RecyclerView.Adapter<RewardAdapterInsid
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.textViewName.setText(rewardModelArrayList.get(position).getName());
-        holder.textViewCoin.setText(rewardModelArrayList.get(position).getPrice()+ "");
+        holder.textViewName.setText(rewardModelArrayList.get(position).name);
+        holder.textViewCoin.setText(rewardModelArrayList.get(position).currentPrice+ "");
         Glide.with(Contextor.getInstance().getContext()).load(rewardModelArrayList.get(position)
-                .getImage_product().get(0))
+                .imgUrl)
                 .into(holder.imageViewProduct);
         holder.buttonDetail.setOnClickListener(new View.OnClickListener() {
             @Override

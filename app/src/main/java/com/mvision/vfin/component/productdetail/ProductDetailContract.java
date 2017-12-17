@@ -7,6 +7,7 @@ import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.component.productdetail.pojo.MemberProductHistory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by enter_01 on 11/7/2017 AD.
@@ -17,7 +18,7 @@ public interface ProductDetailContract {
     interface View extends BaseView {
 
         void setUpViewProductDetail(ProductRealTimeModel productRealTimeModel);
-        void setUpViewMemberProductHistory(ArrayList<MemberProductHistory>memberProductHistory);
+        void setUpViewMemberProductHistory(List<MemberProductHistory> memberProductHistory);
         void setUpViewProductDetailDetail(String detail);
         void setUpViewCoin(ModelCoinAndBit modelCoinAndBit);
         void startTime(String time);
@@ -27,6 +28,8 @@ public interface ProductDetailContract {
         void setBuy(ProductRealTimeModel productRealTimeModel);
         void buttonLoadingShow();
         void buttonLoadingHide();
+        void gotoMyProduct();
+        void gotoProduct();
     }
 
     interface Presenter {

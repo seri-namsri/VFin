@@ -1,6 +1,7 @@
 package com.mvision.vfin.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -48,7 +49,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements BaseV
 
     }
 
-
+    protected void startActivityFromFragment(Class classN, Bundle data) {
+        Intent intent = new Intent(getActivity(), classN);
+        if (data != null)
+            intent.putExtras(data);
+        startActivity(intent);
+    }
 
 
 

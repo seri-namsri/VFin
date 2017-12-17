@@ -29,9 +29,9 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class ProductDetailAdapter extends  RecyclerView.Adapter<ProductDetailAdapter.ViewHolder> {
 
-    private ArrayList<MemberProductHistory>memberProductHistory ;
+    private List<MemberProductHistory>memberProductHistory ;
 
-    public ProductDetailAdapter(ArrayList<MemberProductHistory> memberProductHistory){
+    public ProductDetailAdapter(List<MemberProductHistory> memberProductHistory){
          this.memberProductHistory = memberProductHistory ;
     }
 
