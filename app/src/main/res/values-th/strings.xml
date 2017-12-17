@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">V-fin</string>
+    <string name="tab_profile">โปรไฟล์</string>
+    <string name="tab_message">ข้อความ</string>
+    <string name="tab_buysell">ซื้อ/ขาย</string>
+    <string name="tab_activity">กิจกรรม</string>
+    <string name="tab_reward">รางวัล</string>
+    <string name="fatal_error">Fatal error : </string>
+    <string name="activity_poll">ทำแบบทดสอบ\nรับ Vin Point</string>
+    <string name="activity_ads">ดูโฆษณา\nรับ Vin Point</string>
+    <string name="activity_install">โหลดแอปพลิเคชั่น\nรับ Vin Point</string>
+    <string name="activity_work">ทำงาน\nรับ Vin Point</string>
+    <string name="OTP"><u>กดขอ OTP อีกครั้ง</u></string>
+
+    <string name="key_price">key_price</string>
+    <string name="key_memberID">key_memberID</string>
+
+    <!--menu-->
+    <string name="menu_add_address">menu_add_address</string>
+
+    <!--Login-->
+    <string name="text_forgot"><u>ลืมรหัสผ่าน</u></string>
+    <string name="text_Register"><u>สมัครสมาชิก</u></string>
+    <string name="text_button">เข้าสู่ระบบ</string>
+    <string name="edittext_user">อีเมล หรือ เบอร์โทร</string>
+    <string name="edittext_password">รหัสผ่าน</string>
+    <string name="text_or">หรือ</string>
+
+
+    <!--profile-->
+    <string name="profile_buttonViewProfile">ข้อมูลส่วนตัว</string>
+    <string name="profile_buttonLevelDetail">รายละเอียดเลเวล</string>
+    <string name="profile_textViewLevel">เลเวลของคุณคือ</string>
+
+    <!--ProfileMoreAdapter-->
+    <string name="ProfileMoreAdapter_0">ภารกิจ</string>
+    <string name="ProfileMoreAdapter_1">ประวัติคะแนน</string>
+    <string name="ProfileMoreAdapter_2">สินค้าของฉัน</string>
+    <string name="ProfileMoreAdapter_3">คำถามที่พบบ่อย</string>
+    <string name="ProfileMoreAdapter_4">ตั้งค่า</string>
+    <string name="ProfileMoreAdapter_5">ออกจากระบบ</string>
+
+    <!--MyProductMainPager-->
+    <string name="MyProductMainPager_0">สินค้ารอดำเนินการ</string>
+    <string name="MyProductMainPager_1">สินค้ารอจ่ายค่าจัดส่ง</string>
+    <string name="MyProductMainPager_2">สินค้าเตรียมจัดส่ง</string>
+    <string name="MyProductMainPager_3">สินค้าที่ต้องได้รับ</string>
+
+    <!--MyProductMainFragment-->
+    <string name="MyProductMainFragmentTitle">สินค้าของฉัน</string>
+
+    <string name="text_button_ok">ตกลง</string>
+
+</resources>

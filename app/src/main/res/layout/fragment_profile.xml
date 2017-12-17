@@ -89,7 +89,7 @@
                         android:paddingLeft="@dimen/margin"
                         android:paddingRight="@dimen/margin"
                         android:layout_marginBottom="@dimen/margin"
-                        android:text="ข้อมูลส่วนตัว"
+                        android:text="@string/profile_buttonViewProfile"
                         android:textColor="@color/colorOrangeText"
                         app:name="Kanit"
                         app:type="bold" />
@@ -188,7 +188,7 @@
                         android:drawableLeft="@drawable/ic_medal_level_16"
                         android:paddingLeft="@dimen/margin"
                         android:paddingRight="@dimen/margin"
-                        android:text="รายละเอียดเลเวล"
+                        android:text="@string/profile_buttonLevelDetail"
                         android:textColor="@color/colorOrangeText"
                         app:name="Kanit"
                         app:type="bold" />

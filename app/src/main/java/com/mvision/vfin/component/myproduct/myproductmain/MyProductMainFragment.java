@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
+import com.mvision.vfin.utility.Contextor;
 
 import butterknife.BindView;
 
@@ -92,7 +93,8 @@ public class MyProductMainFragment extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         applyFontForToolbarTitle(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("สินค้าของฉัน");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Contextor.getInstance
+                ().getContext().getResources().getString(R.string.MyProductMainFragmentTitle));
     }
 
 }

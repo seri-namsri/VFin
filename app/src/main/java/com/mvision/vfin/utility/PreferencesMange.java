@@ -33,4 +33,12 @@ public class PreferencesMange {
     public void removeTokenSession(){
          Utility.removeSavedPreferences(Contextor.getInstance().getContext(),"tokenSession");
     }
+
+    public void setLanguage(String la){
+         Utility.savePreferences(Contextor.getInstance().getContext(),"language",la);
+    }
+
+    public String getLanguage(){
+       return Utility.loadSavedPreferences(Contextor.getInstance().getContext(),"language");
+    }
 }

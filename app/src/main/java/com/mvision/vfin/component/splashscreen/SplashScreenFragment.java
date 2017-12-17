@@ -7,6 +7,9 @@ import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.authen.login.LoginActivity;
 import com.mvision.vfin.component.main.MainActivity;
+import com.mvision.vfin.component.splashscreen.dialoglanguage.DialogLanguageDialogFragment;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 
@@ -34,6 +37,11 @@ public class SplashScreenFragment extends BaseFragment implements SplashScreenCo
     @Override
     public void showLoading() {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -94,6 +102,19 @@ public class SplashScreenFragment extends BaseFragment implements SplashScreenCo
     }
 
     @Override
+    public void showSelectLanguage() {
+        DialogLanguageDialogFragment editNameDialogFragment = DialogLanguageDialogFragment
+                .newInstance(callBackLanguage);
+        editNameDialogFragment.show(getFragmentManager(), "dialog");
+    }
+    private CallBackLanguage callBackLanguage = new CallBackLanguage() {
+        @Override
+        public void onClickSuccess() {
+            presenter.getCheckLanguage();
+        }
+    };
+
+    @Override
     public void showBeforeLoginActivity() {
 
     }
@@ -103,5 +124,14 @@ public class SplashScreenFragment extends BaseFragment implements SplashScreenCo
         textViewVersionCode.setText(version);
     }
 
+    @Override
+    public void selectLangSuccess() {
+
+    }
+
+
+    public interface CallBackLanguage{
+        void onClickSuccess();
+    }
 
 }

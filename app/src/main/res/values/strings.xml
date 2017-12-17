@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">V-fin</string>
-    <string name="tab_profile">โปรไฟล์</string>
-    <string name="tab_message">ข้อความ</string>
-    <string name="tab_buysell">ซื้อ/ขาย</string>
-    <string name="tab_activity">กิจกรรม</string>
-    <string name="tab_reward">รางวัล</string>
+    <string name="tab_profile">Profile</string>
+    <string name="tab_message">Message</string>
+    <string name="tab_buysell">Buy/Sell</string>
+    <string name="tab_activity">Activity</string>
+    <string name="tab_reward">Reward</string>
     <string name="fatal_error">Fatal error : </string>
     <string name="activity_poll">ทำแบบทดสอบ\nรับ Vin Point</string>
     <string name="activity_ads">ดูโฆษณา\nรับ Vin Point</string>
@@ -18,100 +18,37 @@
     <!--menu-->
     <string name="menu_add_address">menu_add_address</string>
 
+    <!--Login-->
+    <string name="text_forgot"><u>Forgot Password</u></string>
+    <string name="text_Register"><u>Register</u></string>
+    <string name="text_button">Login</string>
+    <string name="edittext_user">Email or Phone</string>
+    <string name="edittext_password">password</string>
+    <string name="text_or">or</string>
 
 
+    <!--profile-->
+    <string name="profile_buttonViewProfile"><u>Profile Detail</u></string>
+    <string name="profile_buttonLevelDetail"><u>Level Detail</u></string>
+    <string name="profile_textViewLevel">Level of you</string>
 
-    <!-- -->
-    <string name="pref_title_general">General</string>
+    <!--ProfileMoreAdapter-->
+    <string name="ProfileMoreAdapter_0">Mission</string>
+    <string name="ProfileMoreAdapter_1">History Coin</string>
+    <string name="ProfileMoreAdapter_2">My Item</string>
+    <string name="ProfileMoreAdapter_3">FAQ</string>
+    <string name="ProfileMoreAdapter_4">Setting</string>
+    <string name="ProfileMoreAdapter_5">Logout</string>
 
-    <string name="pref_key_enable_background_play">pref.enable_background_play</string>
-    <string name="pref_title_enable_background_play">Enable background play</string>
-    <string name="pref_summary_enable_background_play">need Android 4.0+</string>
+    <!--MyProductMainPager-->
+    <string name="MyProductMainPager_0">Closed</string>
+    <string name="MyProductMainPager_1">Address Selected</string>
+    <string name="MyProductMainPager_2">Fee Paid</string>
+    <string name="MyProductMainPager_3">Delivery</string>
 
-    <string name="pref_key_using_android_player">pref.using_android_player</string>
-    <string name="pref_title_using_android_player">Using system player</string>
-    <string name="pref_summary_using_android_player"></string>
 
-    <string name="pref_key_player">pref.player</string>
-    <string name="pref_title_player">Choose Player</string>
-    <string-array name="pref_entries_player">
-        <item>Auto Select</item>
-        <item>AndroidMediaPlayer</item>
-        <item>IjkMediaPlayer</item>
-        <item>IjkExoMediaPlayer</item>
-    </string-array>
-    <string-array name="pref_entry_values_player">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-    <string-array name="pref_entry_summaries_player">
-        <item>Auto Select</item>
-        <item>AndroidMediaPlayer</item>
-        <item>IjkMediaPlayer</item>
-        <item>IjkExoMediaPlayer</item>
-    </string-array>
+    <!--MyProductMainFragment-->
+    <string name="MyProductMainFragmentTitle">My Item</string>
 
-    <!-- -->
-    <string name="pref_title_ijkplayer_video">Video: ijkplayer</string>
-
-    <string name="pref_key_using_media_codec">pref.using_media_codec</string>
-    <string name="pref_title_using_media_codec">Using MediaCodec</string>
-    <string name="pref_summary_using_media_codec"></string>
-
-    <string name="pref_key_using_media_codec_auto_rotate">pref.using_media_codec_auto_rotate</string>
-    <string name="pref_title_using_media_codec_auto_rotate">Using MediaCodec auto rotate</string>
-    <string name="pref_summary_using_media_codec_auto_rotate"></string>
-
-    <string name="pref_key_pixel_format">pref.pixel_format</string>
-    <string name="pref_title_pixel_format">Pixel Format</string>
-    <string-array name="pref_entries_pixel_format">
-        <item>Auto Select</item>
-        <item>RGB 565</item>
-        <item>RGB 888X</item>
-        <item>YV12</item>
-    </string-array>
-    <string-array name="pref_entry_values_pixel_format">
-        <item></item>
-        <item>fcc-rv16</item>
-        <item>fcc-rv32</item>
-        <item>fcc-yv12</item>
-    </string-array>
-    <string-array name="pref_entry_summaries_pixel_format">
-        <item>Auto Select</item>
-        <item>RGB 565</item>
-        <item>RGB 888X</item>
-        <item>YV12</item>
-    </string-array>
-
-    <!-- -->
-    <string name="pref_title_ijkplayer_audio">Audio: ijkplayer</string>
-
-    <string name="pref_key_using_opensl_es">pref.using_opensl_es</string>
-    <string name="pref_title_using_opensl_es">Using OpenSL ES</string>
-    <string name="pref_summary_using_opensl_es"></string>
-
-    <!-- -->
-    <string name="pref_title_render_view">RenderView</string>
-
-    <string name="pref_key_enable_no_view">pref.enable_no_view</string>
-    <string name="pref_title_enable_no_view">Enable NoView</string>
-    <string name="pref_summary_enable_no_view"></string>
-
-    <string name="pref_key_enable_surface_view">pref.enable_surface_view</string>
-    <string name="pref_title_enable_surface_view">Enable SurfaceView</string>
-    <string name="pref_summary_enable_surface_view"></string>
-
-    <string name="pref_key_enable_texture_view">pref.enable_texture_view</string>
-    <string name="pref_title_enable_texture_view">Enable TextureView</string>
-    <string name="pref_summary_enable_texture_view"></string>
-
-    <string name="pref_key_enable_detached_surface_texture">pref.enable_detached_surface_texture</string>
-    <string name="pref_title_enable_detached_surface_texture">Enable detached SurfaceTexture</string>
-    <string name="pref_summary_enable_detached_surface_texture"></string>
-
-    <!-- -->
-    <string name="pref_key_last_directory"></string>
-
+    <string name="text_button_ok">OK</string>
 </resources>

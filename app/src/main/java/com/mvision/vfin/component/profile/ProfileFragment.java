@@ -118,7 +118,8 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
                 perCentView.setC("0.4");
                 textViewName.setText(member.result.firstName + " "+ member.result.getLastName() );
                 textViewEmail.setText(member.result.email);
-                textViewLevel.setText("เลเวลของคุณคือ "+member.result.memberLevel+"");
+                textViewLevel.setText(getString(R.string.profile_textViewLevel)+" "+member
+                        .result.memberLevel);
                 textViewLevelDetail.setText("อีก 2,502 คะแนน จะเลื่อนขั้นเป็น เลเวล 5");
                 imageViewProfile.bringToFront();
                 framLayout.setVisibility(View.VISIBLE);

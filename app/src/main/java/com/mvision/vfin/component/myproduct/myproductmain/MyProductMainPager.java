@@ -5,7 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
+
+import com.mvision.vfin.R;
 import com.mvision.vfin.component.myproduct.tradingclose.TradingCloseFragment;
+import com.mvision.vfin.utility.Contextor;
+
 /**
  * Created by enter_01 on 11/6/2017 AD.
  */
@@ -38,13 +42,13 @@ public class MyProductMainPager extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {
-            return "สินค้ารอดำเนินการ";
+            return Contextor.getInstance().getContext().getResources().getString(R.string.MyProductMainPager_0);
         } else if (position == 1) {
-            return "สินค้ารอจ่ายค่าจัดส่ง";
+            return Contextor.getInstance().getContext().getResources().getString(R.string.MyProductMainPager_1);
         } else if (position == 2) {
-            return "สินค้าเตรียมจัดส่ง";
+            return Contextor.getInstance().getContext().getResources().getString(R.string.MyProductMainPager_2);
         } else if (position == 3) {
-            return "สินค้าที่ต้องได้รับ";
+            return Contextor.getInstance().getContext().getResources().getString(R.string.MyProductMainPager_3);
         }
         return "";
     }

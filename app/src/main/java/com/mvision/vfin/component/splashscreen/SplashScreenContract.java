@@ -13,9 +13,13 @@ public interface SplashScreenContract {
 
         void showLoginActivity();
 
+        void showSelectLanguage();
+
         void showBeforeLoginActivity();
 
         void showVersion(String version);
+
+        void selectLangSuccess();
 
 
     }
@@ -23,6 +27,7 @@ public interface SplashScreenContract {
     interface Presenter {
         void getAppFirst();
         void getVersion();
+        void getCheckLanguage();
 
     }
 

@@ -13,15 +13,7 @@
         android:src="@drawable/logo_v_fin" />
 
 
-    <com.mvision.vfin.customview.TextViewWithFont
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
-        android:text="เข้าสู่ระบบ"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_big_size"
-        app:name="Kanit"
-        app:type="bold" />
+
 
 
     <com.mvision.vfin.customview.EditTextWithFont
@@ -36,7 +28,7 @@
         android:layout_marginTop="@dimen/margin"
         android:drawableLeft="@drawable/ic_login_phone"
         android:gravity="center"
-        android:hint="เบอร์โทร หรือ อีเมล"
+        android:hint="@string/edittext_user"
         android:textColor="@android:color/white"
         android:textColorHint="#8F9097"
         android:theme="@style/MyEditTextTheme"
@@ -54,7 +46,7 @@
         android:layout_marginTop="@dimen/margin"
         android:drawableLeft="@drawable/ic_login_password"
         android:gravity="center"
-        android:hint="รหัสผ่าน"
+        android:hint="@string/edittext_password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
         android:textColorHint="#8F9097"
@@ -70,7 +62,7 @@
         android:layout_marginRight="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
         android:background="@drawable/button_radius_yello"
-        android:text="เข้าสู่ระบบ"
+        android:text="@string/text_button"
         android:textColor="#E8800F"
         app:name="Kanit"
         app:type="bold" />
@@ -79,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
-        android:text="หรือ"
+        android:text="@string/text_or"
         android:textColor="@android:color/white"
         app:name="Kanit"
         app:type="bold" />
@@ -107,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin"
             android:layout_weight="1"
-            android:text="ลืมรหัสผ่าน"
+            android:text="@string/text_forgot"
             android:id="@+id/textViewForgotPassword"
             android:textColor="@android:color/white"
             app:name="Kanit"
@@ -120,7 +112,7 @@
             android:layout_margin="@dimen/margin"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="สมัครสมาชิก"
+            android:text="@string/text_Register"
             android:textColor="@android:color/white"
             app:name="Kanit"
             android:id="@+id/textViewRegister"

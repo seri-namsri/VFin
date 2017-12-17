@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -42,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+
 public class Utility {
 
 	private static SharedPreferences sharedPreferences;
@@ -61,6 +63,7 @@ public class Utility {
 		}
 
 	}
+
 
 
 	public static String getIMEI1(Context context) {
