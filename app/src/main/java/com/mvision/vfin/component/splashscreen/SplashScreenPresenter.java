@@ -33,19 +33,10 @@ public class SplashScreenPresenter extends Presenter<SplashScreenContract.View> 
         if (PreferencesMange.getInstance().getLanguage().isEmpty())
             view.showSelectLanguage();
         else
-            getCheckLanguage();
+            checkGoto();
 
     }
 
-    public void setLocale(String lang) { //call this in onCreate()
-        Locale myLocale = new Locale(lang);
-        Resources res = Contextor.getInstance().getContext().getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
-
-    }
 
     @Override
     public void getVersion() {
@@ -62,7 +53,6 @@ public class SplashScreenPresenter extends Presenter<SplashScreenContract.View> 
     @Override
     public void getCheckLanguage() {
         if (!PreferencesMange.getInstance().getLanguage().isEmpty()) {
-            setLocale(PreferencesMange.getInstance().getLanguage());
             checkGoto();
         }
 

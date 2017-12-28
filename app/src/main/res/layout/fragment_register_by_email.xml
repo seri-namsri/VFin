@@ -1,6 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/ss_bg"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:text="สมัครสมาชิกด้วยอีเมล"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        app:type = "bold"
+        android:textSize="@dimen/text_big2_size"/>
+
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="อีเมล"/>
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:drawableLeft="@drawable/ic_login_phone"
+        android:theme="@style/MyEditTextTheme"
+        android:id="@+id/editTextEmail"
+        app:name = "Kanit"/>
+
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="รหัสผ่าน"/>
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:drawableLeft="@drawable/ic_login_password"
+        android:layout_width="match_parent"
+        android:theme="@style/MyEditTextTheme"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextPassWord"
+        android:inputType="textPassword"
+        app:name = "Kanit"/>
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="ยืนยันรหัสผ่าน"/>
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:drawableLeft="@drawable/ic_login_password"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_width="match_parent"
+        android:theme="@style/MyEditTextTheme"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:id="@+id/editTextConfirmPassword"
+        app:name = "Kanit"/>
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="ใส่เบอร์มือถือเพื่อยืนยันตัวตน OTP"/>
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:drawableLeft="@drawable/ic_login_phone"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_width="match_parent"
+        android:theme="@style/MyEditTextTheme"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextPhone"
+        app:name = "Kanit"/>
+
+    <com.mvision.vfin.customview.ButtonWithFont
+        android:layout_margin="@dimen/margin_3"
+        android:text="@string/textOk"
+        app:name = "Kanit"
+        app:type = "bold"
+        android:textColor="@color/colorOrangeText"
+        android:background="@drawable/button_radius_yello"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonOk"/>
+
+</LinearLayout>

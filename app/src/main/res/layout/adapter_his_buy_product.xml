@@ -13,8 +13,8 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/imageViewProfile"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:layout_width="@dimen/adapter_his_buy_product_imageViewProfile"
+            android:layout_height="@dimen/adapter_his_buy_product_imageViewProfile" />
 
         <com.mvision.vfin.customview.TextViewWithFont
             app:name = "Kanit"

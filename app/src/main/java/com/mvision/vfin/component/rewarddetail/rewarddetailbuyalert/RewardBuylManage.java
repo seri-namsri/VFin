@@ -2,6 +2,7 @@ package com.mvision.vfin.component.rewarddetail.rewarddetailbuyalert;
 
 import com.mvision.vfin.api.modelrequest.TradeBuy;
 import com.mvision.vfin.api.response.TradeBuyResponseModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.component.reward.pojo.RewardModel;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.PreferencesMange;
@@ -30,8 +31,12 @@ public class RewardBuylManage {
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(com.mvision.vfin.api.request.Product.class)
-                .tradeBuy(new TradeBuy(PreferencesMange.getInstance().getMemberID(),null,
-                        rewardModel.id))
+                .tradeBuy(GetKey.getInstance()
+                        .apiTradeBid(GetKey
+                                .getInstance()
+                                .getSignatures()),new TradeBuy(PreferencesMange.getInstance()
+                        .getMemberID(),null,
+                        rewardModel.code))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<TradeBuyResponseModel>() {

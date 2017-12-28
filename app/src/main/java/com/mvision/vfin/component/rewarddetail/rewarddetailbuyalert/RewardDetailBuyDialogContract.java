@@ -1,5 +1,8 @@
 package com.mvision.vfin.component.rewarddetail.rewarddetailbuyalert;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.mvision.vfin.api.response.TradeBuyResponseModel;
 import com.mvision.vfin.base.BaseView;
 import com.mvision.vfin.component.reward.pojo.RewardModel;
@@ -13,11 +16,13 @@ public interface RewardDetailBuyDialogContract {
     interface View extends BaseView {
         void showRewardDetailBuy(RewardModel rewardModel);
         void tradeProductSuccess(TradeBuyResponseModel rewardModel);
+
     }
 
     interface Presenter {
         void getRewardDetailBuy();
         void tradeProduct();
+
 
     }
 

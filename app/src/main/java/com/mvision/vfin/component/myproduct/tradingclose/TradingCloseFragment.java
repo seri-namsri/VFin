@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.MyProductResponseModel;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.myaddress.MyAddressActivity;
+import com.mvision.vfin.component.myproduct.myproductmain.MyProductMainFragment;
+import com.mvision.vfin.component.myproduct.tradingclose.dialogcalculateprice.DialogCalculatePriceDialogFragment;
 import com.mvision.vfin.utility.Log;
 
 import butterknife.BindView;
@@ -21,9 +26,14 @@ import butterknife.BindView;
 public class TradingCloseFragment extends BaseFragment implements TradingCloseContract.View {
 
     @BindView(R.id.recyclerView)RecyclerView recyclerView ;
+    @BindView(R.id.textViewError)TextView textViewError ;
+    @BindView(R.id.progressBar)ProgressBar progressBar ;
     private TradingClosePresenter presenter ;
     private  MyProductAdapter myProductAdapter ;
-    public static TradingCloseFragment newInstance(Bundle bundle) {
+    private static MyProductMainFragment.CallBackMangePager callBackMangePagerTrad ;
+    public static TradingCloseFragment newInstance(Bundle bundle,MyProductMainFragment.CallBackMangePager callBackMangePager) {
+        if (callBackMangePagerTrad == null)
+            callBackMangePagerTrad = callBackMangePager ;
         TradingCloseFragment fragment = new TradingCloseFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -36,12 +46,13 @@ public class TradingCloseFragment extends BaseFragment implements TradingCloseCo
 
     @Override
     public void showLoading() {
-
+        textViewError.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -52,6 +63,12 @@ public class TradingCloseFragment extends BaseFragment implements TradingCloseCo
 
     @Override
     protected void startView() {
+
+    }
+
+
+
+    public void start(){
         presenter.getMyProduct();
     }
 
@@ -63,7 +80,7 @@ public class TradingCloseFragment extends BaseFragment implements TradingCloseCo
 
     @Override
     public void setUpViewMyproduct(MyProductResponseModel myProductResponseModel) {
-        Log.e("setUpViewMyproduct",new Gson().toJson(myProductResponseModel));
+        textViewError.setVisibility(View.GONE);
         myProductAdapter = new MyProductAdapter(myProductResponseModel,onClickMyProduct);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -72,33 +89,30 @@ public class TradingCloseFragment extends BaseFragment implements TradingCloseCo
 
     @Override
     public void gotoAdddress(int requestCode) {
-        startActivityResultFromFragment(MyAddressActivity.class, null, requestCode);
+        Bundle bundle = new Bundle();
+        bundle.putInt("code",1);
+        startActivityResultFromFragment(MyAddressActivity.class,bundle,
+        requestCode);
     }
 
     @Override
-    public void gotoBuyProduct() {
-
+    public void showDialogCalculatePrice(Bundle bundle) {
+        DialogCalculatePriceDialogFragment dialogCalculatePriceDialogFragment = DialogCalculatePriceDialogFragment
+                .newInstance(bundle,callBackMangePagerTrad);
+        dialogCalculatePriceDialogFragment.show(getFragmentManager(), "dialog");
     }
 
     @Override
-    public void gotoBuyProductFail() {
-
+    public void notFoundData() {
+        recyclerView.setVisibility(View.GONE);
+        textViewError.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void gotoSentProduct() {
-
-    }
-
-    @Override
-    public void setViewUpdateAddress() {
-
-    }
 
     private MyProductAdapter.OnClickMyProduct onClickMyProduct = new MyProductAdapter.OnClickMyProduct() {
         @Override
         public void onclickItem(int position) {
-
+            presenter.getOnclickProduct(position);
         }
     };
 

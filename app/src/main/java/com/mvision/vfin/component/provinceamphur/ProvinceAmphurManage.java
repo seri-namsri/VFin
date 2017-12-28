@@ -46,6 +46,11 @@ public class ProvinceAmphurManage {
                             public void reloadConnect() {
                                 getProvince(callBackData);
                             }
+
+                            @Override
+                            public void clickCancel() {
+
+                            }
                         });
                     }
 
@@ -78,6 +83,11 @@ public class ProvinceAmphurManage {
                             @Override
                             public void reloadConnect() {
                                 getAmmphur(callBackData,provinceId);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+
                             }
                         });
                     }

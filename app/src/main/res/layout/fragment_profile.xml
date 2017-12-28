@@ -24,7 +24,7 @@
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="@dimen/fragment_profile_card_view"
                     android:layout_marginLeft="@dimen/margin"
                     android:layout_marginRight="@dimen/margin"
                     android:layout_marginTop="60dp"
@@ -49,10 +49,12 @@
                             android:id="@+id/textViewName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_normal_size"
                             app:name="Kanit" />
 
                         <com.mvision.vfin.customview.TextViewWithFont
                             android:id="@+id/textViewEmail"
+                            android:textSize="@dimen/text_normal_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:name="Kanit" />
@@ -82,7 +84,7 @@
                     android:layout_height="wrap_content">
                     <com.mvision.vfin.customview.ButtonWithFont
                         android:id="@+id/buttonViewProfile"
-                        android:layout_width="150dp"
+                        android:layout_width="170dp"
                         android:layout_height="30dp"
                         android:background="@drawable/button_radius_yello"
                         android:drawableLeft="@drawable/ic_profile_yellow_16"
@@ -107,7 +109,7 @@
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view1"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="@dimen/fragment_profile_card_view"
                     android:layout_marginLeft="@dimen/margin"
                     android:layout_marginRight="@dimen/margin"
                     android:background="@color/colorPrimary"
@@ -180,7 +182,7 @@
                     <com.mvision.vfin.customview.ButtonWithFont
                         android:layout_gravity="center"
                         android:id="@+id/buttonLevelDetail"
-                        android:layout_width="150dp"
+                        android:layout_width="170dp"
                         android:layout_height="30dp"
                         android:layout_marginBottom="@dimen/margin"
                         android:layout_marginTop="@dimen/margin"
@@ -215,7 +217,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_2"
-                android:paddingBottom="@dimen/margin" />
+                />
 
 
         </LinearLayout>

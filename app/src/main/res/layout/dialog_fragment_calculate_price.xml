@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:minWidth="500dp"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_3">
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="กำลังคำนวณราคากรุณารอสักครู่"
+        app:name="Kanit" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <com.mvision.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/margin"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_black_corner"
+            android:text="@string/textCancel"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <com.mvision.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonTopUp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/margin"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius_yello"
+            android:text="@string/textTopUp"
+            android:textColor="@color/colorOrangeText"
+            android:visibility="gone"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <com.mvision.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonMyProduct"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/margin"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius_yello"
+            android:text="@string/textMyProduct"
+            android:textColor="@color/colorOrangeText"
+            android:visibility="gone"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <com.mvision.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonWalletHistory"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/margin"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius_yello"
+            android:text="@string/textWalletHistory"
+            android:textColor="@color/colorOrangeText"
+            android:visibility="gone"
+            app:name="Kanit"
+            app:type="bold" />
+
+        <com.mvision.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonBuy"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/margin"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius_yello"
+            android:text="@string/textWalletBuy"
+            android:textColor="@color/colorOrangeText"
+            android:visibility="gone"
+            app:name="Kanit"
+            app:type="bold" />
+    </LinearLayout>
+
+</LinearLayout>

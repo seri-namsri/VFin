@@ -5,6 +5,7 @@ import com.mvision.vfin.api.request.Member;
 import com.mvision.vfin.api.response.ProvinceResponseModel;
 import com.mvision.vfin.api.response.SaveAddressResponse;
 import com.mvision.vfin.component.addeditdress.model.AddressModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Log;
@@ -32,7 +33,8 @@ public class AddEditAddressManage {
     public void saveAddress(final AddressModel addressModel, final Query.CallBackData callBackData){
         RetrofitUtility.getInstance()
                 .getRetrofit()
-                .create(Member.class).saveAddress(PreferencesMange.getInstance().getMemberID(), addressModel)
+                .create(Member.class).saveAddress(GetKey.getInstance().apiSaveAddress(GetKey.getInstance()
+                .getSignatures()),PreferencesMange.getInstance().getMemberID(), addressModel)
                 .subscribeOn
                 (Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -48,6 +50,11 @@ public class AddEditAddressManage {
                             @Override
                             public void reloadConnect() {
                                 saveAddress(addressModel,callBackData);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+
                             }
                         });
                     }

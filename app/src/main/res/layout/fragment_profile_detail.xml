@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_3"
                         android:layout_marginTop="@dimen/margin"
-                        android:text="เบอร์ที่ใช้ในการสมัคร"
+                        android:text="@string/ProfileDetailTextViewTel"
                         app:name="Kanit"
                         app:type="bold" />
 
@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="ชื่อ-นามสกุล"
+                    android:text="@string/ProfileDetailTextViewNameLastName"
                     app:name="Kanit"
                     app:type="bold" />
 
@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="หมายเลขบัตรประชาชน"
+                    android:text="@string/textIden"
                     app:name="Kanit"
                     app:type="bold" />
 
@@ -158,7 +158,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="อีเมล"
+                    android:text="@string/textEmail"
                     app:name="Kanit"
                     app:type="bold" />
 
@@ -191,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="วันเกิด"
+                    android:text="@string/textBirdDay"
                     app:name="Kanit"
                     app:type="bold" />
 
@@ -224,7 +224,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="เพศ"
+                    android:text="@string/textGender"
                     app:name="Kanit"
                     app:type="bold" />
 
@@ -257,7 +257,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="รหัสผ่าน"
+                    android:text="@string/textPassword"
                     app:name="Kanit"
                     app:type="bold" />
 
@@ -291,7 +291,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="สถานที่จัดส่ง (ที่อยู่หลัก)"
+                    android:text="@string/ProfileDetailTextViewAddress"
                     app:name="Kanit"
                     app:type="bold" />
 
@@ -311,7 +311,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin"
                     android:background="@drawable/button_radius_yello"
-                    android:text="แก้ไขที่อยู่"
+                    android:text="@string/ProfileDetailButtonEditAddress"
                     android:textColor="@color/colorOrangeText"
                     app:name="Kanit"
                     app:type="bold" />

@@ -1,8 +1,10 @@
 package com.mvision.vfin.component.profile.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseRespone;
 import com.mvision.vfin.component.addeditdress.model.AddressModel;
+import com.mvision.vfin.utility.Contextor;
 
 import org.parceler.Parcel;
 
@@ -29,6 +31,19 @@ public class MemberResponseModel extends BaseRespone{
         public String lastName;
         @SerializedName("email")
         public String email;
+
+        public String getGender() {
+            try {
+                if (gender.equals("male"))
+                    return Contextor.getInstance().getContext().getString(R.string.layoutChangeGenderMen);
+                else if (gender.equals("female"))
+                    return Contextor.getInstance().getContext().getString(R.string.layoutChangeGenderFemale);
+            }catch (NullPointerException e){
+                return "";
+            }
+            return "";
+        }
+
         @SerializedName("gender")
         public String gender;
         @SerializedName("personalId")

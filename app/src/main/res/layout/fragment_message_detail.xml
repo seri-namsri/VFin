@@ -3,51 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBgApp"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        app:theme="@style/ToolbarColoredBackArrow"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary"
+        app:theme="@style/ToolbarColoredBackArrow" />
 
-    <RelativeLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_height="match_parent">
 
 
-        <com.mvision.vfin.customview.TextViewWithFont
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_big_size"
-            app:name="Kanit"
-            app:type="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
 
-        <com.mvision.vfin.customview.TextViewWithFont
-            android:id="@+id/textViewDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewTitle"
-            android:textSize="@dimen/text_normal_size"
-            app:name="Kanit" />
 
-        <com.mvision.vfin.customview.ButtonWithFont
-            android:id="@+id/buttonMyItem"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="@dimen/margin_3"
-            android:layout_below="@+id/textViewDetail"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:background="@drawable/button_radius_yello"
-            android:text="สินค้าของฉัน"
-            android:textColor="@color/colorOrangeText"
-            app:name="Kanit"
-            app:type="bold" />
-    </RelativeLayout>
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_big_size"
+                app:name="Kanit"
+                app:type="bold" />
 
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewTitle"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textViewTitle"
+                android:textSize="@dimen/text_big_size"
+                app:name="Kanit"
+                app:type="bold" />
+
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:id="@+id/textViewDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewDate"
+                android:textSize="@dimen/text_normal_size"
+                app:name="Kanit" />
+
+            <com.mvision.vfin.customview.ButtonWithFont
+                android:id="@+id/button"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/textViewDetail"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_3"
+                android:layout_marginBottom="@dimen/margin"
+                android:background="@drawable/button_radius_yello"
+                android:text="สินค้าของฉัน"
+                android:textColor="@color/colorOrangeText"
+                app:name="Kanit"
+                app:type="bold" />
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

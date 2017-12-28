@@ -3,6 +3,7 @@ package com.mvision.vfin.component.reward;
 
 import com.mvision.vfin.api.request.Market;
 import com.mvision.vfin.api.response.ListRedemtionResponseModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.RetrofitUtility;
@@ -26,7 +27,10 @@ public class RewardManage {
     public void getRewardList(final Query.CallBackData callBackData){
         RetrofitUtility.getInstance()
                 .getRetrofit()
-                .create(Market.class).getListRedemption().subscribeOn(Schedulers.io())
+                .create(Market.class).getListRedemption(GetKey.getInstance()
+                .apiListRedemption(GetKey
+                        .getInstance()
+                        .getSignatures())).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ListRedemtionResponseModel>() {
                     @Override
@@ -40,6 +44,11 @@ public class RewardManage {
                             @Override
                             public void reloadConnect() {
                                 getRewardList(callBackData);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+
                             }
                         });
 

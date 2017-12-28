@@ -3,6 +3,7 @@ package com.mvision.vfin.component.myaddress;
 import com.mvision.vfin.api.modelrequest.ErrorModel;
 import com.mvision.vfin.api.request.Member;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Log;
@@ -36,7 +37,8 @@ public class MyAddressManage {
     public void myAddress(final Query.CallBackData callBackData) {
         RetrofitUtility.getInstance()
                 .getRetrofit()
-                .create(Member.class).myAddress(PreferencesMange.getInstance().getMemberID()).subscribeOn
+                .create(Member.class).myAddress(GetKey.getInstance().apiGetAddress(GetKey.getInstance()
+                .getSignatures()),PreferencesMange.getInstance().getMemberID()).subscribeOn
                 (Schedulers
                 .io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -52,6 +54,11 @@ public class MyAddressManage {
                             @Override
                             public void reloadConnect() {
                                 myAddress(callBackData);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+
                             }
                         });
 
@@ -71,7 +78,9 @@ public class MyAddressManage {
     public void updateAddressIsPrimary(final Query.CallBackData callBackData,long addressID) {
         RetrofitUtility.getInstance()
                 .getRetrofit()
-                .create(Member.class).updateAddressIsPrimary(PreferencesMange.getInstance()
+                .create(Member.class).updateAddressIsPrimary(GetKey.getInstance().apiUpdateAddressIsPrimary(GetKey
+                .getInstance()
+                .getSignatures()),PreferencesMange.getInstance()
                 .getMemberID(),addressID).subscribeOn
                 (Schedulers
                 .io())

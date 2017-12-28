@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * Created by enter_01 on 11/6/2017 AD.
  */
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
+public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private  ArrayList<MessageData> messageModel ;
     private CallBackClick callBackClick ;
@@ -28,24 +28,56 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         this.callBackClick = callBackClick;
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_message, parent, false));
+    public void addMessage(ArrayList<MessageData> messageModel) {
+        checkLoading();
+        this.messageModel.addAll(messageModel);
+        notifyItemRangeInserted(this.messageModel.size() + 1, messageModel.size());
+    }
+
+    public void checkLoading(){
+        if (this.messageModel.get(this
+                .messageModel.size()-1) == null){
+            this.messageModel.remove(this
+                    .messageModel.size()-1);
+            notifyItemRemoved(this.messageModel.size());
+        }
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.textViewMessageTitle.setText(messageModel.get(position).getTitle());
-        holder.textViewMessageCreateDate.setText("เวลาส่ง : " +ConvertDate.getInstance()
-                .TimestampToFormatDateAndTimeTH(messageModel
-                .get(position)
-                .getCreate_date()+"","dd MMM yyyy HH:mm น."));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callBackClick.clickItemMessage(messageModel.get(position));
-            }
-        });
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType){
+            case  1 :
+                return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_message, parent, false));
+            case 2:
+                return new ViewHolderLoading(LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_load_more, parent, false));
+        }
+
+      return null;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return (messageModel.get(position)!=null) ? 1 : 2;
+    }
+
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        try {
+            ViewHolder viewHolderMessage = (ViewHolder) holder;
+            viewHolderMessage.textViewMessageTitle.setText(messageModel.get(position).getTitle());
+            viewHolderMessage.textViewMessageCreateDate.setText("เวลาส่ง : " +ConvertDate.getInstance()
+                    .TimestampToFormatDateAndTimeTH(messageModel
+                            .get(position)
+                            .getCreatedDate()+"","dd MMM yyyy HH:mm น."));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callBackClick.clickItemMessage(messageModel.get(position),position);
+                }
+            });
+        }catch (ClassCastException e){}
+
     }
 
     @Override
@@ -66,6 +98,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     public interface CallBackClick{
-        void clickItemMessage(MessageData messageData);
+        void clickItemMessage(MessageData messageData,int position);
+    }
+
+
+    public class ViewHolderLoading extends RecyclerView.ViewHolder {
+
+        public ViewHolderLoading(View itemView) {
+            super(itemView);
+        }
     }
 }

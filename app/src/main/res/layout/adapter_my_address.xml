@@ -43,13 +43,12 @@
     <com.mvision.vfin.customview.ButtonWithFont
         android:id="@+id/buttonEdit"
         android:layout_width="50dp"
-
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/margin"
         android:background="@drawable/button_background_red_corner"
-        android:text="แก้ไข"
+        android:text="@string/adapterMyAddressButtonEdit"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="@dimen/text_small_size"
         app:name="Kanit"

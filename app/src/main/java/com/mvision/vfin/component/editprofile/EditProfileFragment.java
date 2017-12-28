@@ -91,7 +91,7 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
         editTextSureName.setText(memberResponseModel.result.lastName);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar, "ชื่อ-นามสกุล");
+        setUptoolBar(toolbar, getString(R.string.ProfileDetailTextViewNameLastName));
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,7 +121,7 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
         final EditTextWithFont editTextPassNewConfirm = getViewLayout().findViewById(R.id.editTextPassNewConfirm);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar, "รหัสผ่าน");
+        setUptoolBar(toolbar, getString(R.string.textPassword));
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +137,7 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
         editTextEmail.setText(memberResponseModel.result.email);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar, "อีเมล");
+        setUptoolBar(toolbar, getString(R.string.textEmail));
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,7 +155,8 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
         final DatePickerDialog datePickerDialog = new DatePickerDialog(
                 getContext(), EditProfileFragment.this, 2017, 02, 01);
-        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.textOk),
+                new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface arg0, int arg1) {
                 Calendar newDate = Calendar.getInstance();
@@ -174,7 +175,7 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
                 datePickerDialog.show();
             }
         });
-        setUptoolBar(toolbar, "วันเกิด");
+        setUptoolBar(toolbar, getString(R.string.textBirdDay));
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,7 +190,7 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
         final RadioButton  radioButtonFemale = getViewLayout().findViewById(R.id.radioButtonFemale);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar, "เพศ");
+        setUptoolBar(toolbar, getString(R.string.textGender));
         final String[] gender = {""};
         if (memberResponseModel.result.gender.equals("female")){
             radioButtonFemale.setChecked(true);
@@ -215,7 +216,7 @@ public class EditProfileFragment extends BaseFragment implements EditProfileCont
         final EditTextWithFont editTextPersonalId = getViewLayout().findViewById(R.id.editTextPersonalId);
         Button buttonOk = getViewLayout().findViewById(R.id.buttonOk);
         Toolbar toolbar = getViewLayout().findViewById(R.id.toolbar);
-        setUptoolBar(toolbar, "เลขบัตรประจำตัวประชาชน");
+        setUptoolBar(toolbar, getString(R.string.textIden));
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

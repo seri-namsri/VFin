@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.mvision.vfin.api.modelrequest.ErrorModel;
 import com.mvision.vfin.api.modelrequest.MemberUpdate;
 import com.mvision.vfin.api.response.UpdateProfileResponseModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Log;
@@ -42,7 +43,9 @@ public class ProfileDetailManage {
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", image);
         RetrofitUtility.getInstance()
                 .getRetrofit()
-                .create(com.mvision.vfin.api.request.Member.class).uploadImage(member, type, body).subscribeOn(Schedulers.io())
+                .create(com.mvision.vfin.api.request.Member.class).uploadImage(GetKey.getInstance().apiUpdateMemberProfile(GetKey
+                .getInstance()
+                .getSignatures()),member, type, body).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<UpdateProfileResponseModel>() {
                     @Override
@@ -56,6 +59,11 @@ public class ProfileDetailManage {
                             @Override
                             public void reloadConnect() {
                                 upLoadImage(imageBytes,callBackData);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+
                             }
                         });
 

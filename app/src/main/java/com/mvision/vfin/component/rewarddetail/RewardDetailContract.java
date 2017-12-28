@@ -1,5 +1,8 @@
 package com.mvision.vfin.component.rewarddetail;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.mvision.vfin.api.response.RewardDetailResponseModel;
 import com.mvision.vfin.base.BaseView;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
@@ -15,6 +18,9 @@ public interface RewardDetailContract {
         void showRewardDetailBuy(RewardModel rewardModel);
         void showFullDetail(String detail);
         void setCoin(ModelCoinAndBit modelCoinAndBit);
+        void showAddress(int requestCode);
+        void showCalculatePrice(Bundle bundle);
+        void hideDialogRewardDetailBuy();
     }
 
     interface Presenter {
@@ -23,7 +29,9 @@ public interface RewardDetailContract {
         void getCoin();
         void stopRealTime();
         void getFullDetail();
+        void gotoAddress();
         void buyProduct();
+        void getActivityResult(int requestCode,Intent data);
 
     }
 

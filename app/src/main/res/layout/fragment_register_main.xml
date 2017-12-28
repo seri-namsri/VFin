@@ -2,23 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/ss_bg"
     android:gravity="center"
     android:layout_height="match_parent"
     android:padding="@dimen/margin_3"
+    android:id="@+id/container"
     android:orientation="vertical">
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_v_fin"/>
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo_vfin"/>
 
     <com.mvision.vfin.customview.ButtonWithFont
         android:layout_marginTop="@dimen/margin_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="สมัครสมาชิกด้วยเบอร์มือ"
+        android:id="@+id/buttonRegisterByPhone"
         app:name = "Kanit"/>
 
 
@@ -26,12 +28,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="สมัครสมาชิกด้วย FACEBOOK"
+        android:id="@+id/buttonRegisterByFacebook"
         app:name = "Kanit"/>
 
     <com.mvision.vfin.customview.ButtonWithFont
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="สมัครสมาชิกด้วยอีเมล์"
+        android:id="@+id/buttonRegisterByEmail"
         app:name = "Kanit"/>
 
 </LinearLayout>

@@ -38,7 +38,7 @@ public class MyProductMainActivity extends BaseActivity {
     @Override
     protected void startView() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, MyProductMainFragment.newInstance());
+        transaction.replace(R.id.container, MyProductMainFragment.newInstance(getIntent().getExtras()));
         transaction.commit();
     }
 }

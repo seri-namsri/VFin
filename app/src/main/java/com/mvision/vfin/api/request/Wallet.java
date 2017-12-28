@@ -5,6 +5,7 @@ import com.mvision.vfin.api.response.WalletTransectionResponseModel;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -13,8 +14,8 @@ import rx.Observable;
 
 public interface Wallet {
 
-    @GET("walletservice/v1/wallet/getWalletTransaction")
-    Observable<WalletTransectionResponseModel> getWalletTransaction(@Query("memberCode")String memberCode,
+    @GET
+    Observable<WalletTransectionResponseModel> getWalletTransaction(@Url String url, @Query("memberCode")String memberCode,
                                                                     @Query("pageSize")int pageSize, @Query
                                                                    ("startPosition")int
                                                                    startPosition);

@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -18,14 +19,13 @@ import rx.Observable;
 
 public interface Product {
 
-    @POST("marketservice/v1/trade/buy")
-    Observable<TradeBuyResponseModel> tradeBuy(@Body TradeBuy body);
+    @POST
+    Observable<TradeBuyResponseModel> tradeBuy(@Url String url, @Body TradeBuy body);
 
-    @GET("marketservice/v1/trade/findMyItem/{status}/{memberCode}")
-    Observable<MyProductResponseModel> getMyProduct(@Path("status")String itemStatus
-            , @Path("memberCode")String memberCode);
+    @GET
+    Observable<MyProductResponseModel> getMyProduct(@Url String url);
 
-    @GET("marketservice/v1/trade/product/{id}")
-    Observable<RewardDetailResponseModel> getRewardDetail(@Path("id") String string);
+    @GET
+    Observable<RewardDetailResponseModel> getRewardDetail(@Url String url);
 
 }

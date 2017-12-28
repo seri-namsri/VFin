@@ -19,7 +19,7 @@
         android:paddingLeft="@dimen/margin"
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
-        android:hint="เลขบัตรประจำตัวประชาชน"
+        android:hint="@string/textIden"
         app:name="Kanit" />
 
     <com.mvision.vfin.customview.EditTextWithFont
@@ -35,7 +35,7 @@
     <com.mvision.vfin.customview.ButtonWithFont
         android:layout_width="match_parent"
         android:layout_margin="@dimen/margin"
-        android:text="บันทึก"
+        android:text="@string/textSave"
         android:id="@+id/buttonOk"
         android:textColor="@color/colorOrangeText"
         app:name = "Kanit"

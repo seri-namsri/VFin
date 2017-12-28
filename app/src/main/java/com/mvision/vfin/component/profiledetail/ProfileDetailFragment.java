@@ -122,7 +122,7 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
                 linearLayoutIdentiFication.setEnabled(false);
             }
             textViewIdentiFication.setText(member.result.personalId);
-            textViewGender.setText(member.result.gender);
+            textViewGender.setText(member.result.getGender());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageViewProfile.setElevation(10);
                 imageUpload.setElevation(10);
@@ -223,7 +223,7 @@ public class ProfileDetailFragment extends BaseFragment implements ProfileDetail
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         applyFontForToolbarTitle(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("ข้อมูลส่วนตัว");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.ProfileDetailTitle));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

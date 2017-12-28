@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="หมายเลขพร้อมเพย์"
+            android:textSize="@dimen/text_big_size"
+            android:textColor="@color/colorBgApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="092-219-1666"
+            android:textSize="@dimen/text_very_big_size"
+            android:textColor="@color/colorBgApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="ชื่อบัญชี :"
+            android:textSize="@dimen/text_normal_size"
+            android:textColor="@color/colorBgApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:text="ฝนฝนคนสวย"
+                android:textSize="@dimen/text_normal_size"
+                android:textColor="@color/colorBgApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:text="เลขบัญชี :"
+                android:textSize="@dimen/text_normal_size"
+                android:textColor="@color/colorBgApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <com.mvision.vfin.customview.TextViewWithFont
+                android:text="10202030303"
+                android:textSize="@dimen/text_normal_size"
+                android:textColor="@color/colorBgApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="ธนาคารกสิกรไทย"
+            android:textSize="@dimen/text_normal_size"
+            android:textColor="@color/colorBgApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="ยอดชำระ"
+            android:textSize="@dimen/text_very_big_size"
+            android:textColor="@color/colorBgApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+
+            android:background="@color/colorBgApp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <com.mvision.vfin.customview.ButtonWithFont
+        android:text="ตกลง"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.mvision.vfin.component.rewarddetail.rewarddetailbuyalert;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -7,7 +8,11 @@ import android.widget.TextView;
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.TradeBuyResponseModel;
 import com.mvision.vfin.base.BaseDialogFragment;
+import com.mvision.vfin.component.myaddress.MyAddressActivity;
 import com.mvision.vfin.component.reward.pojo.RewardModel;
+import com.mvision.vfin.component.rewarddetail.RewardDetailFragment;
+import com.mvision.vfin.utility.Contextor;
+import com.mvision.vfin.utility.Log;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,11 +30,13 @@ public class RewardDetailBuyDialogFragment extends BaseDialogFragment implements
     TextView textViewPrice;
 
     private RewardDetailBuyDialogPresenter presenter;
+    private static RewardDetailFragment.CallBackRewardDetailBuyOnclick
+            callBackRewardDetailBuyOnclickDialog ;
 
-
-    public static RewardDetailBuyDialogFragment newInstance(Bundle bundle) {
+    public static RewardDetailBuyDialogFragment newInstance(Bundle bundle,RewardDetailFragment.CallBackRewardDetailBuyOnclick callBackRewardDetailBuyOnclick) {
         RewardDetailBuyDialogFragment fragment = new RewardDetailBuyDialogFragment();
         fragment.setArguments(bundle);
+        callBackRewardDetailBuyOnclickDialog = callBackRewardDetailBuyOnclick;
         return fragment;
     }
 
@@ -59,6 +66,7 @@ public class RewardDetailBuyDialogFragment extends BaseDialogFragment implements
 
     }
 
+
     @Override
     protected void initializePresenter() {
         presenter = new RewardDetailBuyDialogPresenter(this);
@@ -82,8 +90,9 @@ public class RewardDetailBuyDialogFragment extends BaseDialogFragment implements
                 dismiss();
                 break;
             case R.id.buttonOk:
-                presenter.tradeProduct();
-                dismiss();
+                callBackRewardDetailBuyOnclickDialog.clickOk();
+              //  presenter.getMyAddress();
+              //  dismiss();
                 break;
         }
     }

@@ -8,6 +8,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.mvision.vfin.api.request.Wallet;
 import com.mvision.vfin.api.response.WalletTransectionResponseModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.component.financehistory.pojo.FinanceHistoryModel;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.error.ErrorMange;
@@ -38,7 +39,10 @@ public class FinanceHistoryManage {
 
     public void getFinanceHistory(final Query.CallBackData callBackData, final int pageSize, final int startPosition) {
         RetrofitUtility.getInstance().getRetrofit().create(Wallet.class)
-                .getWalletTransaction(PreferencesMange
+                .getWalletTransaction(GetKey.getInstance()
+                        .apiGetWalletTransaction(GetKey
+                                .getInstance()
+                                .getSignatures()),PreferencesMange
                         .getInstance().getMemberID(), pageSize, startPosition)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -54,6 +58,11 @@ public class FinanceHistoryManage {
                             @Override
                             public void reloadConnect() {
                                 getFinanceHistory(callBackData, pageSize, startPosition);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+
                             }
                         });
                     }

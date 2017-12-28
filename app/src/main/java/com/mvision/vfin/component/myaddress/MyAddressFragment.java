@@ -12,12 +12,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.MyAddressResponseModel;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.addeditdress.AddEditAddressActivity;
 import com.mvision.vfin.component.addeditdress.model.AddressModel;
+import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.Utility;
 
 import org.parceler.Parcels;
@@ -33,10 +36,12 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
 
     @BindView(R.id.recyclerView)RecyclerView recyclerView;
     @BindView(R.id.toolbar)Toolbar toolbar;
+    @BindView(R.id.progressBar)ProgressBar progressBar;
 
     private MyAddressPresenter presenter ;
-    public static MyAddressFragment newInstance() {
+    public static MyAddressFragment newInstance(Bundle bundle) {
         MyAddressFragment fragment = new MyAddressFragment();
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -52,12 +57,12 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
 
     @Override
     public void showLoading() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
 
@@ -67,7 +72,7 @@ public class MyAddressFragment extends BaseFragment implements MyAddressContract
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         applyFontForToolbarTitle(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("เลือกที่อยู่");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.MyAddressFragmentTitle));
     }
 
 

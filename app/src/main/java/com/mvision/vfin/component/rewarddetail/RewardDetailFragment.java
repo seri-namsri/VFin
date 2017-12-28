@@ -1,5 +1,7 @@
 package com.mvision.vfin.component.rewarddetail;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -12,10 +14,17 @@ import android.widget.TextView;
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.RewardDetailResponseModel;
 import com.mvision.vfin.base.BaseFragment;
+import com.mvision.vfin.component.financehistory.FinanceHistoryActivity;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
+import com.mvision.vfin.component.myaddress.MyAddressActivity;
+import com.mvision.vfin.component.myproduct.myproductmain.MyProductMainActivity;
+import com.mvision.vfin.component.myproduct.myproductmain.MyProductMainFragment;
+import com.mvision.vfin.component.myproduct.tradingclose.dialogcalculateprice.DialogCalculatePriceDialogFragment;
 import com.mvision.vfin.component.productdetail.alertdetail.AlertDetailFragment;
 import com.mvision.vfin.component.reward.pojo.RewardModel;
 import com.mvision.vfin.component.rewarddetail.rewarddetailbuyalert.RewardDetailBuyDialogFragment;
+import com.mvision.vfin.utility.Contextor;
+import com.mvision.vfin.utility.Log;
 
 import org.parceler.Parcels;
 
@@ -100,13 +109,35 @@ public class RewardDetailFragment extends BaseFragment implements RewardDetailCo
         indicator.setViewPager(viewPager);
     }
 
+    private RewardDetailBuyDialogFragment rewardDetailBuyDialogFragment;
+
     @Override
     public void showRewardDetailBuy(RewardModel rewardModel) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("RewardDetail", Parcels.wrap(rewardModel));
-        RewardDetailBuyDialogFragment editNameDialogFragment = RewardDetailBuyDialogFragment.newInstance(bundle);
-        editNameDialogFragment.show(getFragmentManager(), "dialog");
+        rewardDetailBuyDialogFragment = RewardDetailBuyDialogFragment.newInstance(bundle, callBackRewardDetailBuyOnclick);
+        rewardDetailBuyDialogFragment.show(getFragmentManager(), "dialog");
+
     }
+
+    private CallBackRewardDetailBuyOnclick callBackRewardDetailBuyOnclick = new CallBackRewardDetailBuyOnclick() {
+        @Override
+        public void clickCancle() {
+
+        }
+
+        @Override
+        public void clickOk() {
+            presenter.gotoAddress();
+        }
+    };
+
+    public interface CallBackRewardDetailBuyOnclick {
+        void clickCancle();
+
+        void clickOk();
+    }
+
 
     @Override
     public void showFullDetail(String detail) {
@@ -117,6 +148,52 @@ public class RewardDetailFragment extends BaseFragment implements RewardDetailCo
     @Override
     public void setCoin(ModelCoinAndBit modelCoinAndBit) {
         buttonBit.setText(modelCoinAndBit.getWallet() + "");
+    }
+
+    @Override
+    public void showAddress(int requestCode) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("code", 1);
+        startActivityResultFromFragment(MyAddressActivity.class, bundle,
+                requestCode);
+    }
+
+    @Override
+    public void showCalculatePrice(Bundle bundle) {
+        DialogCalculatePriceDialogFragment dialogCalculatePriceDialogFragment = DialogCalculatePriceDialogFragment
+                .newInstance(bundle, callBackMangePagerTrad);
+        dialogCalculatePriceDialogFragment.show(getFragmentManager(), "dialog");
+    }
+
+    private  MyProductMainFragment.CallBackMangePager callBackMangePagerTrad = new MyProductMainFragment.CallBackMangePager() {
+        @Override
+        public void reLoad(int position) {
+
+        }
+
+        @Override
+        public void changePage(int position) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("changePage",1);
+            Intent intent = new Intent(Contextor.getInstance().getContext(), MyProductMainActivity.class);
+            intent.putExtras(bundle);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Contextor.getInstance().getContext().startActivity(intent);
+        }
+
+        @Override
+        public void startWalletHistory() {
+            Intent intent = new Intent(Contextor.getInstance().getContext(), FinanceHistoryActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Contextor.getInstance().getContext().startActivity(intent);
+        }
+
+    };
+
+    @Override
+    public void hideDialogRewardDetailBuy() {
+        if (rewardDetailBuyDialogFragment != null)
+            rewardDetailBuyDialogFragment.dismiss();
     }
 
     @OnClick({R.id.buttonBit, R.id.buttonCoin, R.id.buttonProductDetail})
@@ -131,9 +208,17 @@ public class RewardDetailFragment extends BaseFragment implements RewardDetailCo
         }
     }
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         presenter.stopRealTime();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (Activity.RESULT_OK == resultCode)
+            presenter.getActivityResult(requestCode, data);
     }
 }

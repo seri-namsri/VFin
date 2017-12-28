@@ -5,14 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.WalletTransectionResponseModel;
 import com.mvision.vfin.base.BaseFragment;
-import com.mvision.vfin.component.financehistory.pojo.FinanceHistoryModel;
 
-import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -24,6 +24,8 @@ public class FinanceHistoryFragment extends BaseFragment implements FinanceHisto
 
     @BindView(R.id.toolbar)Toolbar toolbar;
     @BindView(R.id.textViewCoin)TextView textViewCoin;
+    @BindView(R.id.progressBar)ProgressBar progressBar;
+    @BindView(R.id.textViewNotFound)TextView textViewNotFound;
     @BindView(R.id.recyclerViewHistoryFinance)RecyclerView recyclerViewHistoryFinance;
     private FinanceHistoryPresenter presenter ;
     private LinearLayoutManager linearLayoutManager ;
@@ -41,12 +43,12 @@ public class FinanceHistoryFragment extends BaseFragment implements FinanceHisto
 
     @Override
     public void showLoading() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -99,6 +101,11 @@ public class FinanceHistoryFragment extends BaseFragment implements FinanceHisto
     @Override
     public void setUpViewFinanceHistoryLoading() {
         financeHistoryAdapter.checkLoading();
+    }
+
+    @Override
+    public void showTextNotFound() {
+        textViewNotFound.setVisibility(View.VISIBLE);
     }
 
 

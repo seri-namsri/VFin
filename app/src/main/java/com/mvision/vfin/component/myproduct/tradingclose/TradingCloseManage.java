@@ -2,6 +2,7 @@ package com.mvision.vfin.component.myproduct.tradingclose;
 
 import com.mvision.vfin.api.request.Product;
 import com.mvision.vfin.api.response.MyProductResponseModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.PreferencesMange;
@@ -29,7 +30,10 @@ public class TradingCloseManage {
     public void getMyProduct(final Query.CallBackData callBackData, final String type){
         RetrofitUtility.getInstance()
             .getRetrofit()
-                .create(Product.class).getMyProduct(type,PreferencesMange.getInstance()
+                .create(Product.class).getMyProduct(GetKey.getInstance()
+                        .apiFindMyItem(GetKey
+                                .getInstance()
+                                .getSignatures())+type+"/"+PreferencesMange.getInstance()
                         .getMemberID()
                 )
                 .subscribeOn(Schedulers.io())
@@ -46,6 +50,11 @@ public class TradingCloseManage {
                             @Override
                             public void reloadConnect() {
                                 getMyProduct(callBackData,type);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+
                             }
                         });
 

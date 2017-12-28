@@ -1,22 +1,23 @@
 <resources>
-    <string name="app_name">V-fin</string>
+    <string name="app_name">VFIN</string>
     <string name="tab_profile">Profile</string>
     <string name="tab_message">Message</string>
     <string name="tab_buysell">Buy/Sell</string>
     <string name="tab_activity">Activity</string>
     <string name="tab_reward">Reward</string>
     <string name="fatal_error">Fatal error : </string>
-    <string name="activity_poll">ทำแบบทดสอบ\nรับ Vin Point</string>
-    <string name="activity_ads">ดูโฆษณา\nรับ Vin Point</string>
-    <string name="activity_install">โหลดแอปพลิเคชั่น\nรับ Vin Point</string>
-    <string name="activity_work">ทำงาน\nรับ Vin Point</string>
+    <string name="activity_poll">Poll\nget Vin Point</string>
+    <string name="activity_ads">View Ads\nget Vin Point</string>
+    <string name="activity_install">Download Application\nget Vin Point</string>
+    <string name="activity_work">Work\nget Vin Point</string>
     <string name="OTP"><u>กดขอ OTP อีกครั้ง</u></string>
 
     <string name="key_price">key_price</string>
     <string name="key_memberID">key_memberID</string>
 
     <!--menu-->
-    <string name="menu_add_address">menu_add_address</string>
+    <string name="menu_add_address">menu add address</string>
+    <string name="menu_delete_message">menu delete message</string>
 
     <!--Login-->
     <string name="text_forgot"><u>Forgot Password</u></string>
@@ -50,5 +51,82 @@
     <!--MyProductMainFragment-->
     <string name="MyProductMainFragmentTitle">My Item</string>
 
-    <string name="text_button_ok">OK</string>
+    <!--ProfileDetailFragment-->
+    <string name="ProfileDetailTitle">Profile</string>
+    <string name="ProfileDetailTextViewTel">Registered telephone NO</string>
+    <string name="ProfileDetailTextViewNameLastName">Name-Surname</string>
+    <string name="ProfileDetailTextViewAddress">Address</string>
+    <string name="ProfileDetailButtonEditAddress">Edit Address</string>
+
+    <!--layout_change_password-->
+    <string name="layoutChangeOldPassword">Old Password</string>
+    <string name="layoutChangeNewPassword">New Password</string>
+    <string name="layoutChangeConfirmPassword">Confirm New Password</string>
+
+    <!--layout_change_gender-->
+    <string name="layoutChangeGenderMen">Men</string>
+    <string name="layoutChangeGenderFemale">Female</string>
+
+    <!--MyAddressFragment-->
+    <string name="MyAddressFragmentTitle">Select Address</string>
+
+    <!--adapter_my_address.xml-->
+    <string name="adapterMyAddressButtonEdit">Edit</string>
+
+    <!--AddEditAddressFragment.class-->
+    <string name="AddEditAddressFragmentTitle">Add Address</string>
+    <string name="AddEditAddressFragmentTitleEdit">Edit Address</string>
+
+    <!--fragment_add_address.xml-->
+    <string name="fragmentAddAddressNameReciver">Name Receiver</string>
+    <string name="fragmentAddAddressTelReciver">Tel Receiver</string>
+    <string name="fragmentAddAddressHourNumber">House number</string>
+    <string name="fragmentAddAddressHourStreetDistrict">road/Subdistrict</string>
+    <string name="fragmentAddAddressProvince">Province*</string>
+    <string name="fragmentAddAddressDistrice">District*</string>
+    <string name="fragmentAddAddressPostalCode">PostalCode</string>
+    <string name="fragmentAddAddressNameAddress">Name Address</string>
+
+    <!--ProvinceAmphurFragment.xml-->
+    <string name="ProvinceAmphurFragmentTitleProvince">Select Province</string>
+    <string name="ProvinceAmphurFragmentTitleAmphur">Select Amphur</string>
+    <string name="ProvinceAmphurFragmentErroSelectBefore">Please Select Province</string>
+
+    <!--ProductDetailFragment.xml-->
+    <string name="ProductDetailFragmentOwnerProduct">Owner Product</string>
+    <string name="ProductDetailFragmentTitleProductDetail">Product Detail</string>
+    <string name="ProductDetailFragmentProductDetailInformation">View Detail</string>
+    <string name="ProductDetailFragmentMemberHittory">History Buy Product</string>
+    <string name="ProductDetailFragmentNameMemberHittory">Name</string>
+    <string name="ProductDetailFragmentPriceMemberHittory">Price</string>
+    <string name="ProductDetailFragmentTimeMemberHittory">Time</string>
+    <string name="ProductDetailFragmentTimeLeft">Time Left</string>
+    <string name="ProductDetailFragmentPriceMarket">Price Market</string>
+
+    <!--text-->
+    <string name="textName">Name</string>
+    <string name="textLastName">Surname</string>
+    <string name="textEmail">Email</string>
+    <string name="textIden">Identification</string>
+    <string name="textSave">Save</string>
+    <string name="textOk">Ok</string>
+    <string name="textCancel">cancel</string>
+    <string name="textBirdDay">BirdDay</string>
+    <string name="textGender">Sex</string>
+    <string name="textPassword">Password</string>
+    <string name="textTimeOut">Time Out</string>
+    <string name="textProductOfYou">You get product</string>
+    <string name="textProductWait">Wait</string>
+    <string name="textProductBuyNow">Buy Now</string>
+    <string name="textVinPoint">Vin Point</string>
+    <string name="textTopUp">Top Up</string>
+    <string name="textMyProduct">My Product</string>
+    <string name="textWalletHistory">Wallet History</string>
+    <string name="textWalletBuy">Buy</string>
+    <string name="textLoading">Please Wait</string>
+    <string name="textDeleteMessage">Are sure delete message.</string>
+
+    <!--text_error-->
+    <string name="text_error_input_data_emty">Please require fill data</string>
+    <string name="textErrorNotFountData">์Not Found Data</string>
 </resources>

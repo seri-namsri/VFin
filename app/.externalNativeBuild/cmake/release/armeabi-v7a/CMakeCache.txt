@@ -196,7 +196,7 @@ Project_SOURCE_DIR:STATIC=/Users/enter_01/AndroidStudioProjects/V-Fin/app
 log-lib:FILEPATH=/Users/enter_01/Library/Android/sdk/ndk-bundle/platforms/android-15/arch-arm/usr/lib/liblog.so
 
 //Dependencies for the target
-native-lib_LIB_DEPENDS:STATIC=general;/Users/enter_01/Library/Android/sdk/ndk-bundle/platforms/android-15/arch-arm/usr/lib/liblog.so;
+vfin-security_LIB_DEPENDS:STATIC=general;/Users/enter_01/Library/Android/sdk/ndk-bundle/platforms/android-15/arch-arm/usr/lib/liblog.so;
 
 
 ########################

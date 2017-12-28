@@ -4,50 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/relative"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp">
 
-        <ImageView
-            android:id="@+id/imageViewProduct"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="#50000000"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/imageProfile"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-
-            <com.mvision.vfin.customview.TextViewWithFont
-                android:id="@+id/textViewUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
-                android:textColor="@android:color/white"
-                app:name="Kanit" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    <ImageView
+        android:id="@+id/imageViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/adapter_product_relative"
+        android:scaleType="centerCrop" />
 
 
     <com.mvision.vfin.customview.TextViewWithFont
         android:id="@+id/textViewNameProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relative"
+        android:layout_below="@+id/imageViewProduct"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:textColor="@android:color/black"
@@ -69,31 +38,30 @@
             android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="@dimen/text_normal_size"
-            app:name="Kanit"
             android:text="ราคาตลาด"
-  />
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit" />
 
         <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <com.mvision.vfin.customview.TextViewWithFont
-                app:name = "Kanit"
-                android:textSize="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="เหลือเวลาอีก"/>
+                android:text="เหลือเวลาอีก"
+                android:textSize="@dimen/text_small_size"
+                app:name="Kanit" />
 
             <com.mvision.vfin.customview.TextViewWithFont
                 android:id="@+id/textViewTimeProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:drawableLeft="@drawable/ic_clock"
+                android:gravity="center"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="@dimen/text_normal_size"
                 app:name="Kanit"
@@ -106,10 +74,10 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:visibility="gone"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/margin"
-        android:background="@drawable/bt_fav" />
+        android:background="@drawable/bt_fav"
+        android:visibility="gone" />
 
     <com.mvision.vfin.customview.TextViewWithFont
         android:id="@+id/textViewType"
@@ -124,36 +92,35 @@
 
     <RelativeLayout
 
-        android:layout_below="@+id/textViewType"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewType">
 
 
-
-    <com.mvision.vfin.customview.ButtonWithFont
-        android:id="@+id/buttonPrice"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/margin"
-        android:background="@drawable/button_radius"
-        android:drawableLeft="@drawable/ic_coin"
-        android:drawablePadding="-20sp"
-        android:drawableStart="@drawable/ic_coin"
-        android:gravity="center"
-        android:paddingLeft="4dp"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_small_size"
-        app:name="Kanit"/>
+        <com.mvision.vfin.customview.ButtonWithFont
+            android:id="@+id/buttonPrice"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/adapter_product_buttonPrice"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/button_radius"
+            android:drawableLeft="@drawable/ic_coin"
+            android:drawablePadding="-20sp"
+            android:drawableStart="@drawable/ic_coin"
+            android:gravity="center"
+            android:paddingLeft="4dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_small_size"
+            app:name="Kanit" />
 
         <ProgressBar
-            android:visibility="visible"
             android:id="@+id/progress"
-            android:elevation="2dp"
-            android:layout_centerInParent="true"
             android:layout_width="15dp"
-            android:layout_height="15dp" />
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:elevation="2dp"
+            android:visibility="visible" />
 
     </RelativeLayout>
 </RelativeLayout>

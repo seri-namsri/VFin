@@ -1,9 +1,11 @@
 package com.mvision.vfin.component.main;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,12 +16,18 @@ import com.mvision.vfin.base.BaseActivity;
 import com.mvision.vfin.component.activity.PageActivityFragment;
 import com.mvision.vfin.component.buysell.allproduct.AllProductFragment;
 import com.mvision.vfin.component.buysell.mainproduct.BuySellFragment;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.component.message.MessageFragment;
 import com.mvision.vfin.component.profile.ProfileFragment;
 import com.mvision.vfin.component.reward.RewardFragment;
+import com.mvision.vfin.component.topup.TopUpActivity;
+import com.mvision.vfin.utility.Log;
+import com.mvision.vfin.utility.PreferencesMange;
+import com.mvision.vfin.utility.Utility;
 
 import butterknife.BindView;
+import butterknife.OnTouch;
 
 
 public class MainActivity extends BaseActivity implements MainContract.View{
@@ -60,21 +68,36 @@ public class MainActivity extends BaseActivity implements MainContract.View{
         super.presenter = presenter;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void startView() {
         initTab();
         presenter.showView();
-
     }
 
+    @OnTouch({R.id.buttonCoin})
+    public boolean clickTopUp(View v, MotionEvent event){
+        final int DRAWABLE_RIGHT = 2;
+        if(event.getAction() == MotionEvent.ACTION_UP) {
+            if(event.getRawX() >= (buttonCoin.getRight() - buttonCoin.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                gotoTopUp();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void gotoTopUp(){
+     startActivityFromActivity(TopUpActivity.class,null);
+    }
 
     private void initTab() {
         setupTabIcons();
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Fragment selectedFragment = null;
-                Runtime.getRuntime().gc();
+
                 switch (tab.getPosition()) {
                     case 0:
                         selectedFragment = ProfileFragment.newInstance();
@@ -97,6 +120,7 @@ public class MainActivity extends BaseActivity implements MainContract.View{
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.container, selectedFragment);
                     transaction.commit();
+                    Runtime.getRuntime().gc();
                 } catch (NullPointerException e) {
                 }
             }
@@ -110,12 +134,13 @@ public class MainActivity extends BaseActivity implements MainContract.View{
             }
         });
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, ProfileFragment.newInstance());
+        transaction.replace(R.id.container, AllProductFragment.newInstance());
         transaction.commit();
     }
 
 
     private void setupTabIcons() {
+        setLocale(PreferencesMange.getInstance().getLanguage());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
@@ -127,6 +152,7 @@ public class MainActivity extends BaseActivity implements MainContract.View{
         tabLayout.getTabAt(3).setIcon(R.drawable.click_menu_activity).setText(getText(R.string.tab_activity));
         tabLayout.getTabAt(4).setIcon(R.drawable.click_menu_reward).setText(getText(R.string.tab_reward));
         changeTabsFont(tabLayout);
+        tabLayout.getTabAt(2).select();
 
     }
 

@@ -11,12 +11,12 @@ public class TradeBuy {
     private String memberCode;
     @SerializedName("price")
     public Integer price;
-    @SerializedName("productOnShelfId")
-    public String productOnShelfId;
+    @SerializedName("productOnShelfCode")
+    public String productOnShelfCode;
 
-    public TradeBuy(String memberCode,Integer price,String productOnShelfId) {
+    public TradeBuy(String memberCode,Integer price,String productOnShelfCode) {
         this.memberCode = memberCode;
         this.price = price;
-        this.productOnShelfId = productOnShelfId;
+        this.productOnShelfCode = productOnShelfCode;
     }
 }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_margin="@dimen/margin_2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="เลือกวิธีชำระ"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.EditTextWithFont
+            android:hint="พร้อมเพย์"
+            android:paddingLeft="@dimen/padding_left"
+            android:layout_marginTop="@dimen/padding_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="จำนวนเงินที่โอน (บาท)"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.EditTextWithFont
+            android:paddingLeft="@dimen/padding_left"
+            android:layout_marginTop="@dimen/padding_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="หมายเลขพร้อมเพย์ หรือ เลขบัญชีที่ใช้"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.EditTextWithFont
+            android:paddingLeft="@dimen/padding_left"
+            android:layout_marginTop="@dimen/padding_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="หมายเหตุ (หากมี)"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.EditTextWithFont
+            android:paddingLeft="@dimen/padding_left"
+            android:layout_marginTop="@dimen/padding_top"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:text="อัพโหลดใบเสร็ยจการชำระเงิน"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.mvision.vfin.customview.EditTextWithFont
+            android:paddingLeft="@dimen/padding_left"
+            android:layout_marginTop="@dimen/padding_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+<com.mvision.vfin.customview.ButtonWithFont
+    android:layout_margin="@dimen/margin"
+    android:layout_alignParentBottom="true"
+    android:text="ตกลง"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+</RelativeLayout>

@@ -8,5 +8,12 @@ import com.mvision.vfin.base.BaseView;
 
 public interface MyProductMainContract {
 
+    interface View extends BaseView {
+        void setUpView(int changeView);
+    }
 
+    interface Presenter {
+        void getFirstView();
+
+    }
 }

@@ -3,6 +3,7 @@ package com.mvision.vfin.component.editprofile;
 import com.google.gson.Gson;
 import com.mvision.vfin.api.modelrequest.MemberUpdate;
 import com.mvision.vfin.api.response.UpdateProfileResponseModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.RetrofitUtility;
@@ -28,7 +29,9 @@ public class EditProfileManage {
     public void updateProfile(final String type, final MemberUpdate memberUpdate,
                               final Query.CallBackData callBackData){
         RetrofitUtility.getInstance().getRetrofit().create(com.mvision.vfin.api.request.Member.class)
-                .updateMember(new Gson().toJson(memberUpdate),type)
+                .updateMember(GetKey.getInstance().apiUpdateMemberProfile(GetKey
+                        .getInstance()
+                        .getSignatures()),new Gson().toJson(memberUpdate),type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<UpdateProfileResponseModel>() {
@@ -43,6 +46,11 @@ public class EditProfileManage {
                             @Override
                             public void reloadConnect() {
                                 updateProfile(type,memberUpdate,callBackData);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+
                             }
                         });
                     }

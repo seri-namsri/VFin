@@ -2,12 +2,14 @@ package com.mvision.vfin.component.provinceamphur;
 
 import android.os.Bundle;
 
+import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.AmphurResponseModel;
 import com.mvision.vfin.api.response.ProvinceResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
 import com.mvision.vfin.component.myaddress.Model.Amphur;
 import com.mvision.vfin.component.myaddress.Model.Province;
 import com.mvision.vfin.firebase.Firestore.Query;
+import com.mvision.vfin.utility.Contextor;
 
 import java.util.ArrayList;
 
@@ -35,8 +37,12 @@ public class ProvinceAmphurPresenter extends Presenter<ProvinceAmphurContract.Vi
     @Override
     public void getProvinceOrAmphur() {
         if (keyCode == 1){
+            view.setTitleBar(Contextor.getInstance().getContext().getResources().getString(R
+                    .string.ProvinceAmphurFragmentTitleProvince));
             ProvinceAmphurManage.getInstance().getProvince(callBackData);
         }else if (keyCode == 2 && provinceId >= 0){
+            view.setTitleBar(Contextor.getInstance().getContext().getResources().getString(R
+                    .string.ProvinceAmphurFragmentTitleAmphur));
             ProvinceAmphurManage.getInstance().getAmmphur(callBackData,provinceId);
         }
 

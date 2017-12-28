@@ -47,12 +47,13 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
     @Override
     public void getProductDetail() {
         ProductDetailManage.getInstance(callBackMemberData).getProductDetailRealTime
-                (productModel.id + "");
+                (productModel.code + "");
     }
 
     @Override
     public void getMemberProductHistory() {
-        ProductDetailManage.getInstance(callBackMemberData).getMemberProductHistory(productModel.id + "");
+        ProductDetailManage.getInstance(callBackMemberData).getMemberProductHistory(productModel
+                .code + "");
     }
 
     @Override

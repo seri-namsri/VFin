@@ -28,8 +28,8 @@ public class ProductRealTimeModel {
     public String fullDetails;
     @SerializedName("nextPrice")
     public int nextPrice;
-    @SerializedName("id")
-    public int id;
+    @SerializedName("code")
+    public String code;
 
     public int getMarketPrice() {
         return marketPrice;
@@ -77,8 +77,8 @@ public class ProductRealTimeModel {
         return nextPrice;
     }
 
-    public int getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
     public long getStartTime() {

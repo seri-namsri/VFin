@@ -64,7 +64,6 @@ public class ProvinceAmphurFragment extends BaseFragment implements ProvinceAmph
 
     @Override
     protected void startView() {
-        setUptoolBar();
         presenter.getProvinceOrAmphur();
     }
 
@@ -73,15 +72,6 @@ public class ProvinceAmphurFragment extends BaseFragment implements ProvinceAmph
         return R.layout.android_adapter_reclycleview_dialog;
     }
 
-
-    private void setUptoolBar() {
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
-        applyFontForToolbarTitle(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("เลือกจังหวัด");
-    }
 
     @Override
     public void setProvince(ProvinceResponseModel provinceResponseModel) {
@@ -99,6 +89,16 @@ public class ProvinceAmphurFragment extends BaseFragment implements ProvinceAmph
         returnIntent.putExtras(bundle);
         getActivity().setResult(Activity.RESULT_OK, returnIntent);
         getActivity().finish();
+    }
+
+    @Override
+    public void setTitleBar(String title) {
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        applyFontForToolbarTitle(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
     }
 
     @Override

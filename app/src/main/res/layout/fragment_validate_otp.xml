@@ -55,6 +55,7 @@
         app:name = "Kanit"
         android:textSize="@dimen/text_big_size"
         app:type = "bold"
+        android:id="@+id/textViewResentOTP"
         android:layout_gravity="center"
         android:text="@string/OTP"/>
 

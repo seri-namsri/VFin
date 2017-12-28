@@ -6,12 +6,17 @@
     android:background="#225298">
 
     <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:background="@drawable/ss_bg" />
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/logo_v_fin" />
-
+        android:src="@drawable/logo_vfin"/>
 
     <com.mvision.vfin.customview.TextViewWithFont
         android:id="@+id/textViewVersionCode"

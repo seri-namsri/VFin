@@ -10,15 +10,23 @@ import com.mvision.vfin.R;
 import com.mvision.vfin.component.myproduct.tradingclose.TradingCloseFragment;
 import com.mvision.vfin.utility.Contextor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by enter_01 on 11/6/2017 AD.
  */
 
 public class MyProductMainPager extends FragmentPagerAdapter {
 
-
-    public MyProductMainPager(FragmentManager fm) {
+    private Map<Integer, String> mFragmentTags;
+    private FragmentManager mFragmentManager;
+    private MyProductMainFragment.CallBackMangePager callBackMangePager ;
+    public MyProductMainPager(FragmentManager fm, MyProductMainFragment.CallBackMangePager callBackMangePager) {
         super(fm);
+        mFragmentManager = fm;
+        mFragmentTags = new HashMap<Integer, String>();
+        this.callBackMangePager = callBackMangePager;
     }
 
     @Override
@@ -27,15 +35,13 @@ public class MyProductMainPager extends FragmentPagerAdapter {
         if (position == 0) {
             type = "closed";
         } else if (position == 1) {
-            type = "address_selected";
-        } else if (position == 2) {
             type = "fee_paid";
-        } else if (position == 3) {
+        } else if (position == 2) {
             type = "delivery";
         }
         Bundle bundle = new Bundle();
         bundle.putString("type",type);
-        return TradingCloseFragment.newInstance(bundle);
+        return TradingCloseFragment.newInstance(bundle,callBackMangePager);
 
     }
 
@@ -43,11 +49,9 @@ public class MyProductMainPager extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         if (position == 0) {
             return Contextor.getInstance().getContext().getResources().getString(R.string.MyProductMainPager_0);
-        } else if (position == 1) {
-            return Contextor.getInstance().getContext().getResources().getString(R.string.MyProductMainPager_1);
-        } else if (position == 2) {
+        }  else if (position == 1) {
             return Contextor.getInstance().getContext().getResources().getString(R.string.MyProductMainPager_2);
-        } else if (position == 3) {
+        } else if (position == 2) {
             return Contextor.getInstance().getContext().getResources().getString(R.string.MyProductMainPager_3);
         }
         return "";
@@ -56,11 +60,27 @@ public class MyProductMainPager extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
+
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-     //   super.destroyItem(container, position, object);
+    public Object instantiateItem(ViewGroup container, int position) {
+        Object object = super.instantiateItem(container, position);
+        if (object instanceof Fragment) {
+            Fragment fragment = (Fragment) object;
+            String tag = fragment.getTag();
+            mFragmentTags.put(position, tag);
+        }
+        return object;
+    }
+
+    public Fragment getFragment(int position) {
+        Fragment fragment = null;
+        String tag = mFragmentTags.get(position);
+        if (tag != null) {
+            fragment = mFragmentManager.findFragmentByTag(tag);
+        }
+        return fragment;
     }
 }

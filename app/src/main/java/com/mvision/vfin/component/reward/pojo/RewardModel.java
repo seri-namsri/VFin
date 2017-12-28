@@ -23,8 +23,8 @@ public class RewardModel {
     public String name;
     @SerializedName("mainImage")
     public String imgUrl;
-    @SerializedName("id")
-    public String id;
+    @SerializedName("code")
+    public String code;
     @SerializedName("languageCode")
     public String languageCode;
     @SerializedName("briefDetails")

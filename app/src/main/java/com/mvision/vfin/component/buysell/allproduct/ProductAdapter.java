@@ -17,6 +17,7 @@ import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Contextor;
+import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.PreferencesMange;
 
 import java.text.SimpleDateFormat;
@@ -95,7 +96,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         setDataOrtherItem(productModel.get(position), holder);
-
     }
 
 
@@ -201,6 +201,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     holder.buttonPrice.setEnabled(true);
                     holder.buttonPrice.setBackgroundResource(R.drawable.button_radius_green);
                 }
+
             }
 
             @Override
@@ -233,7 +234,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return productModel.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.textViewNameProduct)
         TextView textViewNameProduct;
         @BindView(R.id.textViewTimeProduct)
@@ -244,10 +245,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Button buttonPrice;
         @BindView(R.id.imageViewProduct)
         ImageView imageViewProduct;
-        @BindView(R.id.imageProfile)
-        ImageView imageProfile;
-        @BindView(R.id.textViewUserName)
-        TextView textViewUserName;
         @BindView(R.id.priceMarket)
         TextView priceMarket;
         @BindView(R.id.progress)

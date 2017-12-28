@@ -19,4 +19,25 @@
     <dimen name="padding_right">8dp</dimen>
     <dimen name="button_width">150dp</dimen>
     <dimen name="button_height">36dp</dimen>
+
+    <!--fragment_profile.xml-->
+    <dimen name="fragment_profile_card_view">150dp</dimen>
+
+    <!--adapter_profile_more.xml-->
+    <dimen name="adapter_profile_more_card">112dp</dimen>
+
+    <!--adapter_product.xml-->
+    <dimen name="adapter_product_relative">200dp</dimen>
+    <dimen name="adapter_product_buttonPrice">35dp</dimen>
+
+    <!--fragment_product_detail.xml-->
+    <dimen name="fragment_product_detail_relative">300dp</dimen>
+    <dimen name="fragment_product_detail_imageViewOwner">30dp</dimen>
+    <dimen name="fragment_product_detail_nest">80dp</dimen>
+
+    <!--adapter_his_buy_product.xml-->
+    <dimen name="adapter_his_buy_product_imageViewProfile">20dp</dimen>
+
+    <!--bottom_sheet_product_detail.xml-->
+    <dimen name="bottom_sheet_product_detail_peek">80dp</dimen>
 </resources>

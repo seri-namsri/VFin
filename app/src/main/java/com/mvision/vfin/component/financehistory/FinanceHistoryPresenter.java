@@ -25,6 +25,7 @@ public class FinanceHistoryPresenter extends Presenter<FinanceHistoryContract
 
     @Override
     public void getFinanceHistory() {
+        view.showLoading();
         FinanceHistoryManage.getInstance().getFinanceHistory(callBackData, pageSize, startPosition);
     }
 
@@ -69,8 +70,10 @@ public class FinanceHistoryPresenter extends Presenter<FinanceHistoryContract
             if (walletTransectionResponseModel.result != null && walletTransectionResponseModel.result.size() > 0) {
                 if (walletTransectionResponseModel.result.size() >= pageSize)
                     walletTransectionResponseModel.result.add(null);
+
                 if (startPosition == 0) {
                     view.setUpViewFinanceHistory(walletTransectionResponseModel);
+                    view.hideLoading();
                 } else {
                     view.setUpViewFinanceHistoryMore(walletTransectionResponseModel);
                 }
@@ -79,6 +82,10 @@ public class FinanceHistoryPresenter extends Presenter<FinanceHistoryContract
             } else if (walletTransectionResponseModel.result != null &&
                     walletTransectionResponseModel.result.size() == 0) {
                 view.setUpViewFinanceHistoryLoading();
+
+                if (startPosition == 0) {
+                    view.showTextNotFound();
+                }
             }
         }
 

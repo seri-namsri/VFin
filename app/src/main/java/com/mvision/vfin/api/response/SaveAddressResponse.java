@@ -1,5 +1,6 @@
 package com.mvision.vfin.api.response;
 
+import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.component.addeditdress.model.AddressModel;
 
 /**
@@ -8,6 +9,7 @@ import com.mvision.vfin.component.addeditdress.model.AddressModel;
 
 public class SaveAddressResponse {
 
+    @SerializedName("result")
     public AddressModel result ;
 
 

@@ -1,15 +1,19 @@
 package com.mvision.vfin.component.rewarddetail;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
 import com.mvision.vfin.api.response.RewardDetailResponseModel;
 import com.mvision.vfin.api.response.TradeBuyResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
+import com.mvision.vfin.component.addeditdress.model.AddressModel;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.component.reward.RewardManage;
 import com.mvision.vfin.component.reward.pojo.RewardModel;
 import com.mvision.vfin.firebase.Firestore.Query;
+import com.mvision.vfin.utility.Log;
 
 import org.parceler.Parcels;
 
@@ -37,7 +41,7 @@ public class RewardDetailPresenter extends Presenter<RewardDetailContract.View> 
 
     @Override
     public void getRewardDetail() {
-        RewardDetailManage.getInstance(callBackData).getRewardDetail(rewardModel.id);
+        RewardDetailManage.getInstance(callBackData).getRewardDetail(rewardModel.code);
 
     }
 
@@ -62,9 +66,33 @@ public class RewardDetailPresenter extends Presenter<RewardDetailContract.View> 
     }
 
     @Override
+    public void gotoAddress() {
+        view.showAddress(1);
+    }
+
+    @Override
     public void buyProduct() {
         RewardDetailManage.getInstance(callBackData).tradeBuyProduct(rewardModel);
     }
+
+    @Override
+    public void getActivityResult(int requestCode, Intent data) {
+        if (requestCode == 1) {
+            try {
+                view.hideDialogRewardDetailBuy();
+                AddressModel addressModel = Parcels.unwrap(data.getExtras().getParcelable
+                        ("addressModel"));
+                addressModel.getAddress();
+                Bundle bundle = data.getExtras();
+                bundle.putParcelable("rewardModel", Parcels.wrap(rewardModel));
+                view.showCalculatePrice(bundle);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
     private RewardDetailManage.CallBackData callBackData = new RewardDetailManage.CallBackData() {
         @Override

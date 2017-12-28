@@ -10,7 +10,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp">
+        android:layout_marginBottom="@dimen/fragment_product_detail_nest">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="300dp">
+                android:layout_height="@dimen/fragment_product_detail_relative">
 
 
                 <android.support.v4.view.ViewPager
@@ -33,12 +33,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#80000000"
-                    android:padding="8dp">
+                    android:padding="@dimen/margin">
 
                     <ImageView
                         android:id="@+id/imageViewOwner"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/fragment_product_detail_imageViewOwner"
+                        android:layout_height="@dimen/fragment_product_detail_imageViewOwner"
                         android:layout_centerVertical="true" />
 
 
@@ -56,7 +56,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/imageViewOwner"
-                            android:text="เจ้าของสินค้า"
+                            android:text="@string/ProductDetailFragmentOwnerProduct"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/text_normal_size" />
 
@@ -104,12 +104,14 @@
                         android:drawablePadding="@dimen/margin"
                         android:gravity="center_vertical"
                         android:padding="@dimen/margin"
-                        android:text="รายละเอียดสินค้า"
+                        android:textSize="@dimen/text_normal_size"
+                        android:text="@string/ProductDetailFragmentTitleProductDetail"
                         android:textColor="@android:color/white" />
 
                     <com.mvision.vfin.customview.TextViewWithFont
                         app:name="Kanit"
                         android:id="@+id/textViewDetail"
+                        android:textSize="@dimen/text_normal_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin" />
@@ -123,7 +125,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/margin"
                         android:background="@drawable/button_radius_yello"
-                        android:text="ข้อมูลสินค้า"
+                        android:text="@string/ProductDetailFragmentProductDetailInformation"
                         android:textColor="@color/colorOrangeText" />
 
                 </LinearLayout>
@@ -148,10 +150,11 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:drawableLeft="@drawable/ic_history"
+                        android:textSize="@dimen/text_normal_size"
                         android:drawablePadding="@dimen/margin"
                         android:gravity="center_vertical"
                         android:padding="@dimen/margin"
-                        android:text="ประวัติการซื้อสินค้า"
+                        android:text="@string/ProductDetailFragmentMemberHittory"
                         android:textColor="@android:color/white" />
 
                     <LinearLayout
@@ -161,28 +164,31 @@
 
                         <com.mvision.vfin.customview.TextViewWithFont
                             android:layout_width="0dp"
+                            android:textSize="@dimen/text_small_size"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="ชื่อผู้ซื้อขายล่าสุด"
+                            android:text="@string/ProductDetailFragmentNameMemberHittory"
                             app:name="Kanit" />
 
                         <com.mvision.vfin.customview.TextViewWithFont
+                            android:textSize="@dimen/text_small_size"
                             app:name="Kanit"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="ราคา" />
+                            android:text="@string/ProductDetailFragmentPriceMemberHittory" />
 
 
                         <com.mvision.vfin.customview.TextViewWithFont
+                            android:textSize="@dimen/text_small_size"
                             app:name="Kanit"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="เวลา" />
+                            android:text="@string/ProductDetailFragmentTimeMemberHittory" />
                     </LinearLayout>
 
                     <android.support.v7.widget.RecyclerView
@@ -211,7 +217,7 @@
                     android:gravity="center"
                     android:textSize="@dimen/text_big_size"
                     app:name="Kanit"
-                    android:text="ราคาตลาด"
+                    android:text="@string/ProductDetailFragmentPriceMarket"
                     />
 
                 <LinearLayout
@@ -226,7 +232,7 @@
                         android:textSize="@dimen/text_small_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="เหลือเวลาอีก"/>
+                        android:text="@string/ProductDetailFragmentTimeLeft"/>
 
                     <com.mvision.vfin.customview.TextViewWithFont
                         android:id="@+id/textViewTimeProduct"

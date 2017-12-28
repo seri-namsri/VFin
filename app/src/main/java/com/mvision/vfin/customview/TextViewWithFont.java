@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 
 import com.mvision.vfin.R;
+import com.mvision.vfin.utility.Contextor;
 
 
 /**
@@ -73,17 +74,14 @@ public class TextViewWithFont extends android.support.v7.widget.AppCompatTextVie
 
 
     public String getTextDataNotNull(String msg) {
-
         if (getText().toString().isEmpty()) {
             if (msg == null) {
-                setError("กรุณากรอกข้อมูลให้ครบ");
+                setError(Contextor.getInstance().getContext().getString(R.string.text_error_input_data_emty));
             } else {
                 setError(msg);
             }
-
             return "";
         }
-
         return getText().toString();
     }
 }

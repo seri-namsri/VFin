@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ss_bg"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="สมัครสมาชิกด้วยเบอร์มือถือ"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_big2_size"
+        app:type="bold" />
+
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin_3"
+        android:text="ใส่เบอร์มือถือของคุณ"
+        android:textColor="@android:color/white" />
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:drawableLeft="@drawable/ic_login_phone"
+        android:textColor="@android:color/white"
+        android:theme="@style/MyEditTextTheme"
+        app:name="Kanit" />
+
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:text="รหัสผ่าน"
+        android:textColor="@android:color/white" />
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:drawableLeft="@drawable/ic_login_password"
+        android:inputType="textPassword"
+        android:theme="@style/MyEditTextTheme"
+        app:name="Kanit" />
+
+    <com.mvision.vfin.customview.TextViewWithFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:text="ยืนยันรหัสผ่าน"
+        android:textColor="@android:color/white" />
+
+    <com.mvision.vfin.customview.EditTextWithFont
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:drawableLeft="@drawable/ic_login_password"
+        android:inputType="textPassword"
+        android:theme="@style/MyEditTextTheme"
+        app:name="Kanit" />
+
+    <com.mvision.vfin.customview.ButtonWithFont
+        android:id="@+id/buttonOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_3"
+        android:background="@drawable/button_radius_yello"
+        android:text="@string/textOk"
+        android:textColor="@color/colorOrangeText"
+        app:name="Kanit"
+        app:type="bold" />
+
+</LinearLayout>

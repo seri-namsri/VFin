@@ -1,11 +1,15 @@
 package com.mvision.vfin.component.rewarddetail.rewarddetailbuyalert;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
 import com.mvision.vfin.api.response.TradeBuyResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
+import com.mvision.vfin.component.addeditdress.model.AddressModel;
 import com.mvision.vfin.component.reward.pojo.RewardModel;
 import com.mvision.vfin.firebase.Firestore.Query;
+import com.mvision.vfin.utility.Log;
 
 import org.parceler.Parcels;
 
@@ -55,4 +59,6 @@ public class RewardDetailBuyDialogPresenter extends Presenter<RewardDetailBuyDia
             }
         });
     }
+
+
 }

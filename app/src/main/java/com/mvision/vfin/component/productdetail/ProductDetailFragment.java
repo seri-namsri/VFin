@@ -1,5 +1,6 @@
 package com.mvision.vfin.component.productdetail;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.BottomSheetBehavior;
@@ -121,6 +122,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         return R.layout.fragment_product_detail;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void setUpViewProductDetail(ProductRealTimeModel productDetail) {
 
@@ -132,7 +134,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         viewPager.setAdapter(productDetailPager);
         indicator.setViewPager(viewPager);
 
-        priceMarket.setText("ราคาตลาด\n" + productDetail.getMarketPrice());
+        priceMarket.setText(getString(R.string.ProductDetailFragmentPriceMarket)+"\n" +
+                productDetail.getMarketPrice());
         textViewNameOwner.setText(productDetail.getOwnerName());
         CropCircleTransformation multi = new CropCircleTransformation();
         Glide.with(Contextor.getInstance().getContext())
@@ -170,30 +173,32 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     public void setTimeOut() {
-        buttonCoin.setText("หมดเวลา");
+        buttonCoin.setText(getString(R.string.textTimeOut));
         buttonCoin.setEnabled(true);
-        textViewTimeProduct.setText("หมดเวลา");
+        textViewTimeProduct.setText(getString(R.string.textTimeOut));
         buttonCoin.setBackgroundResource(R.drawable.button_radius);
     }
 
     @Override
     public void setTimeOutMyItem() {
-        buttonCoin.setText("สินค้าเป็นของคุณ");
+        buttonCoin.setText(getString(R.string.textProductOfYou));
         buttonCoin.setEnabled(true);
-        textViewTimeProduct.setText("หมดเวลา");
+        textViewTimeProduct.setText(getString(R.string.textTimeOut));
         buttonCoin.setBackgroundResource(R.drawable.button_radius_green);
     }
 
     @Override
     public void setSell(ProductRealTimeModel productRealTimeModel) {
-        buttonCoin.setText("รอคนซื้อ " + productRealTimeModel.getNextPrice() + " Vin point");
+        buttonCoin.setText(getString(R.string.textProductWait)+" "+ productRealTimeModel
+                .getNextPrice() + " "+ getString(R.string.textVinPoint));
         buttonCoin.setEnabled(false);
         buttonCoin.setBackgroundResource(R.drawable.button_radius);
     }
 
     @Override
     public void setBuy(ProductRealTimeModel productRealTimeModel) {
-        buttonCoin.setText("ซื้อเลย " + productRealTimeModel.getNextPrice() + " Vin point");
+        buttonCoin.setText(getString(R.string.textProductBuyNow)+" "+ productRealTimeModel
+            .getNextPrice() + " "+ getString(R.string.textVinPoint));
         buttonCoin.setEnabled(true);
         buttonCoin.setBackgroundResource(R.drawable.button_radius_green);
     }

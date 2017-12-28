@@ -14,7 +14,7 @@ public interface ProvinceAmphurContract {
     interface View extends BaseView {
         void setProvince(ProvinceResponseModel provinceResponseModel);
         void sentProvince(Province province);
-
+        void setTitleBar(String title);
         void setAmphur(AmphurResponseModel amphurResponseModel);
         void sentAmphur(Amphur amphur);
     }

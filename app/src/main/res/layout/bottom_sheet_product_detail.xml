@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:padding="8dp"
+    android:padding="@dimen/margin"
     app:behavior_hideable="true"
-    app:behavior_peekHeight="80dp"
+    app:behavior_peekHeight="@dimen/bottom_sheet_product_detail_peek"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
 
@@ -27,6 +27,7 @@
             android:drawableLeft="@drawable/ic_coin"
             android:drawablePadding="-20dp"
             android:padding="@dimen/margin"
+            android:textSize="@dimen/text_normal_size"
             android:textColor="@android:color/white"
             app:name="Kanit"
             app:type="bold" />
@@ -58,10 +59,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ยอดเงินของคุณ"
+                android:textSize="@dimen/text_normal_size"
                 app:name="Kanit" />
 
             <com.mvision.vfin.customview.ButtonWithFont
                 android:id="@+id/buttonVCoin"
+                android:textSize="@dimen/text_normal_size"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/margin"
@@ -85,6 +88,7 @@
             <com.mvision.vfin.customview.TextViewWithFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/text_normal_size"
                 android:text="จำนวณครั้งที่ซื้อได้"
                 app:name="Kanit" />
 
@@ -92,7 +96,8 @@
                 android:id="@+id/buttonBit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
+                android:textSize="@dimen/text_normal_size"
+                android:layout_marginTop="@dimen/margin"
                 android:background="@drawable/button_radius_blue"
                 android:drawableLeft="@drawable/ic_power"
                 android:drawableRight="@drawable/bt_add_more"

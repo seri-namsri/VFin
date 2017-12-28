@@ -157,12 +157,12 @@ public class AddEditAddressFragment extends BaseFragment implements AddEditAddre
         editTextNo.setText(addressModel.houseNo);
         editTextName.setText(addressModel.receiver);
         editTextNameAddress.setText(addressModel.name);
-        setUptoolBar("แก้ไขที่อยู่");
+        setUptoolBar(getString(R.string.AddEditAddressFragmentTitleEdit));
     }
 
     @Override
     public void showSetUpAdd() {
-        setUptoolBar("เพิ่มที่อยู่");
+        setUptoolBar(getString(R.string.AddEditAddressFragmentTitle));
     }
 
     private void setUptoolBar(String title) {

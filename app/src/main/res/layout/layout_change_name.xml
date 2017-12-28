@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
-        android:hint="ชื่อ"
+        android:hint="@string/textName"
         android:paddingLeft="@dimen/margin"
         app:name="Kanit" />
 
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
-        android:hint="นามสกุล"
+        android:hint="@string/textLastName"
         android:paddingLeft="@dimen/margin"
         app:name="Kanit" />
 
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
         android:background="@drawable/button_radius_yello"
-        android:text="บันทึก"
+        android:text="@string/textSave"
         android:textColor="@color/colorOrangeText"
         app:name="Kanit" />
 

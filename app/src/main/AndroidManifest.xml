@@ -11,7 +11,7 @@
         android:name="com.mvision.vfin.ApplicationVFin"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name="com.mvision.vfin.component.splashscreen.SplashScreenActivity">
@@ -60,11 +60,13 @@
 
         <activity android:name=".component.myproduct.myproductmain.MyProductMainActivity"/>
 
-        <activity android:name=".component.forgotpassword.validateotp.ValidateOtpActivity"/>
+        <activity android:name=".component.authen.forgotpassword.validateotp.ValidateOtpActivity"/>
 
-        <activity android:name=".component.forgotpassword.confrimpassword.ConfirmPasswordActivity"/>
+        <activity android:name=".component.authen.forgotpassword.confrimpassword.ConfirmPasswordActivity"/>
 
         <activity android:name=".component.authen.register.RegisterActivity"/>
+
+        <activity android:name=".component.topup.TopUpActivity"/>
 
 
         <service

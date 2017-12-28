@@ -12,11 +12,14 @@ public interface MessageDetailContract {
     interface View extends BaseView {
 
         void setUpViewMessageDetail(MessageData messageDetail);
+        void goToWalletHistory();
+        void showDeleteMessageSuccess(int position);
     }
 
     interface Presenter {
         void getMessageDetail();
-
+        void getOnClickButton();
+        void getDeleteMessage();
     }
 
 }

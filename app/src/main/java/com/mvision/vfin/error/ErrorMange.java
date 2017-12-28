@@ -4,7 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DialogTitle;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.mvision.vfin.R;
@@ -48,7 +54,7 @@ public class ErrorMange {
                 errorModel = new Gson().fromJson(body
                         .string(), ErrorModel.class);
 
-                Log.e("errorModel",new Gson().toJson(errorModel));
+               // Log.e("errorModel", new Gson().toJson(errorModel));
                 if (errorModel.errorCode.equals("2018")) {
                     PreferencesMange.getInstance().removeMemberID();
                     PreferencesMange.getInstance().removeTokenSession();
@@ -59,23 +65,22 @@ public class ErrorMange {
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Contextor.getInstance().getContext().startActivity(i);
                     Utility.ShowMsg(Contextor.getInstance().getContext(), errorModel.message + "");
-                } else  {
-                    showAlertCustom(errorModel.message+"["+errorModel.errorCode+"]",
+                } else {
+                    showAlertCustom(errorModel.message + "[" + errorModel.errorCode + "]",
                             "ลองอีกครั้ง", "ยกเลิก",
                             false, new
-                            CallBackAlertClick() {
-                                @Override
-                                public void clickOk() {
-                                    callBackError.reloadConnect();
-                                    showProgress("รอสักครู่");
-                                }
+                                    CallBackAlertClick() {
+                                        @Override
+                                        public void clickOk() {
+                                            callBackError.reloadConnect();
+                                            showProgress("รอสักครู่");
+                                        }
 
-                                @Override
-                                public void clickCancel() {
-
-                                    //   callBackError.reloadConnect();
-                                }
-                            });
+                                        @Override
+                                        public void clickCancel() {
+                                            callBackError.clickCancel();
+                                        }
+                                    });
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -93,10 +98,10 @@ public class ErrorMange {
                                 @Override
                                 public void clickCancel() {
 
-                                    //   callBackError.reloadConnect();
+                                       callBackError.clickCancel();
                                 }
                             });
-                 //   Utility.ShowMsg(Contextor.getInstance().getContext(), "Can't Connect");
+                    //   Utility.ShowMsg(Contextor.getInstance().getContext(), "Can't Connect");
                 }
             }
         }
@@ -106,6 +111,7 @@ public class ErrorMange {
     private ProgressDialog mProgressDialog;
 
     protected void showProgress(String msg) {
+
         if (mProgressDialog != null && mProgressDialog.isShowing())
             dismissProgress();
 
@@ -114,16 +120,17 @@ public class ErrorMange {
                 .getString(R
                         .string
                         .app_name), msg);
+
     }
 
 
     protected void dismissProgress() {
-        try{
+        try {
             if (mProgressDialog != null) {
                 mProgressDialog.dismiss();
                 mProgressDialog = null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -137,6 +144,8 @@ public class ErrorMange {
 
     public interface CallBackError {
         void reloadConnect();
+
+        void clickCancel();
     }
 
     public interface CallBackAlertClick {
@@ -146,9 +155,11 @@ public class ErrorMange {
     }
 
     protected void showAlertCustom(String msg, String text_yes, String text_no, boolean setcancle, final CallBackAlertClick callBackAlertClick) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.activity);
-        builder.setTitle(Contextor.getInstance().getContext().getResources().getString(R.string
-                .app_name))
+        Typeface face = Typeface.createFromAsset(Contextor.getInstance().getContext().getAssets(), "fonts/Kanit-Light.otf");
+
+        final AlertDialog builder = new AlertDialog.Builder(BaseActivity.activity)
+                .setTitle(Contextor.getInstance().getContext().getResources().getString(R.string
+                        .app_name))
                 .setMessage(msg)
                 .setCancelable(setcancle)
                 .setIcon(R.mipmap.ic_launcher)
@@ -165,7 +176,16 @@ public class ErrorMange {
                         dialog.dismiss();
                         callBackAlertClick.clickCancel();
                     }
-                }).create().show();
+                }).show();
+
+        TextView message = builder.findViewById(android.R.id.message);
+        Button button1 = builder.findViewById(android.R.id.button1);
+        Button button2 = builder.findViewById(android.R.id.button2);
+        Button button3 = builder.findViewById(android.R.id.button3);
+        message.setTypeface(face);
+        button1.setTypeface(face);
+        button2.setTypeface(face);
+        button3.setTypeface(face);
     }
 
 }

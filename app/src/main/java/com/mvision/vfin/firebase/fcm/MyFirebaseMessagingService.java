@@ -31,7 +31,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         String txt = remoteMessage.getData().get("title");
         String detail = remoteMessage.getData().get("body");
-        String imageProduct = remoteMessage.getData().get("imageProduct");
+        String imageProduct = remoteMessage.getData().get("image");
         showNoti(txt,detail,imageProduct);
     }
 
@@ -39,9 +39,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.drawable.logo_v_fin : com.mvision.vfin.R
-                .drawable
-                .logo_v_fin;
+        return useWhiteIcon ? R.drawable.ic_logo_pushnoti : R.mipmap.ic_launcher;
     }
 
 

@@ -21,25 +21,23 @@
             android:id="@+id/radioButtonMen"
             android:textColor="@color/colorTextGray"
             android:layout_margin="@dimen/margin"
-            android:text="men"
+            android:text="@string/layoutChangeGenderMen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/radioButtonFemale"
             android:textColor="@color/colorTextGray"
             android:layout_margin="@dimen/margin"
-            android:text="female"
+            android:text="@string/layoutChangeGenderFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RadioGroup>
 
 
-
-
     <com.mvision.vfin.customview.ButtonWithFont
         android:layout_width="match_parent"
         android:layout_margin="@dimen/margin"
-        android:text="บันทึก"
+        android:text="@string/textSave"
         android:id="@+id/buttonOk"
         android:textColor="@color/colorOrangeText"
         app:name = "Kanit"

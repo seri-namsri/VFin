@@ -38,7 +38,7 @@ public class MyAddressActivity extends BaseActivity {
     @Override
     protected void startView() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, MyAddressFragment.newInstance());
+        transaction.replace(R.id.container, MyAddressFragment.newInstance(getIntent().getExtras()));
         transaction.commit();
     }
 }

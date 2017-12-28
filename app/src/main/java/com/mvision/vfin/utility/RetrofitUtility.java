@@ -8,6 +8,7 @@ import com.mvision.vfin.BuildConfig;
 import com.mvision.vfin.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mvision.vfin.component.configkey.GetKey;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,26 +50,19 @@ public class RetrofitUtility {
         return retrofit();
     }
 
-    public Retrofit getRetrofitGateWay() {
 
-        return retrofitNewApiGateway();
-    }
-
-    public Retrofit getRetrofit(String api) {
-        return retrofit(api);
-    }
 
 
     private Retrofit retrofitApi;
 
     protected Retrofit retrofit() {
         try {
-                Gson gson = new GsonBuilder()
+                 Gson gson = new GsonBuilder()
                         .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                         .create();
                 retrofit = new Retrofit.Builder()
-                        .baseUrl("http://52.74.191.27:8080")
-                       // .baseUrl("http://192.168.1.8:8080")
+                        .baseUrl(GetKey.getInstance().getBaseApi(GetKey.getInstance()
+                               .getSignatures()))
                         .client(getRequestHeader())
                         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                         .addConverterFactory(GsonConverterFactory.create(gson))
@@ -81,66 +75,10 @@ public class RetrofitUtility {
 
     }
 
-    protected Retrofit retrofitNewApiGateway() {
-        try {
-                Gson gson = new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                        .create();
-                retrofit = new Retrofit.Builder()
-                        .baseUrl("")
-                        .client(getRequestHeader())
-                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                        .addConverterFactory(GsonConverterFactory.create(gson))
-                        .build();
 
-                return retrofit;
-        } catch (Exception e) {
-            return retrofit;
-        }
 
-    }
 
-    public Retrofit retrofitWithBaseUrl(String api) {
-        Retrofit retrofit = null;
-        try {
 
-            Gson gson = new GsonBuilder()
-                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                    .create();
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(api)
-                    .client(getRequestHeader())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-
-            return retrofit;
-
-        } catch (Exception e) {
-            return retrofit;
-        }
-
-    }
-
-    protected Retrofit retrofit(String api) {
-        // String url =   new Apilist().stringGetBaseUrl();
-        if (retrofitApi == null) {
-            Gson gson = new GsonBuilder()
-                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                    .create();
-            retrofitApi = new Retrofit.Builder()
-                    .baseUrl(api)
-                    .client(getRequestHeader(api))
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-
-                    .build();
-            return retrofitApi;
-        } else {
-            return retrofitApi;
-        }
-
-    }
 
 
     private HttpLoggingInterceptor provideHttpLoggingInterceptor() {
@@ -198,18 +136,6 @@ public class RetrofitUtility {
     }
 
 
-    private Cache provideCache() {
-        Cache cache = null;
-        try {
-
-            cache = new Cache(new File(Contextor.getInstance().getContext().getCacheDir(), "http-cache"),
-                    10 * 1024 * 1024); // 10 MB
-            Log.e("Cache", "ok" + cache.directory());
-        } catch (Exception e) {
-            Log.e("Cache", "Could not create Cache!");
-        }
-        return cache;
-    }
 
 
     public boolean checkIfHasNetwork() {
@@ -218,65 +144,8 @@ public class RetrofitUtility {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    public boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        if (connectivity == null) {
-            return false;
-        } else {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
 
 
- /*   private OkHttpClient getRequestHeader() {
-
-        OkHttpClient client = new OkHttpClient
-                .Builder()
-                .readTimeout(1000000, TimeUnit.SECONDS)
-                .connectTimeout(1000000, TimeUnit.SECONDS)
-                .addInterceptor(provideHttpLoggingInterceptor())
-                .addInterceptor(provideOfflineCacheInterceptor())
-                .addNetworkInterceptor(provideCacheInterceptor())
-                .cache(provideCache())
-                .build();
-
-        return client;
-    }*/
-
-
-    private OkHttpClient getRequestHeader(String api) {
-        OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-
-        okHttpClient.readTimeout(1000000, TimeUnit.SECONDS);
-        okHttpClient.connectTimeout(1000000, TimeUnit.SECONDS);
-        okHttpClient.addInterceptor(provideHttpLoggingInterceptor());
-        okHttpClient.addInterceptor(provideOfflineCacheInterceptor());
-        okHttpClient.addNetworkInterceptor(provideCacheInterceptor());
-        okHttpClient.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request original = chain.request();
-                // Request customization: add request headers
-                Request.Builder requestBuilder = original.newBuilder()
-                        .header("Authorization", "key=" +
-                                "AAAAW6_DU08:APA91bEtbrFpYKU4PSHuF2YiPq-TYe1764gw25HVU2KbZsOTof--OabR6pQIBTjoM8gMjec3W3MRYGH2LZ-w1MOpQ9mS7WCOwAUoGrII_ne8Nn9xsS7zzVttVO3Q-GE066f4U_RPBV1S").header("Content-Type", "application/json"); // <-- this is the important line
-
-                Request request = requestBuilder.build();
-                return chain.proceed(request);
-            }
-        });
-
-        return okHttpClient.build();
-    }
 
 
     private OkHttpClient getRequestHeader() {
@@ -307,7 +176,7 @@ public class RetrofitUtility {
                       //  .header_signature),Utilities.Decryptor.byteArrayToHex(baseKey.getBytes()))
                         .header(Contextor.getInstance().getContext().getString(R.string.header_timestamp), "" + Calendar.getInstance().getTimeInMillis())
                         .header(Contextor.getInstance().getContext().getString(R.string
-                        .header_language), "TH")
+                        .header_language), PreferencesMange.getInstance().getLanguage())
                         .header(Contextor.getInstance().getContext().getString(R.string
                                 .header_imei), Utility.getIMEI1(Contextor.getInstance().getContext())+"")
                         .header(Contextor.getInstance().getContext().getString(R.string

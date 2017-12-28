@@ -4,6 +4,7 @@ import com.mvision.vfin.api.modelrequest.ErrorModel;
 import com.mvision.vfin.api.modelrequest.LoginFaceBookRequestModel;
 import com.mvision.vfin.api.modelrequest.LoginRequestModel;
 import com.mvision.vfin.api.response.LoginResponseModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.component.profile.model.Member;
 import com.mvision.vfin.error.ErrorCode;
 import com.mvision.vfin.error.ErrorMange;
@@ -37,7 +38,9 @@ public class LoginManage {
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(com.mvision.vfin.api.request
-                        .Member.class).loginVfin(new LoginRequestModel(userName, password))
+                        .Member.class).loginVfin(GetKey.getInstance().apiLogin(GetKey.getInstance()
+                .getSignatures()),new
+                LoginRequestModel(userName, password))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<LoginResponseModel>() {
@@ -52,6 +55,11 @@ public class LoginManage {
                             @Override
                             public void reloadConnect() {
                                 loginWithApi(userName,password,callBackData);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+                                callBackData.onFail("");
                             }
                         });
                     }
@@ -70,7 +78,8 @@ public class LoginManage {
         LoginFaceBookRequestModel a = new LoginFaceBookRequestModel(facebookID);
         Log.e("loginWithFaceBook",new Gson().toJson(a));
         RetrofitUtility.getInstance().getRetrofit().create(com.mvision.vfin.api.request.Member.class)
-                .loginFaceBookVfin(new LoginFaceBookRequestModel(facebookID))
+                .loginFaceBookVfin(GetKey.getInstance().apiLoginFaceBook(GetKey.getInstance()
+                        .getSignatures()),new LoginFaceBookRequestModel(facebookID))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<LoginResponseModel>() {
@@ -84,8 +93,13 @@ public class LoginManage {
                         ErrorMange.getInstance().setError(e, new ErrorMange.CallBackError() {
                             @Override
                             public void reloadConnect() {
-                                callBackData.onFail(ErrorCode.getInstance().reload);
+                               // callBackData.onFail(ErrorCode.getInstance().reload);
                                 loginWithFaceBook(facebookID,callBackData);
+                            }
+
+                            @Override
+                            public void clickCancel() {
+                                callBackData.onFail("");
                             }
                         });
                     }

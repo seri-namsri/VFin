@@ -11,7 +11,7 @@ import com.facebook.FacebookAuthorizationException;
 import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.authen.register.RegisterActivity;
-import com.mvision.vfin.component.forgotpassword.requestforgotpassword.RequestForgotPasswordDialogFragment;
+import com.mvision.vfin.component.authen.forgotpassword.requestforgotpassword.RequestForgotPasswordDialogFragment;
 import com.mvision.vfin.component.main.MainActivity;
 import com.mvision.vfin.customview.EditTextWithFont;
 import com.mvision.vfin.utility.Log;
@@ -210,12 +210,12 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @Override
     public void showLoading() {
-
+        showProgress(getString(R.string.textLoading));
     }
 
     @Override
     public void hideLoading() {
-
+       dismissProgress();
     }
 
     @Override

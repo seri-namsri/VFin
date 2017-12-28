@@ -8,22 +8,22 @@
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
 	{
-		"native-lib-Debug-arm64-v8a" : 
+		"vfin-security-Debug-arm64-v8a" : 
 		{
 			"abi" : "arm64-v8a",
-			"artifactName" : "native-lib",
-			"buildCommand" : "/Users/enter_01/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/enter_01/AndroidStudioProjects/V-Fin/app/.externalNativeBuild/cmake/release/arm64-v8a --target native-lib",
+			"artifactName" : "vfin-security",
+			"buildCommand" : "/Users/enter_01/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/enter_01/AndroidStudioProjects/V-Fin/app/.externalNativeBuild/cmake/release/arm64-v8a --target vfin-security",
 			"buildType" : "debug",
 			"files" : 
 			[
 				
 				{
-					"flags" : "  --target=aarch64-none-linux-android --gcc-toolchain=/Users/enter_01/Library/Android/sdk/ndk-bundle/toolchains/aarch64-linux-android-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/enter_01/Library/Android/sdk/ndk-bundle/sysroot  -Dnative_lib_EXPORTS -isystem /Users/enter_01/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/enter_01/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/arm64-v8a/include -isystem /Users/enter_01/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem /Users/enter_01/Library/Android/sdk/ndk-bundle/sysroot/usr/include/aarch64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
-					"src" : "/Users/enter_01/AndroidStudioProjects/V-Fin/app/src/main/cpp/native-lib.cpp",
+					"flags" : "  --target=aarch64-none-linux-android --gcc-toolchain=/Users/enter_01/Library/Android/sdk/ndk-bundle/toolchains/aarch64-linux-android-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/enter_01/Library/Android/sdk/ndk-bundle/sysroot  -Dvfin_security_EXPORTS -isystem /Users/enter_01/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/enter_01/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/arm64-v8a/include -isystem /Users/enter_01/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem /Users/enter_01/Library/Android/sdk/ndk-bundle/sysroot/usr/include/aarch64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "/Users/enter_01/AndroidStudioProjects/V-Fin/app/src/main/cpp/vfin-security.cpp",
 					"workingDirectory" : "/Users/enter_01/AndroidStudioProjects/V-Fin/app/.externalNativeBuild/cmake/release/arm64-v8a"
 				}
 			],
-			"output" : "/Users/enter_01/AndroidStudioProjects/V-Fin/app/build/intermediates/cmake/release/obj/arm64-v8a/libnative-lib.so",
+			"output" : "/Users/enter_01/AndroidStudioProjects/V-Fin/app/build/intermediates/cmake/release/obj/arm64-v8a/libvfin-security.so",
 			"toolchain" : "9264720671373184164"
 		}
 	},

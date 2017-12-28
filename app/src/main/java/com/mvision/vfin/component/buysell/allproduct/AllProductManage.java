@@ -6,6 +6,7 @@ import com.mvision.vfin.api.request.Apipublic;
 import com.mvision.vfin.api.response.TimeResponseModel;
 import com.mvision.vfin.api.response.TradeBuyResponseModel;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.component.main.model.ModelCoinAndBit;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
@@ -59,7 +60,7 @@ public class AllProductManage {
                 ProductRealTimeModel productRealTimeModel = dataSnapshot.getValue
                         (ProductRealTimeModel.class);
                 productRealTimeModels.add(productRealTimeModel);
-                arrayList.add(productRealTimeModel.getId() + "");
+                arrayList.add(productRealTimeModel.getCode() + "");
                 if (count[0] <= productRealTimeModels.size()) {
                     productRealTimeModel.setIntegerArrayListId(arrayList);
                     callBackData.onSuccessAll(productRealTimeModels);
@@ -148,8 +149,12 @@ public class AllProductManage {
         RetrofitUtility.getInstance()
                 .getRetrofit()
                 .create(com.mvision.vfin.api.request.Product.class)
-                .tradeBuy(new TradeBuy(PreferencesMange.getInstance().getMemberID(), productRealTimeModel.getNextPrice(),
-                        productRealTimeModel.getId() + ""))
+                .tradeBuy(GetKey.getInstance()
+                        .apiTradeBid(GetKey
+                                .getInstance()
+                                .getSignatures()),new TradeBuy(PreferencesMange.getInstance()
+                        .getMemberID(), productRealTimeModel.getNextPrice(),
+                        productRealTimeModel.getCode() + ""))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<TradeBuyResponseModel>() {
@@ -167,7 +172,7 @@ public class AllProductManage {
                                 ErrorModel errorModel = new Gson().fromJson(body.string(), ErrorModel.class);
                                 callBackData.onFail(errorModel.message);
 
-                                int position = arrayList.indexOf(productRealTimeModel.getId() + "");
+                                int position = arrayList.indexOf(productRealTimeModel.getCode() + "");
                                 if (position >= 0) {
                                     callBackData.onItemFail(position);
                                 }
@@ -211,6 +216,11 @@ public class AllProductManage {
                             public void reloadConnect() {
 
                             }
+
+                            @Override
+                            public void clickCancel() {
+
+                            }
                         });
                     }
 
@@ -228,7 +238,7 @@ public class AllProductManage {
             myRef.removeEventListener(childEventListener);
 
         if (valueEventListener != null)
-            myRef.removeEventListener(valueEventListener);
+            myRefCoins.removeEventListener(valueEventListener);
     }
 
 

@@ -88,7 +88,7 @@
 
         <com.mvision.vfin.customview.ButtonWithFont
             app:name = "Kanit"
-            android:text="ยืนยัน"
+            android:text="ระบุที่อยู่จัดส่ง"
             android:layout_marginBottom="@dimen/margin_3"
             android:layout_marginLeft="@dimen/margin"
             android:background="@drawable/button_radius_yello"

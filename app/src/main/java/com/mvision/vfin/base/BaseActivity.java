@@ -2,14 +2,25 @@ package com.mvision.vfin.base;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
+import com.mvision.vfin.R;
 import com.mvision.vfin.base.presenter.Presenter;
+import com.mvision.vfin.utility.Contextor;
+import com.mvision.vfin.utility.PreferencesMange;
+
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -37,12 +48,43 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             presenter.initialize(getIntent().getExtras());
         }
         startView();
+
+    }
+
+    protected void showProgress( String msg) {
+        if (mProgressDialog != null && mProgressDialog.isShowing())
+            dismissProgress();
+
+        mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.app_name),
+                msg);
+
+    }
+
+
+    protected void dismissProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
+    }
+
+
+
+    public void setLocale(String lang) { //call this in onCreate()
+        Locale myLocale = new Locale(lang);
+        Resources res = Contextor.getInstance().getContext().getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         activity = this;
+        setLocale(PreferencesMange.getInstance().getLanguage());
     }
 
     @Override
@@ -99,7 +141,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onStop() {
         super.onStop();
-
+        Runtime.getRuntime().gc();
     }
 
 

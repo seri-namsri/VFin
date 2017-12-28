@@ -18,7 +18,7 @@
         android:paddingLeft="@dimen/margin"
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
-        android:hint="วันเกิด"
+        android:hint="@string/textBirdDay"
         app:name="Kanit" />
 
     <com.mvision.vfin.customview.TextViewWithFont
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
         android:background="@drawable/button_radius_yello"
-        android:text="บันทึก"
+        android:text="@string/textSave"
         android:textColor="@color/colorOrangeText"
         app:name="Kanit" />
 

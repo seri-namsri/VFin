@@ -13,7 +13,7 @@ import org.parceler.Parcel;
 public class AddressModel {
 
     @SerializedName("name")
-   public String name;
+    public String name;
 
     public String getName() {
         return name;
@@ -44,7 +44,7 @@ public class AddressModel {
     public Province province;
 
     public String getTelNo() {
-        return (telNo != null) ?"เบอร์โทร : " +telNo : "";
+        return (telNo != null) ? "เบอร์โทร : " + telNo : "";
     }
 
     public void setTelNo(String telNo) {
@@ -62,8 +62,6 @@ public class AddressModel {
     public Amphur amphur;
 
 
-
-
     public Integer getId() {
         return id;
     }
@@ -71,6 +69,7 @@ public class AddressModel {
     public void setId(Integer id) {
         this.id = id;
     }
+
     @SerializedName("id")
     public Integer id;
 
@@ -81,11 +80,12 @@ public class AddressModel {
     public void setIsPrimary(String isPrimary) {
         this.isPrimary = isPrimary;
     }
+
     @SerializedName("isPrimary")
     public String isPrimary;
 
     public String getSoi() {
-        return (soi != null) ?"ซอย " +soi : "";
+        return (soi != null) ? "ซอย " + soi : "";
     }
 
     public void setSoi(String soi) {
@@ -93,7 +93,7 @@ public class AddressModel {
     }
 
     public String getReceiver() {
-        return (receiver != null) ?"ชื่อผู้รับ : " +receiver : "";
+        return (receiver != null) ? "ชื่อผู้รับ : " + receiver : "";
 
     }
 
@@ -110,7 +110,7 @@ public class AddressModel {
     }
 
     public String getReceiveName() {
-        return (receiveName != null) ?"ชื่อผู้รับ : " +receiveName : "";
+        return (receiveName != null) ? "ชื่อผู้รับ : " + receiveName : "";
     }
 
     public String getAddressName() {
@@ -132,6 +132,7 @@ public class AddressModel {
     public long getUpdatedDate() {
         return updatedDate;
     }
+
     @SerializedName("soi")
     public String soi;
 
@@ -142,6 +143,7 @@ public class AddressModel {
     public void setAlley(String alley) {
         this.alley = alley;
     }
+
     @SerializedName("alley")
     public String alley;
 
@@ -154,7 +156,7 @@ public class AddressModel {
     }
 
     public String getRoad() {
-        return (road != null) ?"ถนน " +road : "";
+        return (road != null) ? "ถนน " + road : "";
     }
 
     public void setRoad(String road) {
@@ -162,17 +164,17 @@ public class AddressModel {
     }
 
     public String getPostalCode() {
-        return (postalCode != null) ?postalCode : "";
+        return (postalCode != null) ? postalCode : "";
     }
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
+
     @SerializedName("lane")
     public String lane;
     @SerializedName("road")
     public String road;
-
 
 
     public String getDetails() {
@@ -184,7 +186,7 @@ public class AddressModel {
     }
 
     public String getDistrict() {
-        return (district != null) ?district.trim() : "";
+        return (district != null) ? district.trim() : "";
     }
 
     public void setDistrict(String district) {
@@ -192,7 +194,7 @@ public class AddressModel {
     }
 
     public String getHouseNo() {
-        return (houseNo != null) ?"บ้านเลขที่ " +houseNo : "";
+        return (houseNo != null) ? "บ้านเลขที่ " + houseNo : "";
     }
 
     public void setHouseNo(String houseNo) {
@@ -200,7 +202,7 @@ public class AddressModel {
     }
 
     public String getProvince() {
-        return (province != null) ?province.provinceName.trim() : "";
+        return (province != null) ? province.provinceName.trim() : "";
     }
 
     public void setProvince(Province province) {
@@ -208,12 +210,13 @@ public class AddressModel {
     }
 
     public String getSubDistrict() {
-        return (subDistrict != null) ?"เขต " +subDistrict : "";
+        return (subDistrict != null) ? "เขต " + subDistrict : "";
     }
 
     public void setSubDistrict(String subDistrict) {
         this.subDistrict = subDistrict;
     }
+
     @SerializedName("subDistrict")
     public String subDistrict;
     @SerializedName("postalCode")
@@ -238,8 +241,94 @@ public class AddressModel {
     @SerializedName("updatedDate")
     public long updatedDate;
 
-    public String getAddressAll(){
-        return getReceiver()+ "\n"+ getTelNo() +"\n"+ getHouseNo()+" "+getDetails()+" "+getDistrict()
-                +" , "+ getProvince() +" "+getPostalCode();
+    public String getAddressAll() {
+        return getReceiver() + "\n" + getTelNo() + "\n" + getHouseNo() + " " + getDetails() + " " + getDistrict()
+                + " , " + getProvince() + " " + getPostalCode();
     }
+
+    public MyAddress getAddress() {
+        MyAddress myAddress = new MyAddress();
+        myAddress.addressName = name;
+        myAddress.details = details;
+        myAddress.district = getDistrict();
+        myAddress.houseNo = houseNo;
+        myAddress.postalCode = postalCode;
+        myAddress.province = getProvince();
+        myAddress.receiveName = receiveName;
+        myAddress.telNo = telNo;
+        myAddress.subDistrict = "String";
+        return myAddress;
+    }
+
+    @Parcel
+    public static class MyAddress {
+        @SerializedName("addressName")
+        String addressName;
+        @SerializedName("details")
+        String details;
+        @SerializedName("district")
+        String district;
+        @SerializedName("subDistrict")
+        String subDistrict;
+        @SerializedName("houseNo")
+        String houseNo;
+        @SerializedName("postalCode")
+        String postalCode;
+        @SerializedName("province")
+        String province;
+        @SerializedName("receiveName")
+        String receiveName;
+
+        public String getAddressAll() {
+            return "<b>ที่อยู่จัดส่ง</b><br>"+getReceiveName()  + getTelNo() + "<br>" + getHouseNo() +
+                    " " +
+                    getDetails()
+                    + " "+
+                    getDistrict()
+                    + " , " + getProvince() + " " + getPostalCode();
+        }
+
+        public String getAddressName() {
+            return addressName;
+        }
+
+        public String getDetails() {
+            return details;
+        }
+
+        public String getDistrict() {
+            return district;
+        }
+
+        public String getSubDistrict() {
+            return subDistrict;
+        }
+
+        public String getHouseNo() {
+            return (houseNo != null) ? "บ้านเลขที่ " + houseNo : "";
+        }
+
+        public String getPostalCode() {
+            return postalCode;
+        }
+
+        public String getProvince() {
+            return province;
+        }
+
+        public String getReceiveName() {
+            return (receiveName != null) ? "ชื่อผู้รับ : " + receiveName +"<br>": "";
+        }
+
+        public String getTelNo() {
+
+            return (telNo != null) ? "เบอร์โทร : " + telNo : "";
+        }
+
+        @SerializedName("telNo")
+        String telNo;
+
+
+    }
+
 }

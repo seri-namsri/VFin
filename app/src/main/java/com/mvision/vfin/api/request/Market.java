@@ -5,6 +5,7 @@ import com.mvision.vfin.api.response.WalletTransectionResponseModel;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -13,7 +14,7 @@ import rx.Observable;
 
 public interface Market {
 
-    @GET("marketservice/v1/trade/listRedemption")
-    Observable<ListRedemtionResponseModel> getListRedemption();
+    @GET
+    Observable<ListRedemtionResponseModel> getListRedemption(@Url String url);
 
 }

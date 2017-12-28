@@ -3,6 +3,7 @@ package com.mvision.vfin.api.modelrequest;
 import com.google.gson.annotations.SerializedName;
 import com.mvision.vfin.BuildConfig;
 import com.mvision.vfin.utility.Contextor;
+import com.mvision.vfin.utility.PreferencesMange;
 import com.mvision.vfin.utility.Utility;
 import com.mvision.vfin.utility.UtilsEncoding;
 
@@ -29,6 +30,8 @@ public class LoginRequestModel {
     private String versionCode;
     @SerializedName("deviceModelName")
     private String deviceModelName;
+    @SerializedName("registrationId")
+    private String registrationId;
     public LoginRequestModel(String userName,String password){
         this.userName = userName;
         this.password = UtilsEncoding.SHA1(password);
@@ -39,5 +42,6 @@ public class LoginRequestModel {
         this.macAddress = Utility.getMACAddress("wlan0");
         this.versionCode = String.valueOf(BuildConfig.VERSION_CODE);
         this.deviceModelName = Utility.getDeviceName();
+        this.registrationId = PreferencesMange.getInstance().getTokenFCM();
     }
 }

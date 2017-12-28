@@ -148,6 +148,7 @@ public class TelephonyInfo {
         return imsi;
     }
 
+
     private static boolean getSIMStateBySlot(Context context, String predictedMethodName, int slotID) throws GeminiMethodNotFoundException {
 
         boolean isReady = false;

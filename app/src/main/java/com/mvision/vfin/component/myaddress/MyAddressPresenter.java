@@ -1,6 +1,7 @@
 package com.mvision.vfin.component.myaddress;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.mvision.vfin.api.response.MyAddressResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
@@ -24,14 +25,25 @@ public class MyAddressPresenter extends Presenter<MyAddressContract.View> implem
     public MyAddressPresenter(MyAddressContract.View view) {
         this.view = view;
     }
+    public int codeCheck = -1 ;
+    @Override
+    public void initialize(Bundle extras) {
+        super.initialize(extras);
+        try {
+            codeCheck = extras.getInt("code");
+        }catch (NullPointerException e){}
+    }
 
     @Override
     public void getAddress() {
+        view.showLoading();
         MyAddressManage.getInstance().myAddress(new Query.CallBackData() {
             @Override
             public <T> void onSuccess(T t) {
+                view.hideLoading();
                 myAddressResponseModel = (MyAddressResponseModel) t;
                 view.setUpViewAddress(myAddressResponseModel);
+                addressModel = getFirstAddress(myAddressResponseModel);
             }
 
             @Override
@@ -46,28 +58,45 @@ public class MyAddressPresenter extends Presenter<MyAddressContract.View> implem
         });
     }
 
+    private AddressModel getFirstAddress(MyAddressResponseModel myAddressResponseModel){
+        try {
+            for (AddressModel addressModel : myAddressResponseModel.result){
+                if ( addressModel.isPrimary.equals("yes")){
+                    return addressModel;
+                }
+            }
+        }catch (NullPointerException e){}
+
+     return null;
+    }
+
     @Override
     public void updateAddressIsPrimary() {
-        try {
-            MyAddressManage.getInstance().updateAddressIsPrimary(new Query.CallBackData() {
-                @Override
-                public <T> void onSuccess(T t) {
-                    view.updateAddressIsPrimarySuccess(addressModel);
-                }
+        if (codeCheck == -1){
+            try {
+                MyAddressManage.getInstance().updateAddressIsPrimary(new Query.CallBackData() {
+                    @Override
+                    public <T> void onSuccess(T t) {
+                        view.updateAddressIsPrimarySuccess(addressModel);
+                    }
 
-                @Override
-                public <T> void onSuccessAll(ArrayList<T> tArrayList) {
+                    @Override
+                    public <T> void onSuccessAll(ArrayList<T> tArrayList) {
 
-                }
+                    }
 
-                @Override
-                public void onFail(String error) {
+                    @Override
+                    public void onFail(String error) {
 
-                }
-            },addressModel.id);
-        }catch (NullPointerException e){
-            view.updateAddressIsPrimaryFail();
+                    }
+                },addressModel.id);
+            }catch (NullPointerException e){
+                view.updateAddressIsPrimaryFail();
+            }
+        }else {
+            view.updateAddressIsPrimarySuccess(addressModel);
         }
+
 
     }
 

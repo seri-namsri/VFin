@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
-        android:hint="อีเมล"
+        android:hint="@string/textEmail"
         android:paddingLeft="@dimen/margin"
         app:name="Kanit" />
 
@@ -27,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:name = "Kanit"
-        android:hint="อีเมล"
         android:padding="@dimen/margin"
         android:id="@+id/editTextEmail"/>
 
@@ -35,7 +34,7 @@
     <com.mvision.vfin.customview.ButtonWithFont
         android:layout_width="match_parent"
         android:layout_margin="@dimen/margin"
-        android:text="บันทึก"
+        android:text="@string/textSave"
         android:id="@+id/buttonOk"
         android:textColor="@color/colorOrangeText"
         app:name = "Kanit"

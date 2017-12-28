@@ -1,5 +1,6 @@
 package com.mvision.vfin.component.profile;
 import com.google.gson.Gson;
+import com.mvision.vfin.component.configkey.GetKey;
 import com.mvision.vfin.component.profile.model.MemberResponseModel;
 import com.mvision.vfin.error.ErrorMange;
 import com.mvision.vfin.firebase.Firestore.Query;
@@ -29,33 +30,33 @@ public class ProfileManager {
     public void getMemberApi(final Query.CallBackData callBackData) {
         RetrofitUtility.getInstance()
                 .getRetrofit()
-                .create(com.mvision.vfin.api.request.Member.class).getMember(PreferencesMange
+                .create(com.mvision.vfin.api.request.Member.class).getMember(GetKey.getInstance()
+                .apiGetMember(GetKey
+                .getInstance()
+                .getSignatures()),PreferencesMange
                 .getInstance().getMemberID().trim()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MemberResponseModel>() {
                     @Override
                     public void onCompleted() {
-
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         ErrorMange.getInstance().setError(e, new ErrorMange.CallBackError() {
                             @Override
                             public void reloadConnect() {
-
                                 getMemberApi(callBackData);
                             }
+
+                            @Override
+                            public void clickCancel() {
+                            }
                         });
-
                     }
-
                     @Override
                     public void onNext(MemberResponseModel s) {
                         callBackData.onSuccess(s);
-
                     }
-
                 });
     }
 }

@@ -1,7 +1,9 @@
 package com.mvision.vfin.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -10,8 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.TextView;
 
+import com.mvision.vfin.R;
 import com.mvision.vfin.base.presenter.Presenter;
+import com.mvision.vfin.utility.Contextor;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -56,6 +62,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements BaseV
         startActivity(intent);
     }
 
+    protected void startActivityResultFromFragment(Class classN, Bundle data, int requestCode) {
+        Intent intent = new Intent(getActivity(), classN);
+        if (data != null)
+            intent.putExtras(data);
+        startActivityForResult(intent, requestCode);
+    }
 
 
     @Nullable
@@ -64,6 +76,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements BaseV
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(setLayoutResourceIdentifier(), container, false);
         unbinder = ButterKnife.bind(this, view);
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         startView();
         return view;
     }
@@ -76,6 +89,24 @@ public abstract class BaseDialogFragment extends DialogFragment implements BaseV
         Runtime.getRuntime().gc();
         unbinder.unbind();
 
+    }
+
+    private ProgressDialog mProgressDialog;
+    protected void showProgress( String msg) {
+        if (mProgressDialog != null && mProgressDialog.isShowing())
+            dismissProgress();
+
+        mProgressDialog = ProgressDialog.show(getActivity(), getResources().getString(R.string.app_name),
+                msg);
+
+    }
+
+
+    protected void dismissProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
     }
 
     protected abstract void initializePresenter();

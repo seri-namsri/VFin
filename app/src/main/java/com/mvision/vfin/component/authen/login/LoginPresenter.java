@@ -4,6 +4,8 @@ import com.mvision.vfin.api.response.LoginResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
 import com.mvision.vfin.firebase.Firestore.Query;
 import com.mvision.vfin.utility.Contextor;
+import com.mvision.vfin.utility.Log;
+import com.mvision.vfin.utility.PreferencesMange;
 import com.mvision.vfin.utility.Utility;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
     @Override
     public void getLogin(String tel, String password) {
         if (tel != null && password != null) {
+            view.showLoading();
             LoginManage.getInstance().loginWithApi(tel, password, callBackData);
         }
     }
@@ -31,12 +34,10 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
     private Query.CallBackData callBackData = new Query.CallBackData() {
         @Override
         public <T> void onSuccess(T t) {
+            view.hideLoading();
             LoginResponseModel member = (LoginResponseModel) t;
-
-            Utility.savePreferences(Contextor.getInstance().getContext(), "member_id",
-                    member.result.memberCode);
-            Utility.savePreferences(Contextor.getInstance().getContext(), "tokenSession",
-                    member.result.tokenSession);
+            PreferencesMange.getInstance().setMemberID(member.result.memberCode);
+            PreferencesMange.getInstance().setTokenSession(member.result.tokenSession);
             view.setUpViewLogin();
         }
 
@@ -47,12 +48,15 @@ public class LoginPresenter extends Presenter<LoginContract.View> implements Log
 
         @Override
         public void onFail(String error) {
+            Log.e("DDDDDDDDD","DDDDDDD");
+            view.hideLoading();
             view.showMessageFail(error);
         }
     };
 
     @Override
     public void getLoginFaceBook(String faceBookId) {
+        view.showLoading();
         LoginManage.getInstance().loginWithFaceBook(faceBookId, callBackData);
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.mvision.vfin.R;
 import com.mvision.vfin.base.BaseFragment;
 import com.mvision.vfin.component.buysell.allproduct.pojo.ProductRealTimeModel;
 import com.mvision.vfin.component.productdetail.ProductDetailActivity;
+import com.mvision.vfin.utility.Log;
 import com.mvision.vfin.utility.Utility;
 
 import org.parceler.Parcels;
@@ -124,8 +126,11 @@ public class AllProductFragment extends BaseFragment implements AllProductContra
                     public void clickItemFail(String error) {
                         Utility.ShowMsg(getActivity(),error);
                     }
-                });
+                })
+                ;
                 recyclerView.setAdapter(productAdapter);
+
+
             }
 
         } catch (Exception e) {
@@ -159,9 +164,9 @@ public class AllProductFragment extends BaseFragment implements AllProductContra
     @Override
     public void showNotFoundData() {
         try {
-            textViewNotFoundData.setText("ไม่มีสินค้าในระบบ");
+            textViewNotFoundData.setText(getString(R.string.textErrorNotFountData));
             textViewNotFoundData.setVisibility(View.VISIBLE);
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
         }
     }
 

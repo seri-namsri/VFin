@@ -47,7 +47,7 @@
         app:type ="bold"
         android:id="@+id/buttonOK"
         android:layout_marginBottom="@dimen/margin"
-        android:text="@string/text_button_ok"
+        android:text="@string/textOk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

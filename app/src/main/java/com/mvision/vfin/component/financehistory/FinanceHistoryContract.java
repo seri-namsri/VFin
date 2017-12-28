@@ -18,6 +18,7 @@ public interface FinanceHistoryContract {
         void setUpViewFinanceHistoryMore(WalletTransectionResponseModel  walletTransectionResponseModel);
         void setUpCoin(String coin);
         void setUpViewFinanceHistoryLoading();
+        void showTextNotFound();
 
     }
 

@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
+import com.mvision.vfin.R;
 import com.mvision.vfin.api.response.ProvinceResponseModel;
 import com.mvision.vfin.base.presenter.Presenter;
 import com.mvision.vfin.component.addeditdress.model.AddressModel;
 import com.mvision.vfin.component.myaddress.Model.Amphur;
 import com.mvision.vfin.component.myaddress.Model.Province;
 import com.mvision.vfin.firebase.Firestore.Query;
+import com.mvision.vfin.utility.Contextor;
 import com.mvision.vfin.utility.Log;
 
 import org.parceler.Parcels;
@@ -68,7 +70,7 @@ public class AddEditAddressPresenter extends Presenter<AddEditAddressContract.Vi
         try {
             view.showDistrict(province.id);
         }catch (NullPointerException e){
-            view.showMessageFail("กรุณาเลือกจังหวัดก่อน");
+            view.showMessageFail(Contextor.getInstance().getContext().getString(R.string.ProvinceAmphurFragmentErroSelectBefore));
         }
     }
 

@@ -53,23 +53,25 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        try {
+            if (clickPosition >= 0 && clickPosition == position) {
+                holder.imageClick.setBackgroundResource(R.drawable.checked);
+            } else if (clickPosition < 0 && myAddressResponseModel.result.get
+                    (position).isPrimary.equals("yes")) {
+                holder.imageClick.setBackgroundResource(R.drawable.checked);
+            } else {
+                holder.imageClick.setBackgroundResource(R.drawable.button_background_black_corner);
+            }
 
-        if (clickPosition >= 0 && clickPosition == position){
-            holder.imageClick.setBackgroundResource(R.drawable.checked);
-        }else if ( clickPosition < 0 && myAddressResponseModel.result.get
-                (position).isPrimary.equals("yes")){
-            holder.imageClick.setBackgroundResource(R.drawable.checked);
-        }
-
-        else {
-            holder.imageClick.setBackgroundResource(R.drawable.button_background_black_corner);
+        }catch (NullPointerException e){
+            e.printStackTrace();
         }
 
         holder.textViewAddress.setText(myAddressResponseModel.result.get(position).houseNo + " " +
                 myAddressResponseModel.result.get(position).details + " " +
-                myAddressResponseModel.result.get(position).province.provinceName +" "+
-                        myAddressResponseModel.result.get(position).district + " " +
-                myAddressResponseModel.result.get(position).postalCode );
+                myAddressResponseModel.result.get(position).province.provinceName + " " +
+                myAddressResponseModel.result.get(position).district + " " +
+                myAddressResponseModel.result.get(position).postalCode);
         holder.textViewAddressName.setText(myAddressResponseModel.result.get(position).getName());
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +82,7 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickItem.itemClickSelect(myAddressResponseModel.result.get(position),position);
+                onClickItem.itemClickSelect(myAddressResponseModel.result.get(position), position);
             }
         });
     }
@@ -110,7 +112,7 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
     public interface OnClickItem {
         void itemClickEdit(AddressModel addressModel, int position);
 
-        void itemClickSelect(AddressModel addressModel,int position);
+        void itemClickSelect(AddressModel addressModel, int position);
     }
 
 }

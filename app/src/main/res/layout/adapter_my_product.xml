@@ -9,6 +9,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:paddingBottom="@dimen/margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -16,12 +17,12 @@
 
         <com.mvision.vfin.customview.TextViewWithFont
             android:id="@+id/textViewName"
-            android:text="Test"
-            android:padding="@dimen/margin"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/margin"
+            android:text="Test"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/text_normal_size"
             app:name="Kanit" />
 
@@ -32,56 +33,116 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_margin="@dimen/margin"
                 android:id="@+id/imageViewProduct"
                 android:layout_width="0dp"
-                android:scaleType="centerCrop"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
+                android:layout_margin="@dimen/margin"
                 android:layout_weight="1"
-                android:background="@color/colorTextGray" />
+                android:background="@color/colorTextGray"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
-                android:layout_margin="@dimen/margin"
                 android:layout_width="0dp"
-                android:orientation="vertical"
                 android:layout_height="wrap_content"
-                android:layout_weight="3">
+                android:layout_margin="@dimen/margin"
+                android:layout_weight="3"
+                android:orientation="vertical">
 
                 <com.mvision.vfin.customview.TextViewWithFont
                     android:id="@+id/textViewOrder"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small_size"
+                    app:name="Kanit"
+                    app:type="bold" />
 
                 <com.mvision.vfin.customview.TextViewWithFont
+                    android:id="@+id/textViewDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:name = "Kanit"
-                    android:textSize="@dimen/text_normal_size"
-                    android:id="@+id/textViewDetail"/>
+                    android:textSize="@dimen/text_small_size"
+                    app:name="Kanit" />
 
                 <com.mvision.vfin.customview.TextViewWithFont
+                    android:id="@+id/textViewStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:name = "Kanit"
-                    app:type = "bold"
-                    android:textSize="@dimen/text_normal_size"
-                    android:id="@+id/textViewAddressName"/>
+                    android:textSize="@dimen/text_small_size"
+                    app:name="Kanit" />
 
                 <com.mvision.vfin.customview.TextViewWithFont
+                    android:id="@+id/textViewStatusDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:name = "Kanit"
-                    android:layout_marginTop="@dimen/margin"
-                    android:textSize="@dimen/text_normal_size"
-                    android:id="@+id/textViewAddressDetail"/>
+                    android:text="กรุณาชำระภายใน 15 วัน"
+                    android:textSize="@dimen/text_very_small_size"
+                    app:name="Kanit"
+                    app:type="bold" />
+
+                <com.mvision.vfin.customview.TextViewWithFont
+                    android:id="@+id/textViewDetailPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_very_small_size"
+                    app:name="Kanit" />
+
+
             </LinearLayout>
 
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorBgApp" />
+
+        <com.mvision.vfin.customview.ExpandableTextView
+            android:id="@+id/textViewAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:drawableBottom="@drawable/expand_button_black"
+            android:gravity="center_vertical"
+            android:src="@drawable/photo_camera"
+            android:textSize="@dimen/text_small_size"
+            app:name="Kanit" />
+
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:id="@+id/textViewEmsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:text="หมายเลขการจัดส่ง"
+            android:textSize="@dimen/text_small_size"
+            app:name="Kanit" />
+
+        <com.mvision.vfin.customview.TextViewWithFont
+            android:id="@+id/textViewEms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:text="EMS123456789"
+            android:textSize="@dimen/text_normal_size"
+            app:name="Kanit"
+            app:type="bold" />
+
         <com.mvision.vfin.customview.ButtonWithFont
             android:id="@+id/buttonClick"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
             android:layout_gravity="center"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:background="@drawable/button_radius_green"
+            android:drawableLeft="@drawable/ic_coin"
+            android:paddingLeft="@dimen/margin"
+            android:paddingRight="@dimen/margin"
+            android:textColor="@android:color/white"
+            app:type="bold" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

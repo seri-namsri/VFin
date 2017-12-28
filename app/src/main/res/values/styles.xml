@@ -14,7 +14,10 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
-
+    <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 
     <style name="stylesTap" parent="android:Widget">
         <item name="tabIndicatorColor">@android:color/black</item>
@@ -29,6 +32,11 @@
     <style name="MyEditTextTheme">
         <!-- Used for the bottom line when not selected / focused -->
         <item name="colorControlNormal">#fff</item>
+        <item name="colorControlHighlight">#fff</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="colorPrimary">#ffffff</item>
+        <item name="colorAccent">#ffffff</item>
+        <item name="android:textColorHint">#ffffff</item>
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 

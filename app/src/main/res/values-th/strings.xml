@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">V-fin</string>
+    <string name="app_name">VFIN</string>
     <string name="tab_profile">โปรไฟล์</string>
     <string name="tab_message">ข้อความ</string>
     <string name="tab_buysell">ซื้อ/ขาย</string>
@@ -16,7 +16,8 @@
     <string name="key_memberID">key_memberID</string>
 
     <!--menu-->
-    <string name="menu_add_address">menu_add_address</string>
+    <string name="menu_add_address">เพิ่มที่อยู่</string>
+    <string name="menu_delete_message">ลบข้อความ</string>
 
     <!--Login-->
     <string name="text_forgot"><u>ลืมรหัสผ่าน</u></string>
@@ -41,14 +42,90 @@
     <string name="ProfileMoreAdapter_5">ออกจากระบบ</string>
 
     <!--MyProductMainPager-->
-    <string name="MyProductMainPager_0">สินค้ารอดำเนินการ</string>
+    <string name="MyProductMainPager_0">รอดำเนินการ</string>
     <string name="MyProductMainPager_1">สินค้ารอจ่ายค่าจัดส่ง</string>
-    <string name="MyProductMainPager_2">สินค้าเตรียมจัดส่ง</string>
-    <string name="MyProductMainPager_3">สินค้าที่ต้องได้รับ</string>
+    <string name="MyProductMainPager_2">เตรียมจัดส่ง</string>
+    <string name="MyProductMainPager_3">ที่ต้องได้รับ</string>
 
     <!--MyProductMainFragment-->
     <string name="MyProductMainFragmentTitle">สินค้าของฉัน</string>
 
-    <string name="text_button_ok">ตกลง</string>
+    <!--ProfileDetailFragment.class-->
+    <string name="ProfileDetailTitle">ข้อมูลส่วนตัว</string>
+    <string name="ProfileDetailTextViewTel">เบอร์ที่ใช้ในการสมัคร</string>
+    <string name="ProfileDetailTextViewNameLastName">ชื่อ-นามสกุล</string>
+    <string name="ProfileDetailTextViewAddress">สถานที่จัดส่ง (ที่อยู่หลัก)</string>
+    <string name="ProfileDetailButtonEditAddress">แก้ไขที่อยู่</string>
 
+    <!--layout_change_password.xml-->
+    <string name="layoutChangeOldPassword">รหัสผ่านเก่า</string>
+    <string name="layoutChangeNewPassword">รหัสผ่านใหม่</string>
+    <string name="layoutChangeConfirmPassword">ยืนยันรหัสผ่านใหม่</string>
+
+    <!--layout_change_gender.xml-->
+    <string name="layoutChangeGenderMen">ชาย</string>
+    <string name="layoutChangeGenderFemale">หญิง</string>
+
+    <!--MyAddressFragment.class-->
+    <string name="MyAddressFragmentTitle">เลือกที่อยู่</string>
+
+    <!--adapter_my_address.xml-->
+    <string name="adapterMyAddressButtonEdit">แก้ไข</string>
+
+    <!--AddEditAddressFragment.class-->
+    <string name="AddEditAddressFragmentTitle">เพิ่มที่อยู่</string>
+    <string name="AddEditAddressFragmentTitleEdit">แก้ไขที่อยู่</string>
+
+    <!--fragment_add_address.xml-->
+    <string name="fragmentAddAddressNameReciver">ชื่อผู้รับ</string>
+    <string name="fragmentAddAddressTelReciver">เบอร์ติดต่อผู้รับ</string>
+    <string name="fragmentAddAddressHourNumber">บ้านเลขที่ / เลขที่ห้อง</string>
+    <string name="fragmentAddAddressHourStreetDistrict">ถนน/ตำบล/หมู่ที่</string>
+    <string name="fragmentAddAddressProvince">เลือกจังหวัด*</string>
+    <string name="fragmentAddAddressDistrice">เลือกอำเภอ / เขต*</string>
+    <string name="fragmentAddAddressPostalCode">รหัสไปรษณีย์</string>
+    <string name="fragmentAddAddressNameAddress">ชื่อเรียกที่อยู่</string>
+
+    <!--ProvinceAmphurFragment.xml-->
+    <string name="ProvinceAmphurFragmentTitleProvince">เลือกจังหวัด</string>
+    <string name="ProvinceAmphurFragmentTitleAmphur">เลือกเขต/อำเภอ</string>
+    <string name="ProvinceAmphurFragmentErroSelectBefore">กรุณาเลือกจังหวัดก่อน</string>
+
+    <!--ProductDetailFragment.xml-->
+    <string name="ProductDetailFragmentOwnerProduct">เจ้าของสินค้า</string>
+    <string name="ProductDetailFragmentTitleProductDetail">รายละเอียดสินค้า</string>
+    <string name="ProductDetailFragmentProductDetailInformation">ข้อมูลสินค้า</string>
+    <string name="ProductDetailFragmentMemberHittory">ประวัติการซื้อสินค้า</string>
+    <string name="ProductDetailFragmentNameMemberHittory">ชื่อผู้ซื้อขายล่าสุด</string>
+    <string name="ProductDetailFragmentPriceMemberHittory">ราคา</string>
+    <string name="ProductDetailFragmentTimeMemberHittory">เวลา</string>
+    <string name="ProductDetailFragmentTimeLeft">เหลือเวลาอีก</string>
+    <string name="ProductDetailFragmentPriceMarket">ราคาตลาด</string>
+
+    <!--text-->
+    <string name="textName">ชื่อ</string>
+    <string name="textLastName">นามสกุล</string>
+    <string name="textEmail">อีเมล</string>
+    <string name="textIden">เลขบัตรประจำตัวประชาชน</string>
+    <string name="textSave">บันทึก</string>
+    <string name="textOk">ตกลง</string>
+    <string name="textCancel">ยกเลิก</string>
+    <string name="textBirdDay">วันเกิด</string>
+    <string name="textGender">เพศ</string>
+    <string name="textPassword">รหัสผ่าน</string>
+    <string name="textTimeOut">หมดเวลา</string>
+    <string name="textProductOfYou">สินค้าเป็นของคุณ</string>
+    <string name="textProductWait">รอคนซื้อ</string>
+    <string name="textProductBuyNow">ซื้อเลย</string>
+    <string name="textVinPoint">วินพอย์</string>
+    <string name="textTopUp">เติมเงิน</string>
+    <string name="textMyProduct">รายการสินค้า</string>
+    <string name="textWalletHistory">ประวัติการเงิน</string>
+    <string name="textWalletBuy">ซื้อ</string>
+    <string name="textLoading">กรุณารอสักครู่</string>
+    <string name="textDeleteMessage">คุณต้องการลบข้อความ</string>
+
+    <!--text_error-->
+    <string name="text_error_input_data_emty">กรุณากรอกข้อมูลให้ครบ</string>
+    <string name="textErrorNotFountData">ไม่มีสินค้าในระบบ</string>
 </resources>
